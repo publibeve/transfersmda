@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agencia de Viajes · TransfersMérida</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue:      #00337F;
+    --blue-dark: #001F4D;
+    --blue-mid:  #002966;
+    --red:       #CC1B1B;
+    --gold:      #F5A623;
+    --white:     #FFFFFF;
+    --gray-50:   #F8FAFC;
+    --gray-100:  #F1F5F9;
+    --gray-200:  #E2E8F0;
+    --gray-300:  #CBD5E1;
+    --gray-400:  #94A3B8;
+    --gray-500:  #64748B;
+    --gray-600:  #475569;
+    --gray-700:  #334155;
+    --gray-800:  #1E293B;
+    --green:     #16A34A;
+    --radius:    16px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { font-family: 'Inter', sans-serif; color: var(--gray-800); background: var(--gray-50); font-size: 16px; overflow-x: hidden; width: 100%; }
+  /* full-bleed: fuerza a una sección a ocupar el 100% del viewport real,
+     sin importar si algún ancestro tuviera padding/margen — así se garantiza
+     que toque ambos bordes de lado a lado, no solo que "no tenga max-width". */
+  .full-bleed { width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+
+  /* ── RESET NATIVE CONTROLS ── */
+  button, input, select { font-family: inherit; font-size: inherit; color: inherit; }
+  button {
+    -webkit-appearance: none; appearance: none;
+    background: none; border: none; cursor: pointer;
+  }
+  select { -webkit-appearance: none; appearance: none; cursor: pointer; }
+  svg { display: block; }
+
+  * { scrollbar-width: thin; scrollbar-color: var(--gray-300) transparent; }
+  *::-webkit-scrollbar { height: 6px; width: 6px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 10px; }
+  *::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--blue-dark);
+    padding: 0 24px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 200;
+    box-shadow: 0 2px 12px rgba(0,0,0,.4);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: var(--blue); border: 1.5px solid rgba(255,255,255,.2);
+    display: grid; place-items: center; color: var(--white);
+  }
+  .nav-logo-icon svg { width: 22px; height: 22px; }
+  .nav-logo-text { color: var(--white); font-size: 18px; font-weight: 700; letter-spacing: -.3px; }
+  /* peso reforzado a propósito: el rojo sobre fondo oscuro se percibe más
+     delgado que el blanco/dorado a igual font-weight (ilusión óptica de
+     contraste luminoso), así que se compensa con más grosor */
+  .nav-logo-text span { color: var(--red); font-weight: 800; }
+  .nav-badge {
+    background: rgba(245,166,35,.15); border: 1px solid rgba(245,166,35,.4);
+    color: var(--gold); font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 20px; letter-spacing: .3px;
+  }
+
+  /* ── HERO (fusionado con el buscador: comparten el mismo módulo/fondo) ── */
+  .hero-text-block {
+    max-width: 1200px; margin: 0 auto 26px; position: relative; z-index: 1;
+    display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: 28px 48px;
+    text-align: left; padding: 0 6px;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--red); border: 1px solid rgba(255,255,255,.25);
+    color: var(--white); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 16px;
+    box-shadow: 0 4px 14px rgba(204,27,27,.35);
+  }
+  .hero-eyebrow svg { width: 14px; height: 14px; color: var(--white); }
+  .hero-text-block h1 {
+    color: var(--white); font-size: clamp(28px, 3.8vw, 44px); font-weight: 800;
+    line-height: 1.12; letter-spacing: -1px; margin: 0 0 12px;
+  }
+  .hero-text-block h1 br { display: none; }
+  .hero-text-block h1 span { color: var(--white); }
+  .hero-text-block p {
+    color: rgba(255,255,255,.88); font-size: 16px; max-width: 560px;
+    margin: 0; line-height: 1.6;
+  }
+  .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; position: relative; z-index: 1; }
+  .hero-stat { text-align: center; padding: 14px 8px; border-radius: 16px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 22px rgba(0,25,70,.18); }
+  .hero-stat strong { display: block; color: var(--white); font-size: 28px; font-weight: 800; line-height: 1.1; }
+  .hero-stat span { color: rgba(255,255,255,.85); font-size: 12.5px; font-weight: 600; }
+  @media (max-width: 820px) {
+    .hero-text-block { grid-template-columns: minmax(0, 1fr); text-align: center; gap: 20px; }
+    .hero-text-block p { margin: 0 auto; }
+  }
+
+  /* ── ALERT ── */
+  .alert-bar {
+    background: #15803D; border-bottom: 1px solid #166534;
+    padding: 12px 24px; text-align: center;
+    color: var(--white); font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+  }
+  .alert-bar svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .alert-bar strong { font-weight: 700; }
+
+  /* ── SEARCH WIDGET (ahora es el módulo principal, fusionado con el hero) ── */
+  .search-widget-wrap {
+    position: relative;
+    /* fondo: cielo azul vívido */
+    background:
+      linear-gradient(180deg, rgba(0,25,70,.38) 0%, rgba(0,25,70,.22) 45%, var(--gray-50) 100%),
+      url('https://i.postimg.cc/B6PQGNtX/sky-213848-1280.jpg')
+      center / cover no-repeat;
+    padding: 56px 24px 34px;
+  }
+  .search-widget {
+    max-width: 1200px; margin: 0 auto;
+    position: relative;
+    background: rgba(255,255,255,.82);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255,255,255,.5);
+    border-radius: 18px;
+    box-shadow: 0 12px 34px rgba(0,20,50,.22);
+    padding: 20px 22px 22px;
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .search-widget { background: var(--white); backdrop-filter: none; }
+  }
+  /* avión + nubes sobrevolando la tarjeta, de fondo (estilo ilustración de "espera") */
+  .sw-plane-bg {
+    position: absolute; inset: 0; overflow: hidden; border-radius: 18px;
+    pointer-events: none; z-index: 0;
+  }
+  .sw-jet {
+    position: absolute; width: 74px; height: 40px; opacity: 0;
+    animation: swJetFly 9s ease-in-out infinite;
+  }
+  .sw-jet svg { width: 100%; height: 100%; display: block; }
+  /* trayectoria con "bamboleo": no es una diagonal recta, sube y baja un poco
+     y se inclina (banking) en el camino para que se sienta vivo, no rígido */
+  @keyframes swJetFly {
+    0%   { left: -16%; top: 62%; opacity: 0;    transform: rotate(-6deg); }
+    10%  { opacity: .9; }
+    28%  { left: 14%;  top: 48%; transform: rotate(-14deg); }
+    46%  { left: 40%;  top: 30%; transform: rotate(-4deg); }
+    64%  { left: 66%;  top: 34%; transform: rotate(-16deg); }
+    82%  { left: 90%;  top: 12%; opacity: .9;   transform: rotate(-8deg); }
+    100% { left: 112%; top: 0%;  opacity: 0;    transform: rotate(-6deg); }
+  }
+  .sw-cloud {
+    position: absolute; color: #9FCBF0; opacity: .6;
+    animation: swCloudFloat 4.5s ease-in-out infinite;
+  }
+  .sw-cloud svg { width: 100%; height: 100%; display: block; }
+  .sw-cloud-1 { width: 42px; height: 42px; top: 10%; left: 10%; animation-duration: 4.2s; }
+  .sw-cloud-2 { width: 30px; height: 30px; top: 16%; left: 38%; animation-duration: 5s;   animation-delay: .6s; }
+  .sw-cloud-3 { width: 36px; height: 36px; top: 8%;  left: 72%; animation-duration: 4.6s; animation-delay: .3s; }
+  .sw-cloud-4 { width: 26px; height: 26px; top: 46%; left: 24%; animation-duration: 5.4s; animation-delay: 1s; }
+  @keyframes swCloudFloat {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(4px, -14px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    /* se reduce el movimiento (más lento y de menor amplitud) en vez de
+       eliminarlo por completo, para no dejar la escena totalmente estática */
+    .sw-jet { animation-duration: 30s; }
+    .sw-cloud { animation-duration: 14s; }
+    .sw-cloud-1, .sw-cloud-2, .sw-cloud-3, .sw-cloud-4 { animation-duration: 14s; }
+  }
+  /* el contenido real de la tarjeta va por encima de la silueta de fondo */
+  .sw-header, .sw-triptype, .sw-transfer, .sw-submit-wrap, .sw-note { position: relative; z-index: 1; }
+  .sw-fields { position: relative; z-index: 6; } /* los desplegables quedan por encima del botón de cotizar */
+  .sw-header { display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 16px; }
+  .sw-header strong { font-size: 15px; font-weight: 800; color: var(--gray-800); }
+  .sw-header span { display: block; font-size: 12px; color: var(--gray-400); }
+
+  .sw-triptype { display: flex; gap: 22px; margin-bottom: 18px; flex-wrap: wrap; }
+  .sw-radio { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--gray-600); cursor: pointer; user-select: none; }
+  .sw-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .sw-radio-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--gray-300); position: relative; flex-shrink: 0; transition: border-color .15s; }
+  .sw-radio input:checked + .sw-radio-dot { border-color: var(--blue); }
+  .sw-radio input:checked + .sw-radio-dot::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: var(--blue); }
+
+  .sw-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; align-items: end; }
+  .sw-submit-wrap { display: flex; justify-content: center; margin-top: 16px; }
+  .sw-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .sw-field label { font-size: 11px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: .4px; }
+  .sw-date-btn {
+    height: 46px; border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 0 34px 0 12px;
+    font-size: 13.5px; font-weight: 600; color: var(--gray-800); background: var(--white); text-align: left;
+    width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sw-date-btn { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .csel-native { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  /* ── CUSTOM SELECT (reemplaza el <select> nativo del navegador) ── */
+  .csel { position: relative; }
+  .csel-trigger {
+    height: 46px; width: 100%; border: 1.5px solid var(--gray-200); border-radius: 10px;
+    padding: 0 12px; background: var(--white); text-align: left;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    transition: border-color .15s, background .15s;
+  }
+  .csel-trigger-text { font-size: 13.5px; font-weight: 600; color: var(--gray-800); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .csel-trigger-chev { color: var(--gray-400); flex-shrink: 0; display: flex; transition: transform .2s ease; }
+  .csel-trigger-chev svg { width: 15px; height: 15px; }
+  .csel-trigger:not(:disabled):hover { border-color: var(--blue); }
+  .csel-trigger:not(:disabled):active { transform: scale(.99); }
+  .csel-trigger:disabled { color: var(--gray-300); cursor: not-allowed; background: var(--gray-50); }
+  .csel-trigger:disabled .csel-trigger-text { color: var(--gray-300); }
+  .csel.placeholder .csel-trigger-text { color: var(--gray-400); font-weight: 500; }
+  .csel.open .csel-trigger { border-color: var(--blue); box-shadow: 0 0 0 3px #DBEAFE; }
+  .csel.open .csel-trigger-chev { transform: rotate(180deg); }
+
+  .csel-panel {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40;
+    background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px;
+    box-shadow: 0 14px 32px rgba(0,20,50,.16);
+    padding: 6px; max-height: 260px; overflow-y: auto;
+    display: none; opacity: 0; transform: translateY(-6px) scale(.98);
+    transition: opacity .14s ease, transform .14s ease;
+  }
+  .csel.open .csel-panel { display: block; }
+  .csel.open.panel-in .csel-panel { opacity: 1; transform: translateY(0) scale(1); }
+  .csel-option {
+    padding: 10px 12px; border-radius: 8px; font-size: 13.5px; font-weight: 600; color: var(--gray-700);
+    cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .csel-option:hover { background: var(--gray-100); }
+  .csel-option:active { background: #EFF6FF; }
+  .csel-option.selected { background: #EFF6FF; color: var(--blue); }
+  .csel-option.selected svg { width: 14px; height: 14px; color: var(--blue); flex-shrink: 0; }
+  .csel-option-empty { padding: 12px; font-size: 13px; color: var(--gray-400); text-align: center; }
+  @media (prefers-reduced-motion: reduce) {
+    .csel-panel { transition: opacity .12s linear; transform: none !important; }
+  }
+  .sw-date-btn svg { width: 15px; height: 15px; color: var(--gray-400); flex-shrink: 0; }
+  .sw-date-btn.has-value { color: var(--blue); border-color: #BFDBFE; background: #F5F9FF; }
+  .sw-field select:disabled, .sw-date-btn:disabled { color: var(--gray-300); cursor: not-allowed; background: var(--gray-50); }
+  .sw-field select:not(:disabled):hover, .sw-date-btn:not(:disabled):hover { border-color: var(--blue); }
+  .sw-field-ret { transition: opacity .2s; }
+  .sw-field-ret.hidden { display: none; }
+
+  .combo-input { height: 46px; width: 100%; border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 0 12px; background: var(--white); font: inherit; font-size: 13.5px; font-weight: 600; color: var(--gray-800); outline: none; transition: border-color .15s, box-shadow .15s; }
+  .combo-input::placeholder { color: var(--gray-400); font-weight: 500; }
+  .combo-input:hover { border-color: var(--blue); }
+  .combo-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px #DBEAFE; }
+  .csel-option small { font-size: 10.5px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: .5px; }
+  .sw-transfer { display: flex; align-items: center; gap: 12px; margin: 16px auto 0; max-width: 560px; padding: 12px 14px; border-radius: 12px; background: rgba(255,255,255,.7); border: 1.5px solid var(--gray-200); cursor: pointer; user-select: none; transition: border-color .15s, background .15s, box-shadow .15s; }
+  .sw-transfer:hover { border-color: var(--blue); background: #fff; }
+  .sw-transfer:has(input:checked) { background: #ECFDF3; border-color: #86D9A6; box-shadow: 0 0 0 3px #D1FADF; }
+  .sw-transfer input { position: absolute; opacity: 0; pointer-events: none; }
+  .sw-tbox { flex: none; width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--gray-300); background: #fff; display: grid; place-items: center; transition: background .15s, border-color .15s; }
+  .sw-tbox svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; transform: scale(0); transition: transform .2s; }
+  .sw-transfer input:checked + .sw-tbox { background: #16A34A; border-color: #16A34A; }
+  .sw-transfer input:checked + .sw-tbox svg { transform: scale(1); }
+  .sw-transfer input:focus-visible + .sw-tbox { outline: 3px solid #93C5FD; outline-offset: 2px; }
+  .sw-ttext { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .sw-ttext strong { font-size: 13.5px; color: var(--gray-800); line-height: 1.25; }
+  .sw-ttext small { font-size: 12px; color: var(--gray-500); font-weight: 600; }
+  .sw-promo-badge { flex: none; background: var(--red); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .4px; text-transform: uppercase; padding: 5px 10px; border-radius: 99px; box-shadow: 0 3px 10px rgba(204,27,27,.35); }
+  @media (max-width: 560px) { .sw-transfer { flex-wrap: wrap; } .sw-promo-badge { order: -1; } }
+  .cal-hint { margin-top: 10px; font-size: 12.5px; line-height: 1.5; font-weight: 600; color: var(--blue); }
+  .cal-hint:empty { display: none; }
+  .sw-note { text-align: center; margin: 12px auto 0; max-width: 560px; font-size: 12.5px; line-height: 1.45; color: var(--gray-600); font-weight: 600; }
+  .sw-search-btn {
+    height: 46px; padding: 0 22px; border-radius: 10px; background: var(--blue); color: var(--white);
+    font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; white-space: nowrap;
+    transition: all .2s; justify-content: center;
+  }
+  .sw-search-btn svg { width: 16px; height: 16px; }
+  .sw-search-btn:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
+  .sw-search-btn:not(:disabled):hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .sw-search-btn:not(:disabled):active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+  .sw-date-btn:not(:disabled):active { transform: scale(.98); transition: transform .08s; }
+
+
+  /* ── AIRPORT SELECTOR ── */
+  .selector-wrap {
+    background: linear-gradient(160deg, var(--blue-dark) 0%, var(--blue-mid) 55%, var(--blue) 100%);
+    padding: 26px 24px 22px;
+    border-bottom: 1px solid var(--blue-dark);
+    position: sticky; top: 68px; z-index: 90;
+    box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  }
+  /* full-bleed: sin max-width, el módulo usa el 100% del ancho del viewport en vez de quedar centrado dentro de un contenedor fijo */
+  .selector-inner { max-width: none; margin: 0; }
+  .selector-label {
+    font-size: 20px; font-weight: 800; color: var(--white);
+    letter-spacing: -0.01em; text-align: center; margin-bottom: 6px;
+  }
+  .selector-sublabel {
+    font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,.65);
+    text-align: center; margin-bottom: 16px;
+  }
+  /* custom horizontal scroller for airport tabs — no native scrollbar/arrows.
+     the scroll buttons float over the tabs; a blurred, fading strip sits
+     underneath them so cards never get a hard, clipped edge. */
+  /* rompe el padding horizontal de .selector-wrap para que el blur/los botones
+     lleguen exactamente al borde real de la página, no al borde del padding */
+  .airport-tabs-wrap { position: relative; margin: 0 -24px; }
+  .airport-tabs {
+    display: flex; gap: 10px; overflow-x: auto; padding: 4px 48px 4px;
+    scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;
+    justify-content: flex-start; /* flex-start por defecto: "center" con overflow real
+       reserva espacio invisible e inalcanzable antes del primer tab en varios
+       navegadores, dejando el primer aeropuerto imposible de alcanzar al hacer
+       scroll. Solo se centra vía JS (.airport-tabs.fits) cuando de verdad caben
+       todos los tabs sin necesidad de scroll. */
+    cursor: grab; touch-action: pan-x;
+  }
+  .airport-tabs.fits { justify-content: center; }
+  .airport-tabs::-webkit-scrollbar { display: none; height: 0; }
+  .airport-tabs.dragging { cursor: grabbing; scroll-behavior: auto; user-select: none; }
+  .airport-tabs.dragging .apt-tab { pointer-events: none; }
+
+  .tabs-edge-fade {
+    position: absolute; top: 0; bottom: 0; width: 68px; z-index: 3;
+    pointer-events: none;
+    backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+    transition: opacity .2s ease;
+  }
+  .tabs-edge-fade-left {
+    left: 0;
+    -webkit-mask-image: linear-gradient(to right, black 0%, black 25%, transparent 100%);
+    mask-image: linear-gradient(to right, black 0%, black 25%, transparent 100%);
+  }
+  .tabs-edge-fade-right {
+    right: 0;
+    -webkit-mask-image: linear-gradient(to left, black 0%, black 25%, transparent 100%);
+    mask-image: linear-gradient(to left, black 0%, black 25%, transparent 100%);
+  }
+
+  .tabs-scroll-btn {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,.16); border: 1.5px solid rgba(255,255,255,.3);
+    backdrop-filter: blur(6px);
+    color: var(--white);
+    display: grid; place-items: center;
+    transition: background .15s, transform .15s, opacity .15s;
+  }
+  .tabs-scroll-prev { left: 8px; }
+  .tabs-scroll-next { right: 8px; }
+  .tabs-scroll-btn svg { width: 16px; height: 16px; }
+  .tabs-scroll-btn:hover { background: rgba(255,255,255,.26); }
+  .tabs-scroll-btn:active { transform: translateY(-50%) scale(.88); }
+  .tabs-scroll-btn:disabled { opacity: .25; cursor: not-allowed; }
+  @media (prefers-reduced-motion: reduce) {
+    .tabs-scroll-btn:active { transform: translateY(-50%); }
+  }
+  /* la barra de progreso ahora es un control real: se puede hacer click para
+     saltar a un punto, o arrastrar el thumb; por eso tiene más alto que el
+     visual de 4px (hit-area invisible) y cursor pointer. */
+  .tabs-track {
+    height: 14px; margin: 4px 18px 0; overflow: visible; position: relative;
+    cursor: pointer; display: flex; align-items: center;
+  }
+  .tabs-track::before {
+    content: ''; position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%);
+    height: 4px; border-radius: 4px; background: rgba(255,255,255,.14);
+  }
+  .tabs-thumb {
+    position: absolute; top: 50%; left: 0; height: 8px; border-radius: 4px;
+    background: var(--red); transform: translateY(-50%);
+    transition: left .15s ease, width .15s ease, height .1s ease;
+    cursor: grab;
+  }
+  .tabs-track:active .tabs-thumb, .tabs-thumb.dragging { height: 10px; cursor: grabbing; transition: none; }
+  .apt-tab {
+    flex-shrink: 0; width: 104px;
+    padding: 13px 8px 11px;
+    border-radius: 14px;
+    border: 2px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    text-align: center;
+    transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .apt-tab:hover { border-color: var(--red); transform: translateY(-2px); }
+  .apt-tab:active { transform: translateY(-1px) scale(.97); transition-duration: .1s; }
+  .apt-tab .apt-icon-wrap {
+    width: 42px; height: 42px; margin: 0 auto 8px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.14);
+    color: rgba(255,255,255,.85);
+    display: grid; place-items: center;
+    transition: all .18s ease;
+  }
+  .apt-icon-wrap svg { width: 21px; height: 21px; }
+  .apt-tab .apt-code { display: block; font-size: 17px; font-weight: 800; color: var(--white); }
+  .apt-tab .apt-city { font-size: 10.5px; color: rgba(255,255,255,.6); font-weight: 600; line-height: 1.3; }
+  .apt-tab.active {
+    background: var(--apt-color, var(--red));
+    border-color: var(--apt-color, var(--red));
+    box-shadow: 0 8px 20px -4px rgba(0,0,0,.4);
+    transform: translateY(-3px) scale(1.03);
+  }
+  .apt-tab.active:active { transform: translateY(-2px) scale(1.0); }
+  .apt-tab.active .apt-icon-wrap { background: rgba(255,255,255,.22); color: var(--white); }
+  .apt-tab.active .apt-code { color: var(--white); }
+  .apt-tab.active .apt-city { color: rgba(255,255,255,.85); }
+
+  /* ── ROUTE TYPE TOGGLE ── */
+  .route-toggle-wrap { background: var(--white); padding: 18px 24px 22px; display: flex; justify-content: center; }
+  .route-toggle { display: inline-flex; background: var(--gray-100); border-radius: 12px; padding: 4px; }
+  .rt-btn {
+    padding: 10px 26px; border-radius: 9px;
+    font-size: 14.5px; font-weight: 700; cursor: pointer;
+    transition: all .2s; color: var(--gray-500); background: transparent;
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .rt-btn svg { width: 16px; height: 16px; }
+  .rt-btn.active { background: var(--white); color: var(--blue); box-shadow: 0 2px 6px rgba(0,0,0,.12); }
+  .rt-btn:active { transform: scale(.96); transition-duration: .08s; }
+
+  /* ── CONTENT ── */
+  .content { padding: 8px 24px 40px; max-width: 1200px; margin: 0 auto; }
+  .airport-section { display: none; }
+  .airport-section.active { display: block; }
+  .route-type { display: none; }
+  .route-type.active { display: block; }
+
+  .airport-hero {
+    display: flex; align-items: center; gap: 20px;
+    margin-bottom: 28px; padding: 26px 28px;
+    border-radius: 20px;
+    background: linear-gradient(120deg, var(--apt-color, var(--blue)), var(--apt-color-dark, var(--blue-dark)));
+    box-shadow: 0 10px 28px -8px var(--apt-color, var(--blue));
+    position: relative; overflow: hidden;
+  }
+  .airport-hero::after {
+    content: ''; position: absolute; right: -30px; top: -30px;
+    width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,.08);
+  }
+  .airport-hero-icon {
+    width: 68px; height: 68px; border-radius: 18px;
+    background: rgba(255,255,255,.18); color: var(--white);
+    display: grid; place-items: center;
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .airport-hero-icon svg { width: 34px; height: 34px; }
+  .airport-hero-meta { position: relative; z-index: 1; }
+  .airport-hero-meta h2 { font-size: 23px; font-weight: 800; color: var(--white); letter-spacing: -.3px; }
+  .airport-hero-meta p { font-size: 13.5px; color: rgba(255,255,255,.75); margin-top: 4px; }
+  .airport-hero-badge {
+    display: inline-block; margin-top: 8px; background: rgba(255,255,255,.2); color: var(--white);
+    font-size: 10.5px; font-weight: 700; letter-spacing: .4px; padding: 3px 10px; border-radius: 20px;
+  }
+  .airport-hero-count { margin-left: auto; text-align: right; position: relative; z-index: 1; }
+  .airport-hero-count strong { display: block; font-size: 26px; font-weight: 800; color: var(--white); }
+  .airport-hero-count span { font-size: 11.5px; color: rgba(255,255,255,.7); }
+
+  /* ── DESTINATION GRID (masonry via CSS columns so opening a card never stretches its neighbors) ── */
+  .dest-grid { column-count: 3; column-gap: 18px; }
+  .cond-grid { column-count: 3; column-gap: 16px; }
+  .dest-card {
+    border: 1px solid var(--gray-200); border-radius: var(--radius);
+    overflow: hidden; background: var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    transition: box-shadow .2s;
+    display: inline-block; width: 100%;
+    break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid;
+    margin: 0 0 18px;
+  }
+  .dest-card:hover { box-shadow: 0 8px 22px rgba(0,0,0,.09); }
+
+  /* fotos representativas del destino: franja superior con degradado para legibilidad */
+  .dest-photo {
+    /* más alta y con el foco desplazado hacia el tercio superior: la mayoría de fotos
+       aéreas/skyline tienen el elemento reconocible arriba, no en el centro exacto */
+    height: 132px; background-size: cover; background-position: center 32%;
+    position: relative; overflow: hidden;
+  }
+  .dest-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,20,50,0) 35%, rgba(0,20,50,.45) 100%);
+  }
+  .dest-photo-credit {
+    position: absolute; right: 8px; bottom: 5px; z-index: 1;
+    font-size: 9px; font-weight: 600; color: rgba(255,255,255,.9);
+    text-shadow: 0 1px 3px rgba(0,0,0,.6); letter-spacing: .2px;
+  }
+
+  .dest-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 20px; cursor: pointer;
+    background: var(--white); border-bottom: 1px solid transparent;
+    user-select: none;
+  }
+  .dest-card.open .dest-header { border-bottom-color: var(--gray-100); background: var(--gray-50); }
+  .dest-header:active { background: var(--gray-100); }
+  .dest-flag-wrap {
+    width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+    background: var(--gray-100);
+    display: grid; place-items: center;
+  }
+  .dest-flag-wrap svg { width: 22px; height: 22px; }
+  /* logo real de aerolínea: caja más ANCHA que alta (los logos son wordmarks
+     horizontales) para que se vean grandes y legibles, no diminutos dentro
+     de un cuadro cuadrado. Fondo blanco + borde + sombra para que resalte. */
+  .dest-flag-wrap.has-logo {
+    width: 100px; height: 50px; border-radius: 10px;
+    background: var(--white); border: 1px solid var(--gray-200); padding: 8px;
+    box-shadow: 0 3px 9px rgba(0,20,50,.12);
+  }
+  .dest-flag-wrap.has-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .dest-title-block { flex: 1; min-width: 0; }
+  .dest-name { font-size: 16px; font-weight: 700; color: var(--gray-800); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .dest-code {
+    display: inline-block; background: var(--gray-100); color: var(--gray-500);
+    font-size: 11px; font-weight: 700; letter-spacing: .5px; padding: 2px 8px; border-radius: 5px;
+  }
+  .dest-country { font-size: 12.5px; color: var(--gray-400); margin-top: 3px; }
+  .dest-airline-count {
+    font-size: 11.5px; font-weight: 600; color: var(--blue);
+    background: #EFF4FF; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; white-space: nowrap;
+  }
+  .dest-toggle { color: var(--gray-400); transition: transform .3s ease; flex-shrink: 0; }
+  .dest-toggle svg { width: 18px; height: 18px; }
+  .dest-card.open .dest-toggle { transform: rotate(180deg); }
+
+  /* animated expand/collapse — no more grid-stretch ghost space */
+  .dest-body { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1); }
+  .dest-card.open .dest-body { max-height: 1200px; }
+
+  /* ── FLIGHT ROW ── */
+  .flight-row { padding: 16px 20px; border-top: 1px solid var(--gray-100); display: flex; flex-direction: column; gap: 12px; }
+  .flight-row:first-child { border-top: none; }
+  .flight-top { display: flex; align-items: center; gap: 14px; }
+  .airline-logo {
+    width: 52px; height: 52px; border-radius: 12px;
+    display: grid; place-items: center;
+    font-size: 16px; font-weight: 800; letter-spacing: .3px; color: var(--white); flex-shrink: 0;
+  }
+  /* logo real (imagen): la caja es más ANCHA que alta (no cuadrada) porque los
+     SVG de aerolíneas son wordmarks horizontales — dentro de un cuadro cuadrado
+     salían diminutos. Fondo blanco, borde y sombra suave para que resalte. */
+  .airline-logo.airline-logo-img {
+    width: 96px; height: 52px; border-radius: 10px;
+    background: var(--white); border: 1px solid var(--gray-200); padding: 8px;
+    box-shadow: 0 3px 9px rgba(0,20,50,.12);
+  }
+  .airline-logo-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .airline-info { flex: 1; min-width: 0; }
+  .airline-name { font-size: 14.5px; font-weight: 700; color: var(--gray-800); }
+  .route-code { font-size: 11.5px; font-weight: 600; color: var(--gray-400); font-family: monospace; letter-spacing: .4px; }
+
+  .flight-days-block { display: flex; gap: 18px; flex-wrap: wrap; }
+  .fd-group { display: flex; flex-direction: column; gap: 6px; }
+  .fd-label { font-size: 10.5px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: .5px; }
+  .day-set { display: flex; gap: 4px; }
+  .dp {
+    width: 25px; height: 25px; border-radius: 7px;
+    font-size: 10px; font-weight: 700;
+    display: grid; place-items: center;
+    color: var(--gray-300); background: var(--gray-100);
+  }
+  .dp.on-out { background: var(--blue); color: var(--white); }
+  .dp.on-ret { background: var(--gold); color: var(--white); }
+  .days-none { font-size: 12px; color: var(--gray-400); }
+
+  .btn-cotizar {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    background: #25D366; color: var(--white);
+    font-size: 13.5px; font-weight: 700;
+    padding: 10px 16px; border-radius: 9px;
+    transition: all .2s; box-shadow: 0 2px 6px rgba(37,211,102,.3);
+    width: 100%;
+  }
+  .btn-cotizar:hover { background: #20b859; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(37,211,102,.4); }
+  .btn-cotizar:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+  .btn-cotizar svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ── EMPTY STATE ── */
+  .no-routes { text-align: center; padding: 56px 24px; color: var(--gray-400); }
+  .no-routes svg { width: 46px; height: 46px; margin: 0 auto 14px; }
+  .no-routes h3 { font-size: 18px; font-weight: 600; color: var(--gray-600); }
+
+  /* ── HOURS NOTE ── */
+  .hours-note {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #EFF6FF; border: 1px solid #DBEAFE;
+    border-radius: 14px; padding: 14px 18px; margin-bottom: 24px;
+    font-size: 13.5px; color: var(--blue); line-height: 1.55;
+  }
+  .hours-note svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── MODAL / CALENDAR ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,20,50,.55);
+    backdrop-filter: blur(2px);
+    z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--white); border-radius: 20px; width: 100%; max-width: 400px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.35); overflow: hidden;
+    animation: modalIn .32s cubic-bezier(.2,.9,.3,1.15);
+    display: flex; flex-direction: column; max-height: 90vh;
+  }
+  @keyframes modalIn { from { opacity:0; transform: scale(.92) translateY(10px); } to { opacity:1; transform: scale(1) translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .modal-box { animation: modalInReduced .18s ease; }
+    @keyframes modalInReduced { from { opacity:0; } to { opacity:1; } }
+    .dest-body { transition: max-height .01s linear; }
+    .apt-tab, .apt-tab:hover, .apt-tab.active { transform: none !important; }
+  }
+  .modal-header {
+    background: var(--blue-dark); color: var(--white);
+    padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+  }
+  .modal-header h3 { font-size: 15.5px; font-weight: 700; }
+  .modal-header p { font-size: 12px; color: rgba(255,255,255,.65); margin-top: 2px; }
+  .modal-close { color: rgba(255,255,255,.7); padding: 4px; }
+  .modal-close svg { width: 18px; height: 18px; }
+  .modal-close:hover { color: var(--white); }
+
+  .modal-scroll { padding: 18px 20px 6px; overflow-y: auto; }
+
+  .qstep {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    background: #EFF6FF; border: 1px solid #DBEAFE; border-radius: 10px; padding: 10px 14px;
+    font-size: 12.5px; color: var(--blue); font-weight: 600;
+  }
+  .qstep-check { width: 18px; height: 18px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; flex-shrink: 0; }
+  .qstep-check svg { width: 10px; height: 10px; }
+  .qstep-edit { margin-left: auto; color: var(--blue); font-size: 11.5px; font-weight: 700; text-decoration: underline; flex-shrink: 0; }
+
+  .cal-section-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13.5px; font-weight: 700; color: var(--gray-700); margin-bottom: 12px;
+  }
+  .cal-section-title svg { width: 16px; height: 16px; color: var(--blue); flex-shrink: 0; }
+
+  /* solo-ida toggle: chip grande, muy legible */
+  .skip-check {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 700; color: var(--gray-600);
+    margin-bottom: 14px; cursor: pointer; user-select: none;
+    padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--gray-200); background: var(--gray-50);
+    transition: all .15s;
+  }
+  .skip-check:hover { border-color: var(--blue); }
+  .skip-check.checked { border-color: var(--blue); background: #EFF6FF; color: var(--blue); }
+  .skip-check input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .skip-box {
+    width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--gray-300);
+    flex-shrink: 0; display: grid; place-items: center; transition: all .15s; color: var(--white); background: var(--white);
+  }
+  .skip-box svg { width: 13px; height: 13px; opacity: 0; transition: opacity .15s; }
+  .skip-check input:checked + .skip-box { background: var(--blue); border-color: var(--blue); }
+  .skip-check input:checked + .skip-box svg { opacity: 1; }
+
+  .mini-cal { transition: opacity .2s; }
+  .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .cal-nav button {
+    width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--gray-200);
+    background: var(--white); color: var(--gray-600);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cal-nav button:hover:not(:disabled) { background: var(--gray-100); }
+  .cal-nav button svg { width: 15px; height: 15px; }
+  .cal-nav button:disabled { opacity: .3; cursor: not-allowed; }
+  .cal-nav strong { font-size: 13.5px; font-weight: 700; color: var(--gray-800); text-transform: capitalize; }
+
+  .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 6px; }
+  .cal-weekdays span { text-align: center; font-size: 10.5px; font-weight: 700; color: var(--gray-400); }
+
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-day {
+    aspect-ratio: 1; border-radius: 8px;
+    font-size: 12.5px; font-weight: 600;
+    display: grid; place-items: center; color: var(--gray-700);
+  }
+  .cal-day.empty { visibility: hidden; }
+  .cal-day.disabled { color: var(--gray-300); cursor: not-allowed; background: var(--gray-50); }
+  .cal-day.enabled { background: #EFF6FF; color: var(--blue); }
+  .cal-day.enabled:hover { background: var(--blue); color: var(--white); }
+  .cal-day.enabled:active { transform: scale(.88); transition: transform .08s; }
+  .cal-day.selected { background: var(--blue) !important; color: var(--white) !important; box-shadow: 0 0 0 3px #DBEAFE; }
+
+  .cal-legend { display: flex; gap: 14px; margin: 14px 0 18px; font-size: 11px; color: var(--gray-500); }
+  .cal-legend span { display: flex; align-items: center; gap: 5px; }
+  .cal-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .cal-legend .li-on { background: #EFF6FF; border: 1px solid var(--blue); }
+  .cal-legend .li-off { background: var(--gray-100); }
+
+  .modal-footer { padding: 14px 20px 20px; flex-shrink: 0; border-top: 1px solid var(--gray-100); }
+  .btn-wa-quote {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: #25D366; color: var(--white); font-weight: 700; font-size: 14.5px;
+    padding: 14px; border-radius: 12px; transition: all .2s;
+  }
+  .btn-wa-quote svg { width: 18px; height: 18px; }
+  .btn-wa-quote:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
+  .btn-wa-quote:not(:disabled):hover { background: #20b859; transform: translateY(-1px); }
+  .btn-wa-quote:not(:disabled):active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+
+  /* ── CONDITIONS SECTION ── */
+  .conditions-section { background: var(--gray-100); padding: 56px 24px; }
+  .conditions-inner { max-width: 1100px; margin: 0 auto; }
+  .conditions-header { text-align: center; margin-bottom: 30px; }
+  .conditions-header h2 { font-size: 26px; font-weight: 800; color: var(--gray-800); margin-bottom: 10px; }
+  .conditions-header p { font-size: 14.5px; color: var(--gray-500); max-width: 660px; margin: 0 auto; line-height: 1.65; }
+  .cond-list { list-style: none; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .cond-list li { font-size: 13.5px; color: var(--gray-600); line-height: 1.55; padding-left: 16px; position: relative; }
+  .cond-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--gray-300); }
+  .cond-source { padding: 0 20px 18px; font-size: 11.5px; color: var(--gray-400); font-style: italic; }
+
+  /* ── CTA FOOTER ── */
+  .cta-section {
+    background: linear-gradient(160deg, var(--blue-dark) 0%, var(--blue-mid) 60%, #003580 100%);
+    padding: 60px 24px; text-align: center;
+  }
+  .cta-section h2 { color: var(--white); font-size: 27px; font-weight: 800; margin-bottom: 12px; }
+  .cta-section p { color: rgba(255,255,255,.7); font-size: 15.5px; margin-bottom: 30px; }
+  .btn-wsp-main {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: var(--white);
+    font-size: 16px; font-weight: 700;
+    padding: 16px 34px; border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(37,211,102,.4);
+    transition: all .2s;
+  }
+  .btn-wsp-main:hover { background: #20b859; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,.45); }
+  .btn-wsp-main:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+  .btn-wsp-main svg { width: 22px; height: 22px; }
+
+  footer { background: var(--blue-dark); color: rgba(255,255,255,.5); padding: 22px 24px; text-align: center; font-size: 12.5px; }
+  footer strong { color: rgba(255,255,255,.85); }
+
+  @media (max-width: 960px) {
+    .dest-grid, .cond-grid { column-count: 2; }
+  }
+  @media (max-width: 640px) {
+    .hero-text-block h1 { font-size: 27px; }
+    .hero-stats { gap: 8px; }
+    .apt-tab { width: 88px; }
+    .airport-hero { flex-wrap: wrap; }
+    .airport-hero-count { margin-left: 0; text-align: left; }
+    .dest-grid, .cond-grid { column-count: 1; }
+  }
+</style>
+<link rel="stylesheet" href="../assets/header.css"><link rel="stylesheet" href="../assets/footer.css"></head>
+<body data-header="agencia">
+
+<!-- ── HERO + BUSCADOR (unificados: el buscador es ahora el módulo principal) ── -->
+<div class="search-widget-wrap">
+  <div class="hero-text-block">
+    <div class="hero-left">
+    <div class="hero-eyebrow" id="heroEyebrow">Agencia de Viajes Autorizada</div>
+    <h1>Vuelos desde y hacia<br><span>Venezuela</span></h1>
+    <p>Escribe tu origen y destino, elige tus fechas y cotiza al instante por WhatsApp. Te confirmamos disponibilidad, horarios y precio.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>10</strong><span>Aeropuertos</span></div>
+      <div class="hero-stat"><strong>20+</strong><span>Aerolíneas</span></div>
+      <div class="hero-stat"><strong>50+</strong><span>Destinos</span></div>
+    </div>
+  </div>
+
+  <div class="search-widget">
+    <div class="sw-plane-bg" aria-hidden="true">
+      <span class="sw-cloud sw-cloud-1" id="swCloud1"></span>
+      <span class="sw-cloud sw-cloud-2" id="swCloud2"></span>
+      <span class="sw-cloud sw-cloud-3" id="swCloud3"></span>
+      <span class="sw-cloud sw-cloud-4" id="swCloud4"></span>
+      <div class="sw-jet" id="swJet"></div>
+    </div>
+    <div class="sw-header">
+      <div>
+        <strong>Busca y cotiza tu vuelo</strong>
+        <span>Elige ruta y fecha — te enviamos directo a WhatsApp para cotizar</span>
+      </div>
+    </div>
+
+    <div class="sw-triptype">
+      <label class="sw-radio">
+        <input type="radio" name="swTripType" value="oneway" onchange="onTripTypeChange()">
+        <span class="sw-radio-dot"></span> Sólo ida
+      </label>
+      <label class="sw-radio">
+        <input type="radio" name="swTripType" value="roundtrip" checked onchange="onTripTypeChange()">
+        <span class="sw-radio-dot"></span> Ida y vuelta
+      </label>
+    </div>
+
+    <div class="sw-fields">
+      <div class="sw-field">
+        <label for="swOrigin">Origen</label>
+        <div class="csel combo" id="csel-swOrigin">
+          <input type="text" id="swOrigin" class="combo-input" placeholder="Ciudad o aeropuerto de salida" autocomplete="off" oninput="onComboInput('swOrigin')" onfocus="openCombo('swOrigin')">
+          <div class="csel-panel" id="swOriginPanel"></div>
+        </div>
+      </div>
+      <div class="sw-field">
+        <label for="swDestino">Destino</label>
+        <div class="csel combo" id="csel-swDestino">
+          <input type="text" id="swDestino" class="combo-input" placeholder="Ciudad o aeropuerto de llegada" autocomplete="off" oninput="onComboInput('swDestino')" onfocus="openCombo('swDestino')">
+          <div class="csel-panel" id="swDestinoPanel"></div>
+        </div>
+      </div>
+      <div class="sw-field">
+        <label>Fecha de ida</label>
+        <button type="button" class="sw-date-btn" id="swDateOutBtn" onclick="openSwCalendar('out')">
+          <span id="swDateOutIcon"></span><span id="swDateOutText">Selecciona fecha</span>
+        </button>
+      </div>
+      <div class="sw-field sw-field-ret" id="swRetWrap">
+        <label>Fecha de vuelta</label>
+        <button type="button" class="sw-date-btn" id="swDateRetBtn" onclick="openSwCalendar('ret')" disabled>
+          <span id="swDateRetIcon"></span><span id="swDateRetText">Selecciona fecha</span>
+        </button>
+      </div>
+    </div>
+    <label class="sw-transfer" id="swTransfer">
+      <input type="checkbox" id="swTransferChk" onchange="updateTransferText()">
+      <span class="sw-tbox"><svg viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg></span>
+      <span class="sw-ttext"><strong>Cotizar también traslados al aeropuerto</strong><small id="swTransferSub"></small></span>
+      <span class="sw-promo-badge">¡Obtén una promo!</span>
+    </label>
+    <div class="sw-submit-wrap">
+      <button type="button" class="sw-search-btn" id="swSearchBtn" onclick="swSearch()" disabled>
+        <span id="swSearchIcon"></span> Cotizar por WhatsApp
+      </button>
+    </div>
+    <p class="sw-note">Puede que tu ruta no esté disponible. Escribe cualquier origen y destino: al cotizar por WhatsApp te confirmamos si hay vuelos para esa ruta y fecha.</p>
+  </div>
+</div>
+
+<div class="alert-bar" id="alertBar">
+  <strong>Los vuelos están sujetos a cambios sin previo aviso.</strong> Tu ruta puede no estar disponible: confirmamos ruta, horario exacto y disponibilidad contigo antes de emitir tu boleto.
+</div>
+
+<section class="conditions-section">
+  <div class="conditions-inner">
+    <div class="conditions-header">
+      <h2>Condiciones Generales de Boletería Aérea</h2>
+      <p>Resumen orientativo de las políticas más comunes de cambio, cancelación y documentación por aerolínea. Cada aerolínea puede actualizar sus condiciones sin previo aviso — nosotros confirmamos las condiciones exactas de tu tarifa antes de emitir tu boleto.</p>
+    </div>
+    <div class="cond-grid" id="condGrid"></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>¿Necesitas tu boleto?</h2>
+  <p>Escríbenos y encontramos el vuelo ideal para ti al mejor precio disponible.</p>
+  <a class="btn-wsp-main" id="ctaBtn"
+     href="https://wa.me/584125805433?text=Hola%2C%20quisiera%20consultar%20sobre%20la%20disponibilidad%20y%20precios%20de%20boletos%20a%C3%A9reos.%20%C2%BFPueden%20ayudarme%3F"
+     target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.11 1.524 5.836L0 24l6.306-1.495A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.012-1.375l-.36-.213-3.742.886.934-3.641-.234-.374A9.818 9.818 0 1121.818 12 9.83 9.83 0 0112 21.818z"/></svg>
+    Consultar por WhatsApp
+  </a>
+</section>
+
+
+
+<!-- ── SHARED CALENDAR MODAL (modo 'quote' por vuelo, y modo 'widget' para el buscador) ── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <h3 id="modalTitle">Elige tu fecha</h3>
+        <p id="modalSubtitle">Ruta · Aerolínea</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()" id="modalCloseBtn"></button>
+    </div>
+    <div class="modal-scroll">
+      <div class="qstep" id="qstepOutDone" style="display:none">
+        <span class="qstep-check" id="qstepCheckIcon"></span>
+        <span>Salida: <strong id="outDoneLabel"></strong></span>
+        <button type="button" class="qstep-edit" onclick="goToOutStep()">cambiar</button>
+      </div>
+      <div class="cal-section-title">
+        <span id="calTitleIcon"></span>
+        <span id="calStepLabel">Fecha de salida</span>
+      </div>
+      <label class="skip-check" id="skipRetWrap" style="display:none">
+        <input type="checkbox" id="skipRetCheck" onchange="onSkipToggle()">
+        <span class="skip-box" id="skipBoxIcon"></span>
+        Solo ida, sin fecha de regreso
+      </label>
+      <div class="mini-cal" id="calBox"></div>
+      <div class="cal-legend" id="calLegend">
+        <span><i class="li-on"></i> Días con vuelo</span>
+        <span><i class="li-off"></i> Sin vuelo</span>
+      </div>
+      <div class="cal-hint" id="calHint"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-wa-quote" id="btnFinishQuote" disabled onclick="handleModalFinish()">
+        <span id="waIconBtn"></span> <span id="btnFinishLabel">Cotizar por WhatsApp</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WA = '584125805433';
+
+// ── ICONS (self-hosted, no OS emoji dependency) ──
+const ICONS = {
+  plane: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 19.5 21 12 2.5 4.5l1.8 6.2L14 12l-9.7 1.3z"/></svg>`,
+  // silueta real de avión (vista superior: fuselaje ancho + alas en flecha + estabilizadores), no un avión de papel
+  // avión de contorno (estilo de la referencia del cliente): trazo azul + cola en celeste
+  jet: `<svg viewBox="0 0 130 70"><path d="M30,22 L19,30 L24,38 L41,37 Q35,29 30,22 Z" fill="#29B6E8" stroke="none"/><path d="M98,36 L72,28 L57,17 L44,37 L30,22 L19,30 L24,38 Q58,43 98,36 Z" fill="none" stroke="#00337F" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/></svg>`,
+  cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 22h9a5 5 0 0 0 0-10z"/></svg>`,
+  palm: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V11"/><path d="M12 11c0-4-3-6-7-6 1 4 3 6 7 6Z"/><path d="M12 11c0-5 3-7 8-7-1 4-4 7-8 7Z"/><path d="M12 11c-2-2-5-2-6 0"/><path d="M12 11c2-2 5-2 6 0"/></svg>`,
+  anchor: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><path d="M12 7.2V21"/><path d="M5 13a7 7 0 0 0 14 0"/><path d="M2.5 13h5M16.5 13h5"/></svg>`,
+  leaf: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-9 0-15 6-15 14 9 0 15-6 15-14Z"/><path d="M5 18 20 4"/></svg>`,
+  mountain: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 19 6-11 4 6 2-3 6 8Z"/></svg>`,
+  mountainSnow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 19 6-11 4 6 2-3 6 8Z"/><path d="m9 8-1.5 3h3z"/></svg>`,
+  waves: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 20c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>`,
+  gem: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M2 9h20M9 3l3 6-3 12M15 3l-3 6 3 12"/></svg>`,
+  city: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l5-4v16"/><path d="M14 21V4l6 3v14"/><path d="M4 21h16"/><path d="M8 9h.01M8 13h.01M8 17h.01M17 9h.01M17 13h.01M17 17h.01"/></svg>`,
+  warning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20Z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>`,
+  clock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`,
+  globe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9Z"/></svg>`,
+  pin: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>`,
+  check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>`,
+  chevronDown: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`,
+  chevronLeft: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>`,
+  chevronRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`,
+  close: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>`,
+  calendar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>`,
+  shield: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/></svg>`,
+  doc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>`,
+  search: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>`,
+};
+const WA_ICON = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.11 1.524 5.836L0 24l6.306-1.495A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.012-1.375l-.36-.213-3.742.886.934-3.641-.234-.374A9.818 9.818 0 1121.818 12 9.83 9.83 0 0112 21.818z"/></svg>`;
+
+// Days order: [Lu, Ma, Mi, Ju, Vi, Sá, Do]
+const DAY_LABELS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
+const DAY_NAMES  = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+const DAY_CODES  = ['L','Ma','Mi','J','V','S','D'];
+const MONTH_NAMES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+function daysArr(str) {
+  if (!str || str === '-') return [0,0,0,0,0,0,0];
+  const parts = str.split(',').map(s => s.trim());
+  return DAY_CODES.map(c => parts.includes(c) ? 1 : 0);
+}
+function daysText(str) {
+  if (!str || str === '-') return '—';
+  return str.split(',').map(c => {
+    const i = DAY_CODES.indexOf(c.trim());
+    return i >= 0 ? DAY_NAMES[i].charAt(0).toUpperCase() + DAY_NAMES[i].slice(1) : c;
+  }).join(', ');
+}
+function unionDays(flights, field) {
+  const acc = [0,0,0,0,0,0,0];
+  flights.forEach(f => { daysArr(f[field]).forEach((v,i) => { if (v) acc[i] = 1; }); });
+  return DAY_CODES.filter((c,i) => acc[i] === 1).join(',');
+}
+
+// ── FOTOS REPRESENTATIVAS POR DESTINO ──
+// Solo se incluyen destinos con una foto real y verificada del lugar (Pexels/Pixabay,
+// licencia libre de uso comercial). El resto conserva el icono + color por defecto
+// hasta confirmar una imagen genuina — ver mensaje de investigación al usuario.
+const DEST_IMAGES = {
+  PZO: { url: 'https://cdn.pixabay.com/photo/2017/06/13/16/40/puerto-ordaz-2399364_1280.jpg', credit: 'Foto: Pixabay' },
+  BOG: { url: 'https://images.pexels.com/photos/19676357/pexels-photo-19676357.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Pexels', pos: 'center 25%' },
+  PTY: { url: 'https://images.pexels.com/photos/18185251/pexels-photo-18185251.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Luis Chiari / Pexels' },
+  PUJ: { url: 'https://images.pexels.com/photos/33392859/pexels-photo-33392859.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Kevin Kleber / Pexels' },
+  HAV: { url: 'https://images.pexels.com/photos/16808291/pexels-photo-16808291.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Mehmet Turgut Kirkgoz / Pexels' },
+  CUN: { url: 'https://images.pexels.com/photos/20210512/pexels-photo-20210512.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Israel Torres / Pexels' },
+  MAD: { url: 'https://images.pexels.com/photos/32469373/pexels-photo-32469373.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Pexels' },
+  TFN: { url: 'https://images.pexels.com/photos/32303168/pexels-photo-32303168.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Pexels' },
+  MDE: { url: 'https://images.pexels.com/photos/34044017/pexels-photo-34044017.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Josué Rodríguez / Pexels' },
+  MIA: { url: 'https://images.pexels.com/photos/15312055/pexels-photo-15312055.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Pexels' },
+  CUR: { url: 'https://images.pexels.com/photos/32330641/pexels-photo-32330641.jpeg?auto=compress&cs=tinysrgb&w=900', credit: 'Foto: Pexels' },
+  // ── destinos nacionales, foto representativa del estado (no siempre la ciudad exacta) ──
+  MAR: { url: 'https://cdn.pixabay.com/photo/2013/05/15/03/27/lake-maracaibo-111300_1280.jpg', credit: 'Foto: Pixabay' }, // Lago de Maracaibo, Zulia
+  VIG: { url: 'https://cdn.pixabay.com/photo/2013/05/06/14/43/merida-109143_1280.jpg', credit: 'Foto: Pixabay' }, // Andes merideños, Mérida
+  BLA: { url: 'https://cdn.pixabay.com/photo/2015/10/16/22/10/venezuela-991906_1280.jpg', credit: 'Foto: Pixabay' }, // Puerto La Cruz, Anzoátegui
+  VLN: { url: 'https://cdn.pixabay.com/photo/2017/10/03/02/20/tower-bod-2811126_1280.jpg', credit: 'Foto: Pixabay' }, // Valencia, Carabobo
+  PMV: { url: 'https://cdn.pixabay.com/photo/2013/05/06/14/45/margarita-island-109148_1280.jpg', credit: 'Foto: Pixabay' }, // Isla de Margarita, Nueva Esparta
+  // ── fuentes oficiales del gobierno de Venezuela (INPARQUES / MINTUR) ──
+  CAJ: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/bdec7f9a4f357c36d37069d2901f45cf.jpg', credit: 'Foto: INPARQUES' }, // P.N. Canaima, Bolívar
+  MYC: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/3b379a773fabfaa739ace311c0c94b6b.jpg', credit: 'Foto: INPARQUES' }, // P.N. Henri Pittier, Aragua
+  BRM: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/ebaf639be243501125b26a10141a5173.jpg', credit: 'Foto: INPARQUES' }, // P.N. Yacambú, Lara
+  LSP: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/f28377ccdd10989a599c826ea79d33a9.jpg', credit: 'Foto: INPARQUES' }, // Médanos de Coro, Falcón
+  CUM: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/59310fcbdd63f67616062696fe241d43.jpg', credit: 'Foto: INPARQUES' }, // P.N. Mochima, Sucre
+  VLV: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/332fbcf3043dfad32b02d63f3c7dd526.jpg', credit: 'Foto: INPARQUES' }, // P.N. Guaramacal, Trujillo
+  MUN: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/0eaea3edf1679809c49e28b11ac8924a.jpg', credit: 'Foto: INPARQUES' }, // P.N. El Guácharo, Monagas
+  SVZ: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/b4bd548e79a11dcca283cd215bc13cab.jpg', credit: 'Foto: INPARQUES' }, // P.N. El Tamá, Táchira
+  STD: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/b4bd548e79a11dcca283cd215bc13cab.jpg', credit: 'Foto: INPARQUES' }, // P.N. El Tamá, Táchira
+  LFR: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/b4bd548e79a11dcca283cd215bc13cab.jpg', credit: 'Foto: INPARQUES' }, // P.N. El Tamá, Táchira
+  BNS: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/a3cde3fe9743ed1ebf8c7a0091119f96.jpg', credit: 'Foto: INPARQUES' }, // P.N. Tapo-Caparo, Barinas
+  PYH: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/faade1c7e983f3da504c57860960db97.jpg', credit: 'Foto: INPARQUES' }, // P.N. Duida-Marahuaca, Amazonas
+  LRV: { url: 'https://www.inparques.gob.ve/cms/src/galeria/img/daf08fb0bbf42081278b962bad249c33.jpg', credit: 'Foto: INPARQUES' }, // Los Roques, Dependencias Federales
+  // ── fuentes oficiales internacionales (ministerios de turismo, institutos de parques, autoridades aeroportuarias) ──
+  NLU: { url: 'https://www.aifa.aero/api/Embe003BannerImg/eyJpdiI6Ii9FOENyWDRSQ01IWnJDc0pWamxyNVE9PSIsInZhbHVlIjoic1R1cjNNMUdYcmNVZ293OUZvS3lydz09IiwibWFjIjoiMTc1ZTdlZjhjMWRjMzk5MmU1ZGIyODQ5MTdiMzAyMzUxZWVhZDFkYjFjZTM3YmM1ZjBkMmJhNTNkNTNiYmVmYiIsInRhZyI6IiJ9', credit: 'Foto: AIFA / Gobierno de México' }, // Santa Lucía / CDMX, México
+  POS: { url: 'https://udecott.com/wp-content/uploads/home-page-bg.jpg', credit: 'Foto: UDeCOTT' }, // Puerto España, Trinidad y Tobago
+  BGI: { url: 'https://www.tourism.gov.bb/film/img/slider-img4.jpg', credit: 'Foto: Ministerio de Turismo de Barbados' }, // Bridgetown, Barbados
+  SDQ: { url: 'https://situr.mitur.gob.do/wp-content/uploads/2022/04/Remozamiento-Malecon-Santo-Domingo-Este-David-Collado-Luis-Abinader.jpg', credit: 'Foto: MITUR' }, // Santo Domingo, Rep. Dominicana
+  BVB: { url: 'https://boavista.rr.gov.br/storage/galerias/turismo/pagina-turismo/parque-do-rio-branco-mirante_51111915614_o-min.jpg', credit: 'Foto: Prefeitura de Boa Vista' }, // Boa Vista, Roraima, Brasil
+};
+// Foto genérica (paisaje andino, Mérida) para destinos sin foto específica verificada aún —
+// así todas las tarjetas mantienen una imagen y se ven visualmente coherentes.
+const GENERIC_DEST_IMAGE = { url: 'https://images.pexels.com/photos/18122957/pexels-photo-18122957.jpeg?auto=compress&cs=tinysrgb&w=900', credit: '' };
+
+// ── LOGOS OFICIALES (SVG verificados en Wikimedia Commons, vigentes) ──
+// Aerolíneas sin entrada aquí usan el badge de iniciales (fallback) más abajo.
+// Copa Airlines: en Commons solo existe en PNG, no SVG — se deja con el badge.
+const AIRLINE_LOGOS = {
+  'Conviasa':          'https://upload.wikimedia.org/wikipedia/commons/d/d7/Conviasa_Logo.svg',
+  'Avior Airlines':    'https://upload.wikimedia.org/wikipedia/commons/1/15/Avior_Airlines_2017.svg',
+  'LASER Airlines':    'https://upload.wikimedia.org/wikipedia/commons/e/e6/Laser_%28airline%29_logo.svg',
+  'Aeropostal':        'https://upload.wikimedia.org/wikipedia/commons/6/6a/Aeropostal_logo.svg',
+  'Aerocaribe':        'https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_wordmark_AeroCaribe_Airlines_%28Venezuela%29.svg',
+  'Avianca':           'https://upload.wikimedia.org/wikipedia/commons/1/1f/Avianca_2023_wordmark.svg',
+  'LATAM Airlines':    'https://upload.wikimedia.org/wikipedia/commons/f/fe/Latam-logo_-v_%28Indigo%29.svg',
+  'American Airlines': 'https://upload.wikimedia.org/wikipedia/commons/8/81/American_Airlines_wordmark_%282013%29.svg',
+  'Air Europa':        'https://upload.wikimedia.org/wikipedia/commons/5/59/Air_Europa_Logo_%282015%29.svg',
+  'Plus Ultra':        'https://upload.wikimedia.org/wikipedia/commons/2/20/Plus_Ultra_L%C3%ADneas_A%C3%A9reas_Logo.svg',
+  'Plus Ultra Líneas Aéreas': 'https://upload.wikimedia.org/wikipedia/commons/2/20/Plus_Ultra_L%C3%ADneas_A%C3%A9reas_Logo.svg', // alias: en "conditions" el título viene completo
+  'Wingo':             'https://upload.wikimedia.org/wikipedia/commons/a/a7/Wingo_logo_2016.svg',
+};
+// si una imagen no carga (URL rota, cambio en Commons, etc.) se cae de vuelta
+// al badge de iniciales en vez de mostrar un ícono de imagen rota
+function airlineLogoFallback(imgEl, name) {
+  const { mono, color } = airlineMonogram(name);
+  const wrap = imgEl.parentElement;
+  wrap.classList.remove('airline-logo-img');
+  wrap.style.background = color;
+  wrap.innerHTML = mono;
+}
+
+// ── AIRLINE MONOGRAM (respaldo: iniciales sobre color, cuando no hay logo real) ──
+const AIRLINE_PALETTE = ['#00337F','#0E9488','#C2660B','#7C3AED','#BE185D','#0369A1','#B45309','#1E8E4B','#DB2777','#4338CA','#0D9488','#EA580C'];
+function airlineMonogram(name) {
+  const stop = ['airlines','aerolíneas','aerolineas'];
+  const words = name.split(' ');
+  const sig = words.filter(w => !stop.includes(w.toLowerCase()));
+  let mono;
+  if (sig.length >= 2) mono = sig[0][0] + sig[1][0];
+  else if (sig.length === 1) mono = sig[0].substring(0, 2);
+  else mono = name.substring(0, 2);
+  mono = mono.toUpperCase();
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
+  const color = AIRLINE_PALETTE[hash % AIRLINE_PALETTE.length];
+  return { mono, color };
+}
+
+// ── AIRPORT DATA (El Vigía primero — sede de operaciones de TransfersMérida) ──
+const airports = [
+  { id:'VIG', city:'El Vigía (Mérida)', name:'Aeropuerto Juan Pablo Pérez Alfonzo', state:'Mérida', icon:'mountainSnow', color:'#F5A623', colorDark:'#B97B0F', home:true,
+    nacional: [
+      { dest:'Valencia', code:'VLN', country:'Estado Carabobo', flights:[
+        { airline:'Conviasa',         out:'VIG-VLN', od:'L',   ret:'VLN-VIG', rd:'L' },
+        { airline:'Turpial Airlines', out:'VIG-VLN', od:'V,D', ret:'VLN-VIG', rd:'V,D' },
+      ]},
+      { dest:'Porlamar', code:'PMV', country:'Estado Nueva Esparta', flights:[
+        { airline:'Conviasa',         out:'VIG-PMV', od:'V,D', ret:'PMV-VIG', rd:'V,D' },
+        { airline:'Turpial Airlines', out:'VIG-PMV', od:'L,J', ret:'PMV-VIG', rd:'L,J' },
+      ]},
+      { dest:'Barcelona', code:'BLA', country:'Estado Anzoátegui', flights:[
+        { airline:'Conviasa',       out:'VIG-BLA', od:'L',  ret:'BLA-VIG', rd:'L' },
+        { airline:'Avior Airlines', out:'VIG-BLA', od:'Ma', ret:'BLA-VIG', rd:'Ma' },
+      ]},
+      { dest:'Maracay', code:'MYC', country:'Estado Aragua', flights:[
+        { airline:'LASER Airlines', out:'VIG-MYC', od:'L,Ma,Mi,J,V,S,D', ret:'MYC-VIG', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+      { dest:'Puerto Ordaz', code:'PZO', country:'Estado Bolívar', flights:[
+        { airline:'Conviasa', out:'VIG-PZO', od:'Ma', ret:'PZO-VIG', rd:'Ma' },
+      ]},
+    ],
+    internacional: []
+  },
+  { id:'VLN', city:'Valencia', name:'Aeropuerto Arturo Michelena', state:'Carabobo', icon:'plane', color:'#00337F', colorDark:'#001F4D',
+    nacional: [
+      { dest:'Porlamar', code:'PMV', country:'Estado Nueva Esparta', flights:[
+        { airline:'Turpial Airlines',   out:'VLN-PMV', od:'L,J,V,D',        ret:'PMV-VLN', rd:'L,J,V,D' },
+        { airline:'Aeropostal',         out:'VLN-PMV', od:'L,Ma,V,D',       ret:'PMV-VLN', rd:'L,Ma,J,V,D' },
+        { airline:'Conviasa',           out:'VLN-PMV', od:'L,Ma,Mi,V,S,D',  ret:'PMV-VLN', rd:'L,Ma,Mi,V,S,D' },
+        { airline:'Rutaca',             out:'VLN-PMV', od:'L,Ma,Mi,V,S,D',  ret:'PMV-VLN', rd:'L,Ma,J,V,S,D' },
+        { airline:'Aerolíneas Estelar', out:'VLN-PMV', od:'J,V,D',          ret:'PMV-VLN', rd:'J,V,D' },
+      ]},
+      { dest:'Barcelona', code:'BLA', country:'Estado Anzoátegui', flights:[
+        { airline:'Rutaca', out:'VLN-BLA', od:'L,Ma,Mi,V,S,D', ret:'BLA-VLN', rd:'L,Ma,Mi,J,S' },
+      ]},
+      { dest:'Maturín', code:'MUN', country:'Estado Monagas', flights:[
+        { airline:'Rutaca',   out:'VLN-MUN', od:'Ma,V',     ret:'MUN-VLN', rd:'Ma,V' },
+        { airline:'Conviasa', out:'VLN-MUN', od:'L,Ma,V,D', ret:'MUN-VLN', rd:'L,Ma,V' },
+      ]},
+      { dest:'Puerto Ordaz', code:'PZO', country:'Estado Bolívar', flights:[
+        { airline:'Turpial Airlines',   out:'VLN-PZO', od:'L,V',           ret:'PZO-VLN', rd:'L,V' },
+        { airline:'Aerolíneas Estelar', out:'VLN-PZO', od:'L,J,D',         ret:'PZO-VLN', rd:'L,Ma,V' },
+        { airline:'Rutaca',             out:'VLN-PZO', od:'L,Ma,Mi,V,S,D', ret:'PZO-VLN', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Conviasa',           out:'VLN-PZO', od:'Ma,J',          ret:'PZO-VLN', rd:'Ma,J' },
+      ]},
+      { dest:'Maracaibo', code:'MAR', country:'Estado Zulia', flights:[
+        { airline:'Turpial Airlines',   out:'VLN-MAR', od:'L,V',        ret:'MAR-VLN', rd:'L,V' },
+        { airline:'Aerolíneas Estelar', out:'VLN-MAR', od:'L,V',        ret:'MAR-VLN', rd:'L,Ma,J,S' },
+        { airline:'Rutaca',             out:'VLN-MAR', od:'Ma,Mi,J,S,D',ret:'MAR-VLN', rd:'Ma,V,D' },
+        { airline:'Conviasa',           out:'VLN-MAR', od:'V,D',        ret:'MAR-VLN', rd:'V,D' },
+      ]},
+      { dest:'San Antonio del Táchira', code:'SVZ', country:'Estado Táchira', flights:[
+        { airline:'Aerolíneas Estelar', out:'VLN-SVZ', od:'L,Ma,J,S', ret:'SVZ-VLN', rd:'L,V,S' },
+        { airline:'Turpial Airlines',   out:'VLN-SVZ', od:'L,V',      ret:'SVZ-VLN', rd:'L,Ma,V' },
+        { airline:'Conviasa',           out:'VLN-SVZ', od:'Ma,D',     ret:'SVZ-VLN', rd:'Ma,D' },
+      ]},
+      { dest:'Santo Domingo del Táchira', code:'STD', country:'Estado Táchira', flights:[
+        { airline:'Rutaca',             out:'VLN-STD', od:'L,Ma,V,S',        ret:'STD-VLN', rd:'L,Ma,V,S' },
+        { airline:'Aerolíneas Estelar', out:'VLN-STD', od:'L,Ma,Mi,J,V,S,D', ret:'STD-VLN', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Conviasa',           out:'VLN-STD', od:'L,S',             ret:'STD-VLN', rd:'L,S' },
+      ]},
+      { dest:'El Vigía', code:'VIG', country:'Estado Mérida', flights:[
+        { airline:'Conviasa',         out:'VLN-VIG', od:'L',   ret:'VIG-VLN', rd:'L' },
+        { airline:'Turpial Airlines', out:'VLN-VIG', od:'V,D', ret:'VIG-VLN', rd:'V,D' },
+      ]},
+      { dest:'La Fría', code:'LFR', country:'Estado Táchira', flights:[
+        { airline:'Conviasa', out:'VLN-LFR', od:'J,V,D', ret:'LFR-VLN', rd:'J' },
+      ]},
+      { dest:'Valera', code:'VLV', country:'Estado Trujillo', flights:[
+        { airline:'Conviasa', out:'VLN-VLV', od:'Ma', ret:'VLV-VLN', rd:'Ma' },
+      ]},
+      { dest:'Cumaná', code:'CUM', country:'Estado Sucre', flights:[
+        { airline:'Conviasa', out:'VLN-CUM', od:'L', ret:'CUM-VLN', rd:'L' },
+      ]},
+      { dest:'Canaima', code:'CAJ', country:'Estado Bolívar', flights:[
+        { airline:'Conviasa', out:'VLN-CAJ', od:'Ma,J,D', ret:'CAJ-VLN', rd:'Ma,J,D' },
+      ]},
+    ],
+    internacional: [
+      { dest:'Bogotá', code:'BOG', country:'Colombia', flights:[
+        { airline:'Turpial Airlines', out:'VLN-BOG', od:'J,D',            ret:'BOG-VLN', rd:'J,S' },
+        { airline:'Avianca',          out:'VLN-BOG', od:'L,Ma,Mi,J,V,S,D',ret:'BOG-VLN', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Wingo',            out:'VLN-BOG', od:'Ma,J',           ret:'BOG-VLN', rd:'Ma,J,D' },
+      ]},
+      { dest:'Ciudad de Panamá', code:'PTY', country:'Panamá', flights:[
+        { airline:'Turpial Airlines', out:'VLN-PTY', od:'Ma,D',           ret:'PTY-VLN', rd:'Ma,D' },
+        { airline:'Copa Airlines',    out:'VLN-PTY', od:'L,Ma,Mi,J,V,S,D',ret:'PTY-VLN', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+      { dest:'Punta Cana', code:'PUJ', country:'Rep. Dominicana', flights:[
+        { airline:'Turpial Airlines', out:'VLN-PUJ', od:'J,D', ret:'PUJ-VLN', rd:'J,D' },
+        { airline:'Rutaca',           out:'VLN-PUJ', od:'J,D', ret:'PUJ-VLN', rd:'J,D' },
+      ]},
+      { dest:'La Habana', code:'HAV', country:'Cuba', flights:[
+        { airline:'Rutaca',   out:'VLN-HAV', od:'L',   ret:'HAV-VLN', rd:'L' },
+        { airline:'Conviasa', out:'VLN-HAV', od:'Ma,V',ret:'HAV-VLN', rd:'Ma,V' },
+      ]},
+      { dest:'Cancún', code:'CUN', country:'México', flights:[
+        { airline:'Conviasa', out:'VLN-CUN', od:'V', ret:'CUN-VLN', rd:'-' },
+      ]},
+      { dest:'Santa Lucía (CDMX)', code:'NLU', country:'México', flights:[
+        { airline:'Conviasa', out:'VLN-NLU', od:'Ma', ret:'NLU-VLN', rd:'Ma' },
+      ]},
+      { dest:'Madrid', code:'MAD', country:'España', flights:[
+        { airline:'Plus Ultra',         out:'VLN-MAD', od:'L,Ma,J,D', ret:'MAD-VLN', rd:'L,Ma,J,D' },
+        { airline:'Aerolíneas Estelar', out:'VLN-MAD', od:'Ma,V',     ret:'MAD-VLN', rd:'Ma,V' },
+        { airline:'Air Europa',         out:'VLN-MAD', od:'Ma,J,S',   ret:'MAD-VLN', rd:'Ma,J,S' },
+      ]},
+      { dest:'Tenerife', code:'TFN', country:'España', flights:[
+        { airline:'Plus Ultra', out:'VLN-TFN', od:'S', ret:'TFN-VLN', rd:'S' },
+      ]},
+    ]
+  },
+  { id:'PMV', city:'Porlamar', name:'Aeropuerto Stgo. Mariño', state:'Nueva Esparta', icon:'palm', color:'#0E9488', colorDark:'#0B665D',
+    nacional: [
+      { dest:'Valencia', code:'VLN', country:'Estado Carabobo', flights:[
+        { airline:'Turpial Airlines',   out:'PMV-VLN', od:'L,J,V,D',       ret:'VLN-PMV', rd:'L,J,V,D' },
+        { airline:'Aeropostal',         out:'PMV-VLN', od:'L,Ma,J,V,D',    ret:'VLN-PMV', rd:'L,Ma,V,D' },
+        { airline:'Conviasa',           out:'PMV-VLN', od:'L,Ma,Mi,V,S,D', ret:'VLN-PMV', rd:'L,Ma,Mi,V,S,D' },
+        { airline:'Rutaca',             out:'PMV-VLN', od:'L,Ma,J,V,S,D',  ret:'VLN-PMV', rd:'L,Ma,Mi,V,S,D' },
+        { airline:'Aerolíneas Estelar', out:'PMV-VLN', od:'Ma,V',          ret:'VLN-PMV', rd:'J,V,D' },
+      ]},
+      { dest:'Barcelona', code:'BLA', country:'Estado Anzoátegui', flights:[
+        { airline:'Conviasa', out:'PMV-BLA', od:'L,Ma,J,V,S,D', ret:'BLA-PMV', rd:'L,Ma,J,V,S,D' },
+        { airline:'Sundance', out:'PMV-BLA', od:'L,Ma,Mi,V,D',  ret:'BLA-PMV', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+      { dest:'Barquisimeto', code:'BRM', country:'Estado Lara', flights:[
+        { airline:'Conviasa', out:'PMV-BRM', od:'Ma,S', ret:'BRM-PMV', rd:'Ma,S' },
+        { airline:'Rutaca',   out:'PMV-BRM', od:'L,J',  ret:'BRM-PMV', rd:'L,J' },
+      ]},
+      { dest:'Maracaibo', code:'MAR', country:'Estado Zulia', flights:[
+        { airline:'Conviasa', out:'PMV-MAR', od:'Ma,V,D', ret:'MAR-PMV', rd:'Ma,V,D' },
+      ]},
+      { dest:'Puerto Ordaz', code:'PZO', country:'Estado Bolívar', flights:[
+        { airline:'Rutaca',   out:'PMV-PZO', od:'L,J', ret:'PZO-PMV', rd:'L,J' },
+        { airline:'Conviasa', out:'PMV-PZO', od:'J,D', ret:'PZO-PMV', rd:'J,D' },
+      ]},
+      { dest:'Maturín', code:'MUN', country:'Estado Monagas', flights:[
+        { airline:'Conviasa', out:'PMV-MUN', od:'L,Ma,J,V,S,D', ret:'MUN-PMV', rd:'L,Ma,J,V,S,D' },
+      ]},
+      { dest:'San Antonio del Táchira', code:'SVZ', country:'Estado Táchira', flights:[
+        { airline:'Aerolíneas Estelar', out:'PMV-SVZ', od:'Ma,S', ret:'SVZ-PMV', rd:'Ma,S' },
+      ]},
+      { dest:'Santo Domingo del Táchira', code:'STD', country:'Estado Táchira', flights:[
+        { airline:'Conviasa', out:'PMV-STD', od:'L,Ma,S', ret:'STD-PMV', rd:'L,Ma,S' },
+      ]},
+      { dest:'La Fría', code:'LFR', country:'Estado Táchira', flights:[
+        { airline:'Conviasa', out:'PMV-LFR', od:'J,S', ret:'LFR-PMV', rd:'J,S' },
+      ]},
+      { dest:'El Vigía', code:'VIG', country:'Estado Mérida', flights:[
+        { airline:'Conviasa',         out:'PMV-VIG', od:'V,D', ret:'VIG-PMV', rd:'V,D' },
+        { airline:'Turpial Airlines', out:'PMV-VIG', od:'L,J', ret:'VIG-PMV', rd:'L,J' },
+      ]},
+      { dest:'Valera', code:'VLV', country:'Estado Trujillo', flights:[
+        { airline:'Conviasa', out:'PMV-VLV', od:'Ma,S', ret:'VLV-PMV', rd:'Ma,S' },
+      ]},
+      { dest:'Maracay', code:'MYC', country:'Estado Aragua', flights:[
+        { airline:'LASER Airlines', out:'PMV-MYC', od:'L,Ma,Mi,J,V,S,D', ret:'MYC-PMV', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Venezolana',     out:'PMV-MYC', od:'L,J,V,D',         ret:'MYC-PMV', rd:'L,J,V,D' },
+      ]},
+    ],
+    internacional: [
+      { dest:'Puerto España', code:'POS', country:'Trinidad y Tobago', flights:[
+        { airline:'Rutaca', out:'PMV-POS', od:'J,D', ret:'POS-PMV', rd:'J,D' },
+      ]},
+      { dest:'Bridgetown', code:'BGI', country:'Barbados', flights:[
+        { airline:'Conviasa', out:'PMV-BGI', od:'Ma', ret:'BGI-PMV', rd:'Ma' },
+      ]},
+    ]
+  },
+  { id:'BLA', city:'Barcelona', name:'Aeropuerto Gral. J.A. Anzoátegui', state:'Anzoátegui', icon:'anchor', color:'#C2660B', colorDark:'#8C4907',
+    nacional: [
+      { dest:'Porlamar', code:'PMV', country:'Estado Nueva Esparta', flights:[
+        { airline:'Conviasa', out:'BLA-PMV', od:'L,Ma,J,V,S,D', ret:'PMV-BLA', rd:'L,Ma,J,V,S,D' },
+        { airline:'Sundance', out:'BLA-PMV', od:'L,Ma,Mi,V,D',  ret:'PMV-BLA', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+      { dest:'Barquisimeto', code:'BRM', country:'Estado Lara', flights:[
+        { airline:'Avior Airlines', out:'BLA-BRM', od:'L,Ma,V,D', ret:'BRM-BLA', rd:'L,Ma,V,D' },
+      ]},
+      { dest:'El Vigía', code:'VIG', country:'Estado Mérida', flights:[
+        { airline:'Conviasa',       out:'BLA-VIG', od:'L',  ret:'VIG-BLA', rd:'L' },
+        { airline:'Avior Airlines', out:'BLA-VIG', od:'Ma', ret:'VIG-BLA', rd:'Ma' },
+      ]},
+      { dest:'Maracaibo', code:'MAR', country:'Estado Zulia', flights:[
+        { airline:'Avior Airlines', out:'BLA-MAR', od:'L,Ma,Mi,J,V,D', ret:'MAR-BLA', rd:'L,Ma,Mi,J,V,D' },
+        { airline:'Conviasa',       out:'BLA-MAR', od:'V',             ret:'MAR-BLA', rd:'V' },
+      ]},
+      { dest:'Puerto Ordaz', code:'PZO', country:'Estado Bolívar', flights:[
+        { airline:'Rutaca', out:'BLA-PZO', od:'L,Ma,Mi,V,D', ret:'PZO-BLA', rd:'L,Ma,Mi,J,S' },
+      ]},
+      { dest:'Maracay', code:'MYC', country:'Estado Aragua', flights:[
+        { airline:'Conviasa',      out:'BLA-MYC', od:'L,Ma,Mi,J,V',    ret:'MYC-BLA', rd:'L,Ma,Mi,J,V' },
+        { airline:'LASER Airlines',out:'BLA-MYC', od:'L,Ma,Mi,J,V,S,D',ret:'MYC-BLA', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+    ],
+    internacional: [
+      { dest:'Bogotá', code:'BOG', country:'Colombia', flights:[
+        { airline:'Avior Airlines', out:'BLA-BOG', od:'L,Ma,V,D', ret:'BOG-BLA', rd:'L,Ma,S,D' },
+        { airline:'LASER Airlines', out:'BLA-BOG', od:'Ma,J,S',   ret:'BOG-BLA', rd:'Ma,J,S' },
+        { airline:'LATAM Airlines', out:'BLA-BOG', od:'L,V',      ret:'BOG-BLA', rd:'L,V' },
+      ]},
+      { dest:'Ciudad de Panamá', code:'PTY', country:'Panamá', flights:[
+        { airline:'Copa Airlines', out:'BLA-PTY', od:'Ma,J,S', ret:'PTY-BLA', rd:'Ma,J,S' },
+      ]},
+      { dest:'Madrid', code:'MAD', country:'España', flights:[
+        { airline:'LASER Airlines', out:'BLA-MAD', od:'L,Ma,V,S', ret:'MAD-BLA', rd:'L,Ma,V,S' },
+      ]},
+      { dest:'Santo Domingo', code:'SDQ', country:'Rep. Dominicana', flights:[
+        { airline:'LASER Airlines', out:'BLA-SDQ', od:'Ma,S', ret:'SDQ-BLA', rd:'Ma,S' },
+      ]},
+      { dest:'Curazao', code:'CUR', country:'Curazao', flights:[
+        { airline:'Avior Airlines', out:'BLA-CUR', od:'Ma,J', ret:'CUR-BLA', rd:'Ma,J' },
+      ]},
+      { dest:'Miami', code:'MIA', country:'Estados Unidos', flights:[
+        { airline:'Global X', out:'BLA-MIA', od:'L,Ma,Mi,J,V,S,D', ret:'MIA-BLA', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+      { dest:'Medellín', code:'MDE', country:'Colombia', flights:[
+        { airline:'Avior Airlines', out:'BLA-MDE', od:'Ma,J,S', ret:'MDE-BLA', rd:'Ma,J,S' },
+      ]},
+    ]
+  },
+  { id:'MYC', city:'Maracay', name:'Aeropuerto Nacional Los Tacariguas', state:'Aragua', icon:'leaf', color:'#1E8E4B', colorDark:'#146336',
+    nacional: [
+      { dest:'Porlamar', code:'PMV', country:'Estado Nueva Esparta', flights:[
+        { airline:'LASER Airlines', out:'MYC-PMV', od:'L,Ma,Mi,J,V,S,D', ret:'PMV-MYC', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Venezolana',     out:'MYC-PMV', od:'L,J,V,D',         ret:'PMV-MYC', rd:'L,J,V,D' },
+      ]},
+      { dest:'Barcelona', code:'BLA', country:'Estado Anzoátegui', flights:[
+        { airline:'Conviasa',      out:'MYC-BLA', od:'L,Ma,Mi,J,V',    ret:'BLA-MYC', rd:'L,Ma,Mi,J,V' },
+        { airline:'LASER Airlines',out:'MYC-BLA', od:'L,Ma,Mi,J,V,S,D',ret:'BLA-MYC', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+      { dest:'Los Roques', code:'LRV', country:'Dptos. Fed. (Archipiélago)', flights:[
+        { airline:'SASCA Airlines', out:'MYC-LRV', od:'L,Ma,Mi,J,V,S,D', ret:'LRV-MYC', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Conviasa',       out:'MYC-LRV', od:'L,Ma,Mi,J,V,S,D', ret:'LRV-MYC', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+      { dest:'Barinas', code:'BNS', country:'Estado Barinas', flights:[
+        { airline:'Conviasa', out:'MYC-BNS', od:'S', ret:'BNS-MYC', rd:'S' },
+      ]},
+      { dest:'Barquisimeto', code:'BRM', country:'Estado Lara', flights:[
+        { airline:'Conviasa', out:'MYC-BRM', od:'S', ret:'BRM-MYC', rd:'S' },
+      ]},
+      { dest:'Maracaibo', code:'MAR', country:'Estado Zulia', flights:[
+        { airline:'LASER Airlines', out:'MYC-MAR', od:'L,Ma,Mi,J,V,S,D', ret:'MAR-MYC', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Venezolana',     out:'MYC-MAR', od:'L,Ma,J,V,D',      ret:'MAR-MYC', rd:'L,Ma,J,V,D' },
+      ]},
+      { dest:'El Vigía', code:'VIG', country:'Estado Mérida', flights:[
+        { airline:'LASER Airlines', out:'MYC-VIG', od:'L,Ma,Mi,J,V,S,D', ret:'VIG-MYC', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+      { dest:'Punto Fijo', code:'LSP', country:'Estado Falcón', flights:[
+        { airline:'Conviasa', out:'MYC-LSP', od:'L,V', ret:'LSP-MYC', rd:'L,V' },
+      ]},
+      { dest:'Puerto Ayacucho', code:'PYH', country:'Estado Amazonas', flights:[
+        { airline:'Conviasa', out:'MYC-PYH', od:'L', ret:'PYH-MYC', rd:'L' },
+      ]},
+    ],
+    internacional: []
+  },
+  { id:'BRM', city:'Barquisimeto', name:'Aeropuerto Internacional Jacinto Lara', state:'Lara', icon:'mountain', color:'#7C3AED', colorDark:'#5B21B6',
+    nacional: [
+      { dest:'Porlamar', code:'PMV', country:'Estado Nueva Esparta', flights:[
+        { airline:'Rutaca',   out:'BRM-PMV', od:'L,J', ret:'PMV-BRM', rd:'L,J' },
+        { airline:'Conviasa', out:'BRM-PMV', od:'Ma,S',ret:'PMV-BRM', rd:'Ma,S' },
+      ]},
+      { dest:'Maracaibo', code:'MAR', country:'Estado Zulia', flights:[
+        { airline:'Avior Airlines', out:'BRM-MAR', od:'L,Ma,V,D', ret:'MAR-BRM', rd:'L,Ma,V,D' },
+        { airline:'Venezolana',     out:'BRM-MAR', od:'D',        ret:'MAR-BRM', rd:'-' },
+      ]},
+      { dest:'Maracay', code:'MYC', country:'Estado Aragua', flights:[
+        { airline:'Conviasa', out:'BRM-MYC', od:'S', ret:'MYC-BRM', rd:'S' },
+      ]},
+      { dest:'Barcelona', code:'BLA', country:'Estado Anzoátegui', flights:[
+        { airline:'Avior Airlines', out:'BRM-BLA', od:'L,Ma,V,D', ret:'BLA-BRM', rd:'L,Ma,V,D' },
+      ]},
+      { dest:'San Antonio del Táchira', code:'SVZ', country:'Estado Táchira', flights:[
+        { airline:'Conviasa', out:'BRM-SVZ', od:'D', ret:'SVZ-BRM', rd:'D' },
+      ]},
+    ],
+    internacional: [
+      { dest:'Ciudad de Panamá', code:'PTY', country:'Panamá', flights:[
+        { airline:'Aerolíneas Estelar', out:'BRM-PTY', od:'Ma,S',    ret:'PTY-BRM', rd:'Ma,S' },
+        { airline:'Venezolana',         out:'BRM-PTY', od:'Ma,S',    ret:'PTY-BRM', rd:'Ma,S' },
+        { airline:'Copa Airlines',      out:'BRM-PTY', od:'L,Mi,J,V',ret:'PTY-BRM', rd:'L,J,V' },
+      ]},
+    ]
+  },
+  { id:'MAR', city:'Maracaibo', name:'Aeropuerto Internacional La Chinita', state:'Zulia', icon:'waves', color:'#0369A1', colorDark:'#024469',
+    nacional: [
+      { dest:'Valencia', code:'VLN', country:'Estado Carabobo', flights:[
+        { airline:'Turpial Airlines',   out:'MAR-VLN', od:'L,V',      ret:'VLN-MAR', rd:'L,V' },
+        { airline:'Aerolíneas Estelar', out:'MAR-VLN', od:'L,Ma,J,S', ret:'VLN-MAR', rd:'L,Ma,V' },
+        { airline:'Rutaca',             out:'MAR-VLN', od:'Ma,V,D',   ret:'VLN-MAR', rd:'Ma,Mi,J,S,D' },
+        { airline:'Conviasa',           out:'MAR-VLN', od:'V,D',      ret:'VLN-MAR', rd:'V,D' },
+      ]},
+      { dest:'Barcelona', code:'BLA', country:'Estado Anzoátegui', flights:[
+        { airline:'Avior Airlines', out:'MAR-BLA', od:'L,Ma,Mi,J,V,D', ret:'BLA-MAR', rd:'L,Ma,Mi,J,V,D' },
+        { airline:'Conviasa',       out:'MAR-BLA', od:'V',             ret:'BLA-MAR', rd:'V' },
+      ]},
+      { dest:'Puerto Ordaz', code:'PZO', country:'Estado Bolívar', flights:[
+        { airline:'Conviasa', out:'MAR-PZO', od:'J', ret:'PZO-MAR', rd:'J' },
+      ]},
+      { dest:'Maturín', code:'MUN', country:'Estado Monagas', flights:[
+        { airline:'Conviasa', out:'MAR-MUN', od:'Ma,V', ret:'MUN-MAR', rd:'Ma,V' },
+      ]},
+      { dest:'Porlamar', code:'PMV', country:'Estado Nueva Esparta', flights:[
+        { airline:'Conviasa', out:'MAR-PMV', od:'Ma,V,D', ret:'PMV-MAR', rd:'Ma,V,D' },
+      ]},
+    ],
+    internacional: [
+      { dest:'Ciudad de Panamá', code:'PTY', country:'Panamá', flights:[
+        { airline:'Venezolana',   out:'MAR-PTY', od:'J,S',           ret:'PTY-MAR', rd:'J,S' },
+        { airline:'Copa Airlines',out:'MAR-PTY', od:'L,Ma,Mi,J,V,D', ret:'PTY-MAR', rd:'L,Ma,Mi,J,V,D' },
+      ]},
+      { dest:'Miami', code:'MIA', country:'Estados Unidos', flights:[
+        { airline:'American Airlines', out:'MAR-MIA', od:'L,Ma,Mi,J,V,S,D', ret:'MIA-MAR', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+    ]
+  },
+  { id:'PZO', city:'Puerto Ordaz', name:'Aeropuerto Internacional Manuel C. Piar', state:'Bolívar', icon:'gem', color:'#B45309', colorDark:'#7C3908',
+    nacional: [
+      { dest:'Valencia', code:'VLN', country:'Estado Carabobo', flights:[
+        { airline:'Turpial Airlines',   out:'PZO-VLN', od:'L,V',           ret:'VLN-PZO', rd:'L,V' },
+        { airline:'Aerolíneas Estelar', out:'PZO-VLN', od:'L,Ma,V',        ret:'VLN-PZO', rd:'L,Ma,V' },
+        { airline:'Rutaca',             out:'PZO-VLN', od:'L,Ma,Mi,J,V,S,D',ret:'VLN-PZO', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Conviasa',           out:'PZO-VLN', od:'Ma,J',          ret:'VLN-PZO', rd:'Ma,J' },
+      ]},
+      { dest:'Barcelona', code:'BLA', country:'Estado Anzoátegui', flights:[
+        { airline:'Conviasa', out:'PZO-BLA', od:'L,Ma,Mi,J,S', ret:'BLA-PZO', rd:'L,Ma,Mi,J,S' },
+      ]},
+      { dest:'Porlamar', code:'PMV', country:'Estado Nueva Esparta', flights:[
+        { airline:'Avior Airlines', out:'PZO-PMV', od:'L,J,D', ret:'PMV-PZO', rd:'L,J,D' },
+        { airline:'Conviasa',       out:'PZO-PMV', od:'J,D',   ret:'PMV-PZO', rd:'J,D' },
+      ]},
+      { dest:'El Vigía', code:'VIG', country:'Estado Mérida', flights:[
+        { airline:'Conviasa', out:'PZO-VIG', od:'Ma', ret:'VIG-PZO', rd:'Ma' },
+      ]},
+      { dest:'Maracaibo', code:'MAR', country:'Estado Zulia', flights:[
+        { airline:'Conviasa', out:'PZO-MAR', od:'J', ret:'MAR-PZO', rd:'J' },
+      ]},
+    ],
+    internacional: [
+      { dest:'Boa Vista', code:'BVB', country:'Brasil', flights:[
+        { airline:'Rutaca', out:'PZO-BVB', od:'L,J', ret:'BVB-PZO', rd:'L,J' },
+      ]},
+    ]
+  },
+  { id:'STD', city:'Santo Domingo (Táchira)', name:'Aeropuerto Mayor B. Vivas', state:'Táchira', icon:'mountain', color:'#57534E', colorDark:'#3A3733',
+    nacional: [
+      { dest:'Maturín', code:'MUN', country:'Estado Monagas', flights:[
+        { airline:'Conviasa', out:'STD-MUN', od:'Mi', ret:'MUN-STD', rd:'Mi' },
+      ]},
+    ],
+    internacional: []
+  },
+  { id:'CCS', city:'Caracas (Maiquetía)', name:'Aeropuerto Internacional Simón Bolívar', state:'La Guaira', icon:'city', color:'#BE185D', colorDark:'#831049',
+    nacional: [
+      { dest:'Los Roques', code:'LRV', country:'Dptos. Federales', flights:[
+        { airline:'Aerocaribe', out:'CCS-LRV', od:'L,Ma,Mi,J,V,S,D', ret:'LRV-CCS', rd:'L,Ma,Mi,J,V,S,D' },
+        { airline:'Bluestar',   out:'CCS-LRV', od:'L,Ma,Mi,J,V,S,D', ret:'LRV-CCS', rd:'L,Ma,Mi,J,V,S,D' },
+      ]},
+    ],
+    internacional: []
+  }
+];
+
+// ── CONDITIONS DATA (investigado en fuentes oficiales, ago 2026) ──
+const conditions = [
+  { id:'general', title:'Condiciones Generales de Compra', icon:'doc', color:'#00337F', open:true, items:[
+    'El boleto es de uso personal e intransferible; en la mayoría de los casos no se permite el cambio de nombre del pasajero.',
+    'Los boletos suelen tener una vigencia de hasta 1 año desde la fecha de emisión para ser reprogramados.',
+    'Todo cambio de fecha, ruta o itinerario está sujeto a una penalidad, más la diferencia de tarifa si aplica.',
+    'El "no-show" (no presentarse al vuelo) generalmente implica perder el valor del boleto, o que el tramo de regreso se cancele automáticamente.',
+    'Los boletos no reembolsables por causas no atribuibles a la aerolínea suelen poder usarse como abono a un nuevo pasaje, descontando la penalidad correspondiente.'
+  ]},
+  { id:'docs', title:'Documentación Requerida', icon:'shield', color:'#0E9488', open:true, items:[
+    'Vuelos nacionales (venezolanos): cédula de identidad vigente o vencida — es el único documento válido; no se aceptan copias, denuncias de extravío ni licencias de conducir.',
+    'Vuelos nacionales (extranjeros o turistas): pasaporte vigente.',
+    'Vuelos internacionales: pasaporte vigente con la vigencia mínima exigida por el país de destino.',
+    'Presentación recomendada en el aeropuerto: 2-3 horas antes en vuelos nacionales y 3-5 horas antes en vuelos internacionales (varía por aerolínea).'
+  ]},
+  { id:'conviasa', title:'Conviasa', open:false, items:[
+    'Boleto válido por 1 año desde la fecha de emisión.',
+    'Todo cambio de boleto aplica penalidad; si hay diferencia de tarifa, se cobra adicional.',
+    'No se permite el cambio de nombre del pasajero.',
+    'Boletos no usados por causas no atribuibles a la aerolínea no son reembolsables, pero pueden abonarse a un nuevo boleto descontando la penalidad.'
+  ], source:'conviasa.aero' },
+  { id:'avior', title:'Avior Airlines', open:false, items:[
+    'Cambios sujetos a tarifa de reemisión más diferencia tarifaria; las condiciones varían según la tarifa (Light, Ultra, Business).',
+    'Tarifa Light no permite cambios; Ultra incluye un cambio gratuito; Business permite cambios ilimitados.',
+    'El "no-show" puede reprogramarse pagando una penalidad aproximada de 100 USD.',
+    'Los reembolsos (según la tarifa) suelen procesarse entre 7 y 14 días hábiles.'
+  ], source:'aviorair.com' },
+  { id:'laser', title:'LASER Airlines', open:false, items:[
+    'Tarifas económicas permiten cambios con penalidad; tarifas flexibles permiten cambios sin costo.',
+    'Se aplica cobro por cambio de fecha y por "no-show".',
+    'Notificar cualquier imposibilidad de viajar con al menos 24 horas de antelación.',
+    'Presentarse en el mostrador con 4 horas de antelación en vuelos nacionales y 5 horas en internacionales.'
+  ], source:'laserairlines.com' },
+  { id:'rutaca', title:'Rutaca Airlines', open:false, items:[
+    'Boleto válido por 1 año desde la fecha de emisión.',
+    'Los cambios de fecha o ruta están sujetos a penalidad.',
+    'El boleto es personal e intransferible.',
+    'Presentarse 2 horas antes en vuelos nacionales y 3 horas antes en vuelos internacionales.'
+  ], source:'flyrutaca.com' },
+  { id:'turpial', title:'Turpial Airlines', open:false, items:[
+    'Existen tarifas no reembolsables; el reembolso parcial descuenta tramos usados, cargos administrativos, penalidades e impuestos.',
+    'En reembolsos involuntarios (causa atribuible a la aerolínea) aplica el 100% del valor del boleto.',
+    'Cambios de fecha se gestionan directamente con la aerolínea.',
+    'Itinerarios sujetos a cambio o cancelación sin previo aviso por fuerza mayor.'
+  ], source:'turpialairlines.com' },
+  { id:'aeropostal', title:'Aeropostal', open:false, items:[
+    'Reembolsos o cambios sujetos a las condiciones de la tarifa adquirida; las cancelaciones suelen tener penalidad.',
+    'Si no te presentas al vuelo de ida, el tramo de regreso se cancela automáticamente y debe reconfirmarse con la aerolínea.',
+    'Presentarse en el aeropuerto con un mínimo de 2 horas de anticipación en vuelos nacionales.'
+  ], source:'aerolineasvenezolanas.net' },
+  { id:'estelar', title:'Aerolíneas Estelar', open:false, items:[
+    'Boleto no endosable, no transferible, con vigencia de 1 año desde la emisión.',
+    'Cambios de fecha o ruta sujetos a disponibilidad, diferencia tarifaria y penalidad de gestión.',
+    'En la mayoría de las tarifas, los cambios o reembolsos solo son gratuitos dentro de las 24 horas posteriores a la compra.'
+  ], source:'flyestelar.com' },
+  { id:'avianca', title:'Avianca', open:false, items:[
+    'Cambios permitidos hasta 35 minutos antes del vuelo nacional (1 hora antes en internacional) vía web, según la tarifa.',
+    'Tarifas Flex y Business permiten cambios sin cargo por cambio (puede aplicar diferencia tarifaria).',
+    'Reembolsos después del vuelo no se permiten en ninguna tarifa, salvo eventos operacionales de la aerolínea.'
+  ], source:'avianca.com' },
+  { id:'copa', title:'Copa Airlines', open:false, items:[
+    'Tarifas flexibles no tienen cargo por cambio, solo diferencia de tarifa; tarifas económicas no reembolsables pueden generar cargos de 0 a 200 USD más ajuste de tarifa.',
+    'Cancelación sin penalidad dentro de las 24 horas posteriores a la compra, bajo ciertas condiciones y canales.',
+    'Los reembolsos se procesan al medio de pago original, dentro de la vigencia del boleto.'
+  ], source:'copaair.com' },
+  { id:'wingo', title:'Wingo', open:false, items:[
+    'Todo cambio está sujeto a disponibilidad, diferencia de tarifa y penalidad.',
+    'Cancelación gratuita dentro de las 24 horas de la compra si faltan más de 7 días para el vuelo; las tarifas promocionales no son reembolsables fuera de ese plazo.',
+    'Costo referencial de cambio: 90-120 USD en rutas nacionales y 150-180 USD en internacionales (varía según ruta y tarifa).'
+  ], source:'wingo.com' },
+  { id:'latam', title:'LATAM Airlines', open:false, items:[
+    'Todo cambio de fecha, origen, destino o itinerario queda sujeto a las condiciones de la tarifa contratada.',
+    'Vigencia del boleto: 12 meses desde la emisión (si la tarifa permite cambios o devoluciones).',
+    'Las devoluciones se procesan al medio de pago original dentro de los 7 días hábiles posteriores a la solicitud.'
+  ], source:'latamairlines.com' },
+  { id:'american', title:'American Airlines', open:false, items:[
+    'Cambios sin costo dentro de las primeras 24 horas de la compra, si la reserva se hizo con 7 o más días de anticipación.',
+    'Boletos de tarifa Económica Básica generalmente no son cambiables, salvo excepciones puntuales.',
+    'El reintegro total dentro de 24 horas requiere que el vuelo se haya reservado con al menos 7 días de anticipación (política vigente desde julio 2026).'
+  ], source:'aa.com' },
+  { id:'plusultra', title:'Plus Ultra Líneas Aéreas', open:false, items:[
+    'Tarifa Ejecutiva Básica: cambios y reembolsos solo con penalidad. Tarifa Ejecutiva Flexible: cambios y reembolsos sin cargo.',
+    'Si el motivo del reembolso es atribuible a la aerolínea (cancelación, cambio de itinerario), el pasajero puede recibir la devolución total.'
+  ], source:'plusultra.com' },
+  { id:'aireuropa', title:'Air Europa', open:false, items:[
+    'Tarifa Flex permite cambios y reembolsos sin penalización antes del viaje; tarifa Lite permite cambios con penalización pero no reembolsos.',
+    'Cancelación sin riesgo dentro de las primeras 24 horas posteriores a la compra.',
+    'El vuelo solo puede cancelarse con reembolso si la tarifa es Flex o se contrató un seguro de cancelación.'
+  ], source:'aireuropa.com' },
+  { id:'venezolana', title:'Venezolana (RAVSA)', open:false, items:[
+    'Boleto válido por 365 días desde la emisión; personal, intransferible y no reembolsable en dinero (puede convertirse en nota de crédito con descuento administrativo).',
+    'Cambios de fecha sujetos a penalidad y posible diferencia tarifaria.',
+    'Si no te presentas al vuelo de ida, el regreso se cancela automáticamente y debe reconfirmarse con la aerolínea.'
+  ], source:'ravsa.com.ve' },
+  { id:'globalx', title:'Global X', open:false, items:[
+    'Aerolínea internacional con base en Miami; las condiciones de cambio y cancelación dependen de la tarifa adquirida al momento de la compra.',
+    'Recomendamos confirmar las condiciones específicas de tu tarifa directamente con la aerolínea antes de viajar.'
+  ], source:'globalxair.com' },
+  { id:'sasca', title:'SASCA Airlines', open:false, items:[
+    'Boleto válido por 180 días continuos desde la emisión; no reembolsable, no transferible, no endosable ni canjeable.',
+    'Si no vuelas el tramo de ida, el sistema cancela automáticamente el regreso.',
+    'Cambios de fecha y anulaciones generan penalidad más diferencia de tarifa si aplica.',
+    'Presentarse 1 hora y 30 minutos antes del vuelo.'
+  ], source:'sascaairlines.com' },
+  { id:'aerocaribe', title:'Aerocaribe', open:false, items:[
+    'Servicio no reembolsable ni transferible.',
+    'Reservación requerida con un mínimo de 30 días de anticipación.',
+    'Presentarse en el aeropuerto 2 horas antes de la salida.'
+  ], source:'aerocaribe.aero' },
+  { id:'bluestar', title:'Bluestar', open:false, items:[
+    'Aerolínea tipo chárter con vuelos regulares a Los Roques desde 2023.',
+    'Las condiciones específicas de cambio, cancelación y equipaje se detallan al confirmar la reserva — te las compartimos junto con tu cotización.'
+  ], source:'bluestarve.com' },
+  { id:'sundance', title:'Sundance Airlines', open:false, items:[
+    'Las reservas deben pagarse por completo para quedar confirmadas.',
+    'Cambios de fecha y hora sujetos a disponibilidad y penalidades adicionales, detalladas en la confirmación enviada por correo.',
+    'Cancelar o modificar un tramo requiere notificación con al menos 48 horas de anticipación.'
+  ], source:'sundanceairlines.com' },
+];
+
+// ── STATE ──
+let currentAirport = airports[0].id;
+let currentType    = 'nacional';
+
+// ── STATIC ICON INJECTION ──
+document.getElementById('heroEyebrow').innerHTML = ICONS.plane + ' Agencia de Viajes Autorizada';
+document.getElementById('alertBar').innerHTML = ICONS.warning + document.getElementById('alertBar').innerHTML;
+document.getElementById('modalCloseBtn').innerHTML = ICONS.close;
+document.getElementById('skipBoxIcon').innerHTML = ICONS.check;
+document.getElementById('calTitleIcon').innerHTML = ICONS.calendar;
+document.getElementById('qstepCheckIcon').innerHTML = ICONS.check;
+document.getElementById('swJet').innerHTML = ICONS.jet;
+['swCloud1','swCloud2','swCloud3','swCloud4'].forEach(id => {
+  document.getElementById(id).innerHTML = ICONS.cloud;
+});
+document.getElementById('swDateOutIcon').innerHTML = ICONS.calendar;
+document.getElementById('swDateRetIcon').innerHTML = ICONS.calendar;
+document.getElementById('swSearchIcon').innerHTML = WA_ICON;
+
+// ── BUILD TABS ──
+function buildTabs() {
+  const wrap = document.getElementById('airportTabs');
+  airports.forEach(apt => {
+    const btn = document.createElement('div');
+    btn.className = 'apt-tab' + (apt.id === currentAirport ? ' active' : '');
+    btn.id = 'tab-' + apt.id;
+    btn.style.setProperty('--apt-color', apt.color);
+    btn.innerHTML = `<div class="apt-icon-wrap">${ICONS[apt.icon]}</div><span class="apt-code">${apt.id}</span><span class="apt-city">${apt.city}</span>`;
+    btn.onclick = () => switchAirport(apt.id);
+    wrap.appendChild(btn);
+  });
+  wrap.addEventListener('scroll', updateTabsScrollUI, { passive: true });
+  window.addEventListener('resize', updateTabsScrollUI);
+  updateTabsScrollUI();
+}
+
+// ── CUSTOM SCROLLER UI (reemplaza la barra/flechas nativas del navegador) ──
+function scrollTabs(dir) {
+  const wrap = document.getElementById('airportTabs');
+  const amount = Math.max(160, wrap.clientWidth * 0.7);
+  wrap.scrollBy({ left: dir * amount, behavior: 'smooth' });
+}
+function updateTabsScrollUI() {
+  const wrap = document.getElementById('airportTabs');
+  const prevBtn = document.getElementById('tabsScrollPrev');
+  const nextBtn = document.getElementById('tabsScrollNext');
+  const fadeLeft = document.getElementById('tabsFadeLeft');
+  const fadeRight = document.getElementById('tabsFadeRight');
+  const thumb = document.getElementById('tabsThumb');
+  const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+  const scrollable = maxScroll > 4;
+  wrap.classList.toggle('fits', !scrollable); // solo centrar cuando NO hace falta scroll
+  prevBtn.style.display = scrollable ? 'grid' : 'none';
+  nextBtn.style.display = scrollable ? 'grid' : 'none';
+  fadeLeft.style.display = scrollable ? 'block' : 'none';
+  fadeRight.style.display = scrollable ? 'block' : 'none';
+  document.getElementById('tabsTrack').style.display = scrollable ? 'block' : 'none';
+  if (!scrollable) return;
+  const atStart = wrap.scrollLeft <= 2;
+  const atEnd = wrap.scrollLeft >= maxScroll - 2;
+  prevBtn.disabled = atStart;
+  nextBtn.disabled = atEnd;
+  // el blur del borde solo tiene sentido si hay más contenido hacia ese lado
+  fadeLeft.style.opacity = atStart ? '0' : '1';
+  fadeRight.style.opacity = atEnd ? '0' : '1';
+  const thumbWidth = Math.max(12, (wrap.clientWidth / wrap.scrollWidth) * 100);
+  const thumbLeft = (wrap.scrollLeft / maxScroll) * (100 - thumbWidth);
+  thumb.style.width = thumbWidth + '%';
+  thumb.style.left = thumbLeft + '%';
+}
+
+// ── ARRASTRAR CON MOUSE/TOUCH PARA DESPLAZAR LOS TABS ──
+// overflow-x:auto solo responde a rueda/trackpad/touch nativo; con el
+// scrollbar nativo oculto, un usuario de mouse no tenía forma de arrastrar
+// con el click. Esto agrega ese comportamiento (1:1 con el puntero).
+function initTabsDrag() {
+  const wrap = document.getElementById('airportTabs');
+  let isDown = false, moved = false, startX = 0, startScroll = 0, downTab = null, suppressClick = false;
+
+  wrap.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'touch') { suppressClick = false; return; } // el touch nativo ya funciona solo
+    isDown = true; moved = false; suppressClick = true;
+    startX = e.clientX; startScroll = wrap.scrollLeft;
+    downTab = e.target.closest('.apt-tab');
+    wrap.setPointerCapture(e.pointerId);
+    wrap.classList.add('dragging');
+  });
+  wrap.addEventListener('pointermove', (e) => {
+    if (!isDown) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    wrap.scrollLeft = startScroll - dx;
+  });
+  // setPointerCapture retarga pointerup (y en algunos navegadores el click
+  // resultante) al elemento contenedor, por lo que el click nativo del botón
+  // ya no es fiable aquí. En vez de depender de 'click', seleccionamos el
+  // aeropuerto directamente desde pointerup cuando no hubo arrastre real.
+  function endDrag() {
+    if (!isDown) return;
+    isDown = false;
+    wrap.classList.remove('dragging');
+    if (!moved && downTab) {
+      switchAirport(downTab.id.replace('tab-', ''));
+    }
+    downTab = null;
+  }
+  wrap.addEventListener('pointerup', endDrag);
+  wrap.addEventListener('pointercancel', () => { isDown = false; moved = false; downTab = null; wrap.classList.remove('dragging'); });
+  wrap.addEventListener('pointerleave', () => { isDown = false; moved = false; downTab = null; wrap.classList.remove('dragging'); });
+  // el click nativo ya se maneja arriba vía pointerup; se bloquea aquí (solo
+  // para gestos de mouse) para evitar una doble selección si el navegador
+  // sí llega a disparar el click nativo. El touch nunca activa suppressClick,
+  // así que su click nativo sigue funcionando normalmente.
+  wrap.addEventListener('click', (e) => {
+    if (suppressClick) { e.stopPropagation(); e.preventDefault(); suppressClick = false; }
+  }, true);
+}
+
+// ── BARRA DE PROGRESO FUNCIONAL: click para saltar, arrastrar el thumb ──
+function initTrackDrag() {
+  const track = document.getElementById('tabsTrack');
+  const thumb = document.getElementById('tabsThumb');
+  const wrap = document.getElementById('airportTabs');
+
+  function seekToClientX(clientX) {
+    const rect = track.getBoundingClientRect();
+    const thumbWidthPx = thumb.offsetWidth;
+    const usable = Math.max(1, rect.width - thumbWidthPx);
+    let ratio = (clientX - rect.left - thumbWidthPx / 2) / usable;
+    ratio = Math.min(1, Math.max(0, ratio));
+    const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+    wrap.scrollLeft = ratio * maxScroll;
+  }
+
+  let dragging = false;
+  track.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    thumb.classList.add('dragging');
+    track.setPointerCapture(e.pointerId);
+    wrap.style.scrollBehavior = 'auto';
+    seekToClientX(e.clientX);
+  });
+  track.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    seekToClientX(e.clientX);
+  });
+  function endTrackDrag() {
+    if (!dragging) return;
+    dragging = false;
+    thumb.classList.remove('dragging');
+    wrap.style.scrollBehavior = '';
+  }
+  track.addEventListener('pointerup', endTrackDrag);
+  track.addEventListener('pointercancel', endTrackDrag);
+}
+
+// ── BUILD CONTENT ──
+function buildContent() {
+  const wrap = document.getElementById('mainContent');
+  wrap.innerHTML = '';
+  airports.forEach(apt => {
+    const sec = document.createElement('div');
+    sec.className = 'airport-section' + (apt.id === currentAirport ? ' active' : '');
+    sec.id = 'sec-' + apt.id;
+
+    const totalRoutes = (apt.nacional?.length || 0) + (apt.internacional?.length || 0);
+    const homeBadge = apt.home ? `<div class="airport-hero-badge">Base de operaciones TransfersMérida</div>` : '';
+
+    const heroHtml = `
+      <div class="airport-hero" style="--apt-color:${apt.color}; --apt-color-dark:${apt.colorDark}">
+        <div class="airport-hero-icon">${ICONS[apt.icon]}</div>
+        <div class="airport-hero-meta">
+          <h2>${apt.name} (${apt.id})</h2>
+          <p>${apt.city} · ${apt.state}</p>
+          ${homeBadge}
+        </div>
+        <div class="airport-hero-count">
+          <strong>${totalRoutes}</strong>
+          <span>destinos</span>
+        </div>
+      </div>
+      <div class="hours-note">
+        ${ICONS.clock}
+        <span>El horario exacto de cada vuelo lo confirmamos directamente contigo según la aerolínea seleccionada — aquí eliges el día en que viajas y nosotros gestionamos disponibilidad y hora.</span>
+      </div>`;
+
+    const nacHtml = buildRouteType(apt, 'nacional');
+    const intHtml = buildRouteType(apt, 'internacional');
+
+    sec.innerHTML = heroHtml +
+      `<div class="route-type ${currentType==='nacional'?'active':''}" id="rt-${apt.id}-nacional">${nacHtml}</div>` +
+      `<div class="route-type ${currentType==='internacional'?'active':''}" id="rt-${apt.id}-internacional">${intHtml}</div>`;
+
+    wrap.appendChild(sec);
+  });
+}
+
+function buildRouteType(apt, type) {
+  const routes = apt[type] || [];
+  if (!routes.length) {
+    return `<div class="no-routes">
+      ${ICONS.plane}
+      <h3>Sin vuelos ${type === 'nacional' ? 'nacionales' : 'internacionales'} registrados</h3>
+    </div>`;
+  }
+  const isIntl = type === 'internacional';
+  return `<div class="dest-grid">${routes.map(dest => buildDestCard(apt, dest, isIntl)).join('')}</div>`;
+}
+
+function buildDestCard(apt, dest, isIntl) {
+  const rows = dest.flights.map((f, fi) => buildFlightRow(apt, dest, f, fi)).join('');
+  const countryLine = dest.country ? `<div class="dest-country">${dest.country}</div>` : '';
+  const cardId = `card-${apt.id}-${dest.code}`;
+  const destIcon = isIntl ? ICONS.globe : ICONS.pin;
+  const destColor = isIntl ? '#B45309' : apt.color;
+  const img = DEST_IMAGES[dest.code] || GENERIC_DEST_IMAGE;
+  const creditHtml = img.credit ? `<span class="dest-photo-credit">${img.credit}</span>` : '';
+  // img.pos permite ajustar el encuadre por destino (ej. 'center 15%') cuando el
+  // recorte por defecto no muestre la parte representativa de la foto.
+  const posStyle = img.pos ? `background-position:${img.pos};` : '';
+  const photoHtml = `<div class="dest-photo" style="background-image:url('${img.url}');${posStyle}">${creditHtml}</div>`;
+  return `
+    <div class="dest-card" id="${cardId}">
+      ${photoHtml}
+      <div class="dest-header" onclick="toggleCard('${cardId}')">
+        <div class="dest-flag-wrap" style="color:${destColor}">${destIcon}</div>
+        <div class="dest-title-block">
+          <div class="dest-name">${dest.dest} <span class="dest-code">${dest.code}</span></div>
+          ${countryLine}
+        </div>
+        <span class="dest-airline-count">${dest.flights.length} aerolínea${dest.flights.length>1?'s':''}</span>
+        <span class="dest-toggle">${ICONS.chevronDown}</span>
+      </div>
+      <div class="dest-body">${rows}</div>
+    </div>`;
+}
+
+let flightRegistry = {};
+function buildFlightRow(apt, dest, flight, fi) {
+  const key = `${apt.id}-${dest.code}-${fi}`;
+  flightRegistry[key] = { apt, dest, flight };
+  const outDays = renderDays(flight.od, 'on-out');
+  const retDays = renderDays(flight.rd, 'on-ret');
+  const logoUrl = AIRLINE_LOGOS[flight.airline];
+  const logoHtml = logoUrl
+    ? `<div class="airline-logo airline-logo-img"><img src="${logoUrl}" alt="${flight.airline}" loading="lazy" onerror="airlineLogoFallback(this, '${flight.airline.replace(/'/g, "\\'")}')"></div>`
+    : (() => { const { mono, color } = airlineMonogram(flight.airline); return `<div class="airline-logo" style="background:${color}">${mono}</div>`; })();
+  return `
+    <div class="flight-row">
+      <div class="flight-top">
+        ${logoHtml}
+        <div class="airline-info">
+          <div class="airline-name">${flight.airline}</div>
+          <div class="route-code">${flight.out} / ${flight.ret}</div>
+        </div>
+      </div>
+      <div class="flight-days-block">
+        <div class="fd-group">
+          <span class="fd-label">Salida</span>
+          ${outDays}
+        </div>
+        <div class="fd-group">
+          <span class="fd-label">Regreso</span>
+          ${retDays}
+        </div>
+      </div>
+      <button class="btn-cotizar" onclick="startQuote('${key}')">
+        ${WA_ICON}
+        Elegir fecha y cotizar
+      </button>
+    </div>`;
+}
+
+function renderDays(str, onClass) {
+  if (!str || str === '-') return '<span class="days-none">Sin ruta registrada</span>';
+  const arr = daysArr(str);
+  return '<div class="day-set">' +
+    DAY_LABELS.map((lbl, i) => `<div class="dp ${arr[i] ? onClass : ''}" title="${DAY_NAMES[i]}">${lbl}</div>`).join('') +
+    '</div>';
+}
+
+// ── CONDITIONS MODULE ──
+function buildConditions() {
+  const grid = document.getElementById('condGrid');
+  grid.innerHTML = conditions.map(c => {
+    const cardId = `cond-${c.id}`;
+    const openClass = c.open ? ' open' : '';
+    const color = c.color || airlineMonogram(c.title).color;
+    const icon = c.icon || 'plane';
+    const logoUrl = AIRLINE_LOGOS[c.title];
+    const flagWrapHtml = logoUrl
+      ? `<div class="dest-flag-wrap has-logo"><img src="${logoUrl}" alt="${c.title}" loading="lazy" onerror="airlineLogoFallback(this, '${c.title.replace(/'/g, "\\'")}')"></div>`
+      : `<div class="dest-flag-wrap" style="color:${color}">${ICONS[icon]}</div>`;
+    const sourceLine = c.source ? `<div class="cond-source">Fuente: ${c.source} — verifica las condiciones vigentes directamente con la aerolínea.</div>` : '';
+    return `
+    <div class="dest-card${openClass}" id="${cardId}">
+      <div class="dest-header" onclick="toggleCard('${cardId}')">
+        ${flagWrapHtml}
+        <div class="dest-title-block">
+          <div class="dest-name">${c.title}</div>
+        </div>
+        <span class="dest-toggle">${ICONS.chevronDown}</span>
+      </div>
+      <div class="dest-body">
+        <ul class="cond-list">${c.items.map(i => `<li>${i}</li>`).join('')}</ul>
+        ${sourceLine}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── INTERACTIONS ──
+function switchAirport(id) {
+  document.querySelectorAll('.apt-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.airport-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.getElementById('sec-' + id).classList.add('active');
+  currentAirport = id;
+  window.scrollTo({ top: document.querySelector('.selector-wrap').offsetTop - 10, behavior: 'smooth' });
+}
+
+function switchRouteType(type) {
+  currentType = type;
+  document.getElementById('btnNacional').classList.toggle('active', type === 'nacional');
+  document.getElementById('btnInternacional').classList.toggle('active', type === 'internacional');
+  document.querySelectorAll('.route-type').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.route-type[id$="-' + type + '"]').forEach(el => el.classList.add('active'));
+}
+
+function toggleCard(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ── SINGLE SEQUENTIAL CALENDAR (reutilizable: modo cotización por vuelo y modo buscador) ──
+function createMiniCal(containerEl, allowedArr, minDate, initialSelected, onChange) {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const floorDate = minDate || today;
+  let viewDate = new Date((initialSelected || floorDate).getFullYear(), (initialSelected || floorDate).getMonth(), 1);
+  let selected = initialSelected || null;
+
+  function render() {
+    const floorMonthStart = new Date(floorDate.getFullYear(), floorDate.getMonth(), 1);
+    const maxMonth = new Date(today.getFullYear(), today.getMonth() + 6, 1);
+    const prevDisabled = viewDate <= floorMonthStart;
+    const nextDisabled = viewDate >= maxMonth;
+
+    containerEl.innerHTML = `
+      <div class="cal-nav">
+        <button type="button" class="cal-prev" ${prevDisabled ? 'disabled' : ''}>${ICONS.chevronLeft}</button>
+        <strong>${MONTH_NAMES[viewDate.getMonth()]} ${viewDate.getFullYear()}</strong>
+        <button type="button" class="cal-next" ${nextDisabled ? 'disabled' : ''}>${ICONS.chevronRight}</button>
+      </div>
+      <div class="cal-weekdays"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+      <div class="cal-grid"></div>
+    `;
+
+    const prevBtn = containerEl.querySelector('.cal-prev');
+    const nextBtn = containerEl.querySelector('.cal-next');
+    if (!prevDisabled) prevBtn.onclick = () => { viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1); render(); };
+    if (!nextDisabled) nextBtn.onclick = () => { viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1); render(); };
+
+    const grid = containerEl.querySelector('.cal-grid');
+    const year = viewDate.getFullYear();
+    const month = viewDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const startOffset = (firstDay.getDay() + 6) % 7;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < startOffset; i++) {
+      const e = document.createElement('div');
+      e.className = 'cal-day empty';
+      grid.appendChild(e);
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateObj = new Date(year, month, d);
+      const ourIdx = (dateObj.getDay() + 6) % 7;
+      const isAllowed = allowedArr[ourIdx] === 1;
+      const isPast = dateObj < today;
+      // no permitir la misma fecha (ni una anterior) que ya se usó como referencia (p.ej. la salida)
+      const isAtOrBeforeMin = minDate && dateObj.getTime() <= minDate.getTime();
+      const disabled = !isAllowed || isPast || isAtOrBeforeMin;
+      const isSel = selected && selected.getTime() === dateObj.getTime();
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cal-day ' + (disabled ? 'disabled' : (isSel ? 'selected' : 'enabled'));
+      btn.textContent = d;
+      btn.disabled = disabled;
+      if (!disabled) {
+        // NOTA: no volvemos a llamar render() aquí — cada modo (cotización o buscador)
+        // decide explícitamente cuándo y cómo se refresca el calendario, evitando que
+        // una instancia vieja sobreescriba el calendario recién creado por la otra fase.
+        btn.onclick = () => { selected = dateObj; onChange(dateObj); };
+      }
+      grid.appendChild(btn);
+    }
+  }
+
+  render();
+  return { getSelected: () => selected, refresh: render };
+}
+
+// ── MODO 1: COTIZACIÓN POR VUELO (tarjetas de destino) ──
+let quoteEntry = null;
+let quotePhase = 'out';
+let outDate = null;
+let retDate = null;
+let retSkipped = false;
+let modalMode = 'quote'; // 'quote' | 'widget'
+
+function shortFmt(d) { return `${d.getDate()} de ${MONTH_NAMES[d.getMonth()]}`; }
+function fullFmt(d) { return `${DAY_NAMES[(d.getDay()+6)%7]} ${d.getDate()} de ${MONTH_NAMES[d.getMonth()]} de ${d.getFullYear()}`; }
+
+function startQuote(key) {
+  const entry = flightRegistry[key];
+  if (!entry) return;
+  modalMode = 'quote';
+  quoteEntry = entry;
+  quotePhase = 'out';
+  outDate = null; retDate = null; retSkipped = false;
+  const { apt, dest, flight } = entry;
+
+  document.getElementById('modalSubtitle').textContent = `${apt.city} ⇄ ${dest.dest} · ${flight.airline}`;
+  document.getElementById('skipRetCheck').checked = false;
+  document.getElementById('skipRetWrap').classList.remove('checked');
+  document.getElementById('waIconBtn').innerHTML = WA_ICON;
+  document.getElementById('btnFinishLabel').textContent = 'Cotizar por WhatsApp';
+
+  renderStep();
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function renderStep() {
+  const { flight } = quoteEntry;
+  const hasReturn = flight.rd && flight.rd !== '-';
+  const doneWrap = document.getElementById('qstepOutDone');
+  const skipWrap = document.getElementById('skipRetWrap');
+  const label = document.getElementById('calStepLabel');
+  const calBox = document.getElementById('calBox');
+  calBox.style.opacity = '1';
+  calBox.style.pointerEvents = 'auto';
+
+  if (quotePhase === 'out') {
+    doneWrap.style.display = 'none';
+    skipWrap.style.display = 'none';
+    label.textContent = 'Fecha de salida';
+    createMiniCal(calBox, daysArr(flight.od), null, outDate, (d) => {
+      outDate = d;
+      quotePhase = hasReturn ? 'ret' : 'out';
+      renderStep();
+    });
+  } else {
+    doneWrap.style.display = 'flex';
+    document.getElementById('outDoneLabel').textContent = fullFmt(outDate);
+    skipWrap.style.display = 'flex';
+    label.textContent = 'Fecha de regreso';
+    createMiniCal(calBox, daysArr(flight.rd), outDate, retDate, (d) => {
+      retDate = d;
+      renderStep();
+    });
+    if (retSkipped) { calBox.style.opacity = '.35'; calBox.style.pointerEvents = 'none'; }
+  }
+  updateFinishState();
+}
+
+function goToOutStep() {
+  quotePhase = 'out';
+  retDate = null; retSkipped = false;
+  document.getElementById('skipRetCheck').checked = false;
+  document.getElementById('skipRetWrap').classList.remove('checked');
+  renderStep();
+}
+
+function onSkipToggle() {
+  retSkipped = document.getElementById('skipRetCheck').checked;
+  document.getElementById('skipRetWrap').classList.toggle('checked', retSkipped);
+  const calBox = document.getElementById('calBox');
+  calBox.style.opacity = retSkipped ? '.35' : '1';
+  calBox.style.pointerEvents = retSkipped ? 'none' : 'auto';
+  updateFinishState();
+}
+
+function updateFinishState() {
+  const btn = document.getElementById('btnFinishQuote');
+  const { flight } = quoteEntry;
+  const hasReturn = flight.rd && flight.rd !== '-';
+  let ok;
+  if (!outDate) ok = false;
+  else if (!hasReturn) ok = true;
+  else ok = quotePhase === 'ret' && (retSkipped || !!retDate);
+  btn.disabled = !ok;
+}
+
+function submitQuote() {
+  if (!quoteEntry || !outDate) return;
+  const { apt, dest, flight } = quoteEntry;
+
+  let msg = `Hola 🤗, quisiera cotizar el siguiente vuelo:\n\n`;
+  msg += `Aerolínea: ${flight.airline}\n`;
+  msg += `Ruta ida: ${flight.out} (${apt.city} -> ${dest.dest})\n`;
+  msg += `Fecha de salida: ${fullFmt(outDate)}\n`;
+  if (flight.rd && flight.rd !== '-') {
+    msg += `Ruta regreso: ${flight.ret} (${dest.dest} -> ${apt.city})\n`;
+    msg += (retDate && !retSkipped) ? `Fecha de regreso: ${fullFmt(retDate)}\n` : `Fecha de regreso: por confirmar (cotizando solo ida)\n`;
+  }
+  msg += `\n¿Podrían confirmarme disponibilidad, hora exacta y precio?`;
+
+  const link = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+  window.open(link, '_blank');
+  closeModal();
+}
+
+// ── CUSTOM SELECT ENGINE (reemplaza el <select> nativo del navegador) ──
+// Mantenemos el <select> real oculto como fuente de datos/valor — toda la
+// lógica existente (onchange, .value, .disabled) sigue funcionando igual;
+// solo dibujamos encima una UI propia que se mantiene sincronizada con él.
+function syncCustomSelect(id) {
+  const nativeSel = document.getElementById(id);
+  const wrap = document.getElementById('csel-' + id);
+  const trigger = document.getElementById(id + 'Trigger');
+  const triggerText = document.getElementById(id + 'TriggerText');
+  const panel = document.getElementById(id + 'Panel');
+  if (!nativeSel || !wrap) return;
+
+  trigger.disabled = nativeSel.disabled;
+  if (nativeSel.disabled) { wrap.classList.remove('open'); }
+
+  const opts = Array.from(nativeSel.options);
+  const selectedOpt = opts.find(o => o.value === nativeSel.value) || opts[0];
+  const isPlaceholder = !selectedOpt || !selectedOpt.value;
+  wrap.classList.toggle('placeholder', isPlaceholder);
+  triggerText.textContent = selectedOpt ? selectedOpt.textContent : 'Selecciona...';
+
+  if (opts.length === 0) {
+    panel.innerHTML = `<div class="csel-option-empty">Sin opciones</div>`;
+    return;
+  }
+  panel.innerHTML = opts.map(o => {
+    const isSel = o.value === nativeSel.value && o.value !== '';
+    return `<div class="csel-option${isSel ? ' selected' : ''}" data-value="${o.value.replace(/"/g,'&quot;')}">
+      <span>${o.textContent}</span>${isSel ? ICONS.check : ''}
+    </div>`;
+  }).join('');
+  panel.querySelectorAll('.csel-option').forEach(el => {
+    el.onclick = () => {
+      nativeSel.value = el.getAttribute('data-value');
+      nativeSel.dispatchEvent(new Event('change'));
+      closeCustomSelect(id);
+    };
+  });
+}
+
+function toggleCustomSelect(id) {
+  const trigger = document.getElementById(id + 'Trigger');
+  if (trigger.disabled) return;
+  const wrap = document.getElementById('csel-' + id);
+  const isOpen = wrap.classList.contains('open');
+  closeAllCustomSelects();
+  if (!isOpen) openCustomSelect(id);
+}
+function openCustomSelect(id) {
+  const wrap = document.getElementById('csel-' + id);
+  syncCustomSelect(id);
+  wrap.classList.add('open');
+  requestAnimationFrame(() => wrap.classList.add('panel-in'));
+}
+function closeCustomSelect(id) {
+  const wrap = document.getElementById('csel-' + id);
+  wrap.classList.remove('open', 'panel-in');
+}
+function closeAllCustomSelects() {
+  document.querySelectorAll('.csel.open').forEach(w => w.classList.remove('open', 'panel-in'));
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.csel')) closeAllCustomSelects();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeAllCustomSelects();
+});
+
+// ── MODO 2: BUSCADOR RÁPIDO (barra tipo aerolínea) ──
+let swTripType = 'roundtrip';
+let swOutDate = null;
+let swRetDate = null;
+let swPickTarget = null;
+let swPickDate = null;
+
+const SW_PLACES = (() => {
+  const m = new Map();
+  airports.forEach(a => {
+    m.set(a.id, { code: a.id, label: `${a.city.replace(/\s*\(.*?\)\s*$/, '')} (${a.id})`, intl: false });
+    (a.nacional || []).forEach(d => { if (!m.has(d.code)) m.set(d.code, { code: d.code, label: `${d.dest} (${d.code})`, intl: false }); });
+    (a.internacional || []).forEach(d => { if (!m.has(d.code)) m.set(d.code, { code: d.code, label: `${d.dest} (${d.code})`, intl: true }); });
+  });
+  const PRIORITY = ['VIG', 'CCS']; // rutas principales: siempre primero
+  return [...m.values()].map(p => ({ ...p, n: normTxt(p.label) })).sort((a, b) => {
+    const pa = PRIORITY.indexOf(a.code), pb = PRIORITY.indexOf(b.code);
+    if (pa !== -1 || pb !== -1) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
+    return a.label.localeCompare(b.label, 'es');
+  });
+})();
+function normTxt(t) { return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+
+// ── PROGRAMACIÓN DE VUELOS DESDE/HACIA EL VIGÍA (únicas rutas con reglas; el resto es libre) ──
+// día: 0=lunes … 6=domingo · out = VIG→destino · ret = destino→VIG
+const VIG_SCHEDULE = [
+  ...[0,2,4,6].map(d => ({ code:'CCS', airline:'LASER Airlines', day:d, out:'04:00 PM', ret: d === 0 ? '01:50 PM' : '02:00 PM' })),
+  { code:'CCS', airline:'Conviasa',        day:0, out:'08:20 PM', ret:'02:00 PM' },
+  { code:'BLA', airline:'Conviasa',        day:0, out:'03:40 PM', ret:'06:00 PM' },
+  { code:'PMV', airline:'Turpial Airlines',day:3, out:'02:30 PM', ret:'12:00 PM' },
+  { code:'PMV', airline:'Turpial Airlines',day:6, out:'03:30 PM', ret:'01:00 PM' },
+  { code:'PZO', airline:'Conviasa',        day:3, out:'12:30 PM', ret:'10:00 AM' },
+  { code:'PMV', airline:'Conviasa',        day:4, out:'10:40 AM', ret:'08:30 AM' },
+  { code:'PMV', airline:'Conviasa',        day:6, out:'06:00 PM', ret:'03:40 PM' },
+];
+const SW_ALIASES = { vigia:'VIG', 'el vigia':'VIG', merida:'VIG', caracas:'CCS', maiquetia:'CCS', margarita:'PMV', 'isla de margarita':'PMV', porlamar:'PMV', 'puerto ordaz':'PZO', 'ciudad guayana':'PZO', guayana:'PZO', barcelona:'BLA', anzoategui:'BLA' };
+function resolveCode(text) {
+  const t = normTxt(String(text || '').trim());
+  if (!t) return null;
+  const m = String(text).match(/\(([A-Za-z]{3})\)/);
+  if (m) return m[1].toUpperCase();
+  const up = t.toUpperCase();
+  if (SW_PLACES.some(p => p.code === up)) return up;
+  if (SW_ALIASES[t]) return SW_ALIASES[t];
+  const hit = SW_PLACES.find(p => { const c = normTxt(p.label.replace(/\s*\(.*$/, '')); return c === t || (t.length >= 5 && (c.includes(t) || t.includes(c))); });
+  return hit ? hit.code : null;
+}
+// vuelos programados en la dirección a→b (o null si la ruta es libre)
+function legFlights(a, b) {
+  if (a === 'VIG' && b && VIG_SCHEDULE.some(f => f.code === b)) return VIG_SCHEDULE.filter(f => f.code === b).map(f => ({ airline: f.airline, day: f.day, time: f.out }));
+  if (b === 'VIG' && a && VIG_SCHEDULE.some(f => f.code === a)) return VIG_SCHEDULE.filter(f => f.code === a).map(f => ({ airline: f.airline, day: f.day, time: f.ret }));
+  return null;
+}
+function legInfo(which, date) {
+  const r = getSwRoute(); if (!r) return null;
+  const o = resolveCode(r.origin), d = resolveCode(r.dest);
+  const fl = which === 'out' ? legFlights(o, d) : legFlights(d, o);
+  if (!fl) return null;
+  const idx = (date.getDay() + 6) % 7;
+  return fl.filter(f => f.day === idx).map(f => `${f.airline} ${f.time}`);
+}
+
+function renderCombo(id) {
+  const input = document.getElementById(id);
+  const panel = document.getElementById(id + 'Panel');
+  const q = normTxt(input.value.trim());
+  const list = SW_PLACES.filter(p => !q || p.n.includes(q) || p.code.toLowerCase() === q).slice(0, 40);
+  panel.innerHTML = list.length
+    ? list.map(p => `<div class="csel-option" data-v="${p.label.replace(/"/g, '&quot;')}"><span>${p.label}</span>${p.intl ? '<small>Internacional</small>' : ''}</div>`).join('')
+    : `<div class="csel-option-empty">Sin sugerencias: puedes escribir cualquier ciudad o aeropuerto.</div>`;
+  panel.querySelectorAll('.csel-option').forEach(el => {
+    el.onmousedown = (e) => { e.preventDefault(); };
+    el.onclick = () => { input.value = el.getAttribute('data-v'); closeAllCustomSelects(); updateSwSearchBtn(); };
+  });
+}
+function openCombo(id) {
+  closeAllCustomSelects();
+  renderCombo(id);
+  const wrap = document.getElementById('csel-' + id);
+  wrap.classList.add('open');
+  requestAnimationFrame(() => wrap.classList.add('panel-in'));
+}
+function onComboInput(id) {
+  const wrap = document.getElementById('csel-' + id);
+  if (!wrap.classList.contains('open')) { openCombo(id); } else { renderCombo(id); }
+  updateSwSearchBtn();
+}
+
+function updateTransferText() {
+  const rt = swTripType === 'roundtrip';
+  document.getElementById('swTransferSub').textContent = rt
+    ? 'Ida y vuelta: 2 traslados (al aeropuerto y de regreso)'
+    : 'Solo ida: 1 traslado al aeropuerto';
+}
+
+function buildSearchWidget() {
+  updateTransferText();
+  updateSwSearchBtn();
+}
+
+function onTripTypeChange() {
+  swTripType = document.querySelector('input[name="swTripType"]:checked').value;
+  updateTransferText();
+  document.getElementById('swRetWrap').classList.toggle('hidden', swTripType === 'oneway');
+  swRetDate = null;
+  document.getElementById('swDateRetText').textContent = 'Selecciona fecha';
+  document.getElementById('swDateRetBtn').classList.remove('has-value');
+  updateSwSearchBtn();
+}
+
+function getSwRoute() {
+  const origin = document.getElementById('swOrigin').value.trim();
+  const dest = document.getElementById('swDestino').value.trim();
+  if (origin.length < 2 || dest.length < 2) return null;
+  return { origin, dest };
+}
+
+function updateSwSearchBtn() {
+  const btn = document.getElementById('swSearchBtn');
+  const route = getSwRoute();
+  const needsRet = swTripType === 'roundtrip';
+  btn.disabled = !(!!route && !!swOutDate && (!needsRet || !!swRetDate));
+}
+
+function openSwCalendar(which) {
+  modalMode = 'widget';
+  swPickTarget = which;
+  swPickDate = which === 'out' ? swOutDate : swRetDate;
+  const _r0 = getSwRoute();
+  const _o = _r0 ? resolveCode(_r0.origin) : null, _d = _r0 ? resolveCode(_r0.dest) : null;
+  const _fl = which === 'out' ? legFlights(_o, _d) : legFlights(_d, _o);
+  const allowedArr = [0,1,2,3,4,5,6].map(i => (!_fl || _fl.some(f => f.day === i)) ? 1 : 0); // ruta del Vigía: solo días con vuelo; resto libre
+  document.getElementById('calLegend').style.display = _fl ? '' : 'none';
+  const hintEl = document.getElementById('calHint');
+  const showHint = (d) => { const inf = d && _fl ? legInfo(which, d) : null; hintEl.textContent = inf && inf.length ? 'Vuelos ese día (referencia): ' + inf.join(' · ') : ''; };
+  hintEl.textContent = '';
+  const minDate = which === 'ret' ? swOutDate : null;
+
+  document.getElementById('modalTitle').textContent = which === 'out' ? 'Fecha de ida' : 'Fecha de vuelta';
+  const _r = getSwRoute();
+  document.getElementById('modalSubtitle').textContent = _r ? `${_r.origin} ⇄ ${_r.dest}` : 'Ruta libre · te confirmamos disponibilidad';
+  document.getElementById('qstepOutDone').style.display = 'none';
+  document.getElementById('skipRetWrap').style.display = 'none';
+  document.getElementById('calStepLabel').textContent = which === 'out' ? 'Elige el día de tu viaje' : 'Elige el día de tu regreso';
+  document.getElementById('waIconBtn').innerHTML = ICONS.check;
+  document.getElementById('btnFinishLabel').textContent = 'Confirmar fecha';
+
+  const calBox = document.getElementById('calBox');
+  calBox.style.opacity = '1';
+  calBox.style.pointerEvents = 'auto';
+  const cal = createMiniCal(calBox, allowedArr, minDate, swPickDate, (d) => {
+    swPickDate = d;
+    showHint(d);
+    document.getElementById('btnFinishQuote').disabled = false;
+    cal.refresh(); // vuelve a pintar el calendario para que se vea la fecha marcada
+  });
+  document.getElementById('btnFinishQuote').disabled = !swPickDate;
+  showHint(swPickDate);
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function swSearch() {
+  const route = getSwRoute();
+  if (!route || !swOutDate) return;
+  const needsRet = swTripType === 'roundtrip';
+  if (needsRet && !swRetDate) return;
+
+  let msg = `Hola 🤗, quisiera cotizar el siguiente vuelo:\n\n`;
+  msg += `Origen: ${route.origin}\n`;
+  msg += `Destino: ${route.dest}\n`;
+  msg += `Tipo de viaje: ${needsRet ? 'Ida y vuelta' : 'Solo ida'}\n`;
+  msg += `Fecha de salida: ${fullFmt(swOutDate)}\n`;
+  const _io = legInfo('out', swOutDate);
+  if (_io && _io.length) msg += `Vuelos programados ese día (referencia): ${_io.join(' · ')}\n`;
+  if (needsRet && swRetDate) {
+    msg += `Fecha de regreso: ${fullFmt(swRetDate)}\n`;
+    const _ir = legInfo('ret', swRetDate);
+    if (_ir && _ir.length) msg += `Vuelos programados ese día (referencia): ${_ir.join(' · ')}\n`;
+  }
+  if (document.getElementById('swTransferChk').checked) {
+    msg += `\nTraslados al aeropuerto: quiero cotizarlos también (${needsRet ? 'ida y vuelta: 2 traslados' : 'solo ida: 1 traslado'}). ¿Qué promoción tienen disponible?\n`;
+  }
+  msg += `\n¿Podrían confirmarme si esa ruta está disponible y, de ser así, qué aerolíneas, horarios y precio tienen para esas fechas? Entiendo que la ruta puede no estar disponible y que los vuelos están sujetos a cambios.`;
+
+  const link = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+  window.open(link, '_blank');
+}
+
+// ── DISPATCH DEL BOTÓN DEL MODAL (según el modo activo) ──
+function handleModalFinish() {
+  if (modalMode === 'widget') {
+    if (!swPickDate) return;
+    if (swPickTarget === 'out') {
+      swOutDate = swPickDate;
+      document.getElementById('swDateOutText').textContent = shortFmt(swOutDate);
+      document.getElementById('swDateOutBtn').classList.add('has-value');
+      document.getElementById('swDateRetBtn').disabled = false;
+      if (swRetDate && swRetDate.getTime() <= swOutDate.getTime()) {
+        swRetDate = null;
+        document.getElementById('swDateRetText').textContent = 'Selecciona fecha';
+        document.getElementById('swDateRetBtn').classList.remove('has-value');
+      }
+    } else {
+      swRetDate = swPickDate;
+      document.getElementById('swDateRetText').textContent = shortFmt(swRetDate);
+      document.getElementById('swDateRetBtn').classList.add('has-value');
+    }
+    updateSwSearchBtn();
+    closeModal();
+  } else {
+    submitQuote();
+  }
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  quoteEntry = null;
+  swPickTarget = null; swPickDate = null;
+}
+
+// ── INIT ──
+buildConditions();
+buildSearchWidget();
+</script>
+<script src="../assets/header.js"></script></body>
+</html>

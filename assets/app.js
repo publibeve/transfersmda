@@ -30,7 +30,7 @@ function chrome(cur){
  document.body.insertAdjacentHTML("beforeend",footerHTML());
 }
 window.TM.footerHTML=footerHTML;
-function footerHTML(){return `<footer class="ftr"><div class="ftr-in"><img src="${LW}" alt="TransfersMérida"><p>Traslados · Hoteles · Paquetes · Tours · Rent a Car<br>El Vigía, Mérida, Venezuela</p><div class="legal"><span><b>RIF</b>${esc(C.rif)}</span><span><b>RTN</b>${esc(C.rtn)}</span><span><b>Licencia de Turismo</b>${esc(C.ttt)}</span></div><small>© ${new Date().getFullYear()} TransfersMérida. Todos los derechos reservados.</small></div></footer>`}
+function footerHTML(){return `<footer class="ftr"><div class="ftr-in"><img src="${LW}" alt="TransfersMérida"><p>Traslados · Hoteles · Paquetes · Tours · Rent a Car · Agencia<br>El Vigía, Mérida, Venezuela</p><div class="legal"><span><b>RIF</b>${esc(C.rif)}</span><span><b>RTN</b>${esc(C.rtn)}</span><span><b>Licencia de Turismo</b>${esc(C.ttt)}</span></div><small>© ${new Date().getFullYear()} TransfersMérida. Todos los derechos reservados.</small></div></footer>`}
 /* ---------- date picker ---------- */
 const DP=(()=>{
  let el,scrim,st=null,view,hover=null;
