@@ -13,12 +13,12 @@ const P=window.TMPublish={
   if(!r.ok){const e=new Error((j&&j.message)||("Error "+r.status));e.status=r.status;throw e}
   return j;
  },
- async commit(path,text,msg){
+ async commit(path,text,msg,isB64){
   const c=P.cfg();if(!c.token)throw new Error("Falta la clave de GitHub.");
   const url="/contents/"+path.split("/").map(encodeURIComponent).join("/");
   for(let t=0;t<2;t++){
    let sha;try{const g=await P.api(url+"?ref="+encodeURIComponent(c.branch));sha=g.sha}catch(e){if(e.status!==404)throw e}
-   try{return await P.api(url,{method:"PUT",body:JSON.stringify({message:msg||"Actualización desde el editor",content:P.b64(text),branch:c.branch,sha})})}
+   try{return await P.api(url,{method:"PUT",body:JSON.stringify({message:msg||"Actualización desde el editor",content:isB64?text:P.b64(text),branch:c.branch,sha})})}
    catch(e){if(t===0&&(e.status===409||e.status===422))continue;throw e}
   }
  },
