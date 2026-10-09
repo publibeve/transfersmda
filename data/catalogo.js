@@ -13,7 +13,19 @@ window.TM_DATA = {
    "name": "Hotel Venetur Mérida",
    "loc": "Mérida",
    "note": "Tarifa por noche",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589440978-6.jpg",
+    "/img/hoteles-1791589439381-5.jpg",
+    "/img/hoteles-1791589434572-2.jpg",
+    "/img/hoteles-1791589436052-3.jpg",
+    "/img/hoteles-1791589437609-4.jpg",
+    "/img/hoteles-1791589442775-7.jpg",
+    "/img/hoteles-1791589445876-9.jpg",
+    "/img/hoteles-1791589447386-10.jpg",
+    "/img/hoteles-1791589449091-11.jpg",
+    "/img/hoteles-1791589451005-12.jpg",
+    "/img/hoteles-1791589452853-13.jpg"
+   ],
    "rooms": [
     [
      "Hab. Matrimonial",
@@ -261,11 +273,8 @@ window.TM_DATA = {
    "note": "Tarifas con IVA",
    "photos": [
     "https://i.postimg.cc/QC0DG8FK/Hotel-los-Lirios-1.jpg",
-    "https://i.postimg.cc/593bF3sN/Hotel-los-Lirios-2.jpg",
     "https://i.postimg.cc/NG4Br4d0/Hotel-los-Lirios-3.jpg",
-    "https://i.postimg.cc/j2ZT0xDP/Hotel-los-Lirios-4.jpg",
-    "https://i.postimg.cc/j2ZT0xD7/Hotel-los-Lirios-5.jpg",
-    "https://i.postimg.cc/0jcvRkzm/Hotel-los-Lirios-6.jpg"
+    "https://i.postimg.cc/j2ZT0xD7/Hotel-los-Lirios-5.jpg"
    ],
    "rooms": [
     [
