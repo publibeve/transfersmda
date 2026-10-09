@@ -3,7 +3,9 @@ window.TM_DATA = {
   "wa": "584125805433",
   "rif": "J-41302545-0",
   "rtn": "21403",
-  "ttt": "TTT-840"
+  "ttt": "TTT-840",
+  "siteName": "Transfers Mérida",
+  "favicon": "https://i.postimg.cc/q7BmN5dx/FAVICON-8.png"
  },
  "hoteles": [
   {
