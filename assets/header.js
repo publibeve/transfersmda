@@ -23,3 +23,18 @@ document.addEventListener("DOMContentLoaded",()=>{
  if(h==="agencia"){const f=b.querySelector(":scope > footer");f&&f.remove();const m=b.querySelector(".modal-overlay");const nf=window.TM_renderFooter(false);m?m.before(nf):b.append(nf)}
 });
 })();
+
+/* Título de pestaña e ícono (favicon) iguales en todas las páginas */
+(function(){
+ try{
+  var c=(window.TM_DATA&&window.TM_DATA.config)||{},site=c.siteName||"Transfers Mérida";
+  var seg=(location.pathname.replace(/\/index\.html$/,"").split("/").filter(Boolean).pop()||"").toLowerCase();
+  var N={hoteles:"Hoteles",paquetes:"Paquetes",tours:"Tours","rental-cars":"Rental Cars",agencia:"Agencia de Viajes",admin:"Editor del catálogo"};
+  var name=N[seg]||(seg?seg.replace(/-/g," ").replace(/\b\w/g,function(m){return m.toUpperCase()}):"");
+  if(name)document.title=name+" | "+site;
+  if(c.favicon&&c.favicon.trim()){
+   document.querySelectorAll("link[rel~=icon]").forEach(function(e){e.remove()});
+   var l=document.createElement("link");l.rel="icon";l.href=c.favicon.trim();document.head.appendChild(l);
+  }
+ }catch(e){}
+})();
