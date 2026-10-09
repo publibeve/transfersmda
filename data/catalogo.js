@@ -11,7 +11,16 @@ window.TM_DATA = {
    "name": "Hotel Venetur Mérida",
    "loc": "Mérida",
    "note": "Tarifa por noche",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589440978-6.jpg",
+    "/img/hoteles-1791589439381-5.jpg",
+    "/img/hoteles-1791589434572-2.jpg",
+    "/img/hoteles-1791589437609-4.jpg",
+    "/img/hoteles-1791589442775-7.jpg",
+    "/img/hoteles-1791589445876-9.jpg",
+    "/img/hoteles-1791589447386-10.jpg",
+    "/img/hoteles-1791589449091-11.jpg"
+   ],
    "rooms": [
     [
      "Hab. Matrimonial",
@@ -137,7 +146,15 @@ window.TM_DATA = {
    "name": "Milla Suite",
    "loc": "Mérida",
    "note": "Temporada baja / temporada alta",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589741326-10.jpg",
+    "/img/hoteles-1791589730723-3.jpg",
+    "/img/hoteles-1791589736711-7.jpg",
+    "/img/hoteles-1791589738133-8.jpg",
+    "/img/hoteles-1791589727018-1.jpg",
+    "/img/hoteles-1791589735287-6.jpg",
+    "/img/hoteles-1791589742845-11.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial (1-2 pax)",
@@ -232,7 +249,13 @@ window.TM_DATA = {
    "name": "Convención Hotel Boutique",
    "loc": "Mérida",
    "note": "Tarifa con desayuno",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589976279-2.jpg",
+    "/img/hoteles-1791589974002-1.jpg",
+    "/img/hoteles-1791589978073-3.jpg",
+    "/img/hoteles-1791589979778-4.jpg",
+    "/img/hoteles-1791589981286-5.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial Superior Queen (1 pax)",
@@ -259,11 +282,8 @@ window.TM_DATA = {
    "note": "Tarifas con IVA",
    "photos": [
     "https://i.postimg.cc/QC0DG8FK/Hotel-los-Lirios-1.jpg",
-    "https://i.postimg.cc/593bF3sN/Hotel-los-Lirios-2.jpg",
     "https://i.postimg.cc/NG4Br4d0/Hotel-los-Lirios-3.jpg",
-    "https://i.postimg.cc/j2ZT0xDP/Hotel-los-Lirios-4.jpg",
-    "https://i.postimg.cc/j2ZT0xD7/Hotel-los-Lirios-5.jpg",
-    "https://i.postimg.cc/0jcvRkzm/Hotel-los-Lirios-6.jpg"
+    "https://i.postimg.cc/j2ZT0xD7/Hotel-los-Lirios-5.jpg"
    ],
    "rooms": [
     [
