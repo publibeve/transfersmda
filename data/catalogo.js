@@ -17,14 +17,11 @@ window.TM_DATA = {
     "/img/hoteles-1791589440978-6.jpg",
     "/img/hoteles-1791589439381-5.jpg",
     "/img/hoteles-1791589434572-2.jpg",
-    "/img/hoteles-1791589436052-3.jpg",
     "/img/hoteles-1791589437609-4.jpg",
     "/img/hoteles-1791589442775-7.jpg",
     "/img/hoteles-1791589445876-9.jpg",
     "/img/hoteles-1791589447386-10.jpg",
-    "/img/hoteles-1791589449091-11.jpg",
-    "/img/hoteles-1791589451005-12.jpg",
-    "/img/hoteles-1791589452853-13.jpg"
+    "/img/hoteles-1791589449091-11.jpg"
    ],
    "rooms": [
     [
@@ -151,7 +148,15 @@ window.TM_DATA = {
    "name": "Milla Suite",
    "loc": "Mérida",
    "note": "Temporada baja / temporada alta",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589741326-10.jpg",
+    "/img/hoteles-1791589730723-3.jpg",
+    "/img/hoteles-1791589736711-7.jpg",
+    "/img/hoteles-1791589738133-8.jpg",
+    "/img/hoteles-1791589727018-1.jpg",
+    "/img/hoteles-1791589735287-6.jpg",
+    "/img/hoteles-1791589742845-11.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial (1-2 pax)",
@@ -246,7 +251,13 @@ window.TM_DATA = {
    "name": "Convención Hotel Boutique",
    "loc": "Mérida",
    "note": "Tarifa con desayuno",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589976279-2.jpg",
+    "/img/hoteles-1791589974002-1.jpg",
+    "/img/hoteles-1791589978073-3.jpg",
+    "/img/hoteles-1791589979778-4.jpg",
+    "/img/hoteles-1791589981286-5.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial Superior Queen (1 pax)",
