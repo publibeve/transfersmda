@@ -1,0 +1,109 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Editor del catálogo · TransfersMérida</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="../assets/app.css"><link rel="stylesheet" href="../assets/header.css">
+<style>
+.ad{max-width:1180px;margin:0 auto;padding:24px 20px 60px}
+.ad h1{font-size:28px;font-weight:900;letter-spacing:-.03em;color:var(--blue);margin:0 0 4px}.ad .sub{color:var(--desc);margin:0 0 20px;font-size:14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.tabs button{padding:10px 18px;border-radius:99px;font-weight:700;font-size:14px;background:#fff;border:1.5px solid var(--line);transition:.2s}.tabs button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.lay{display:grid;grid-template-columns:270px 1fr;gap:20px;align-items:start}
+@media(max-width:820px){.lay{grid-template-columns:1fr}}
+.pan{background:rgba(255,255,255,.92);border:1px solid #fff;border-radius:22px;padding:16px;box-shadow:0 12px 30px rgba(0,30,80,.08)}
+.lst{display:flex;flex-direction:column;gap:4px;max-height:60vh;overflow:auto;margin:10px 0}
+.lst button{text-align:left;padding:11px 12px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}.lst button:hover{background:#eef4fc}.lst button.on{background:#e3eeff;box-shadow:inset 0 0 0 1.5px var(--blue);color:var(--blue-dark)}
+.b2{padding:10px 16px;border-radius:12px;font-weight:700;font-size:13px;background:#eef4fc;color:var(--blue);transition:.15s}.b2:hover{background:var(--blue);color:#fff}.b2.pri{background:var(--blue);color:#fff}.b2.pri:hover{background:var(--blue-dark)}.b2.red{background:#fdecec;color:var(--red)}.b2.red:hover{background:var(--red);color:#fff}.b2.sm{padding:7px 11px;font-size:12px}
+.f{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.f label{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--desc)}
+.f input,.f textarea{font:inherit;font-size:14px;padding:11px 13px;border-radius:12px;border:1.5px solid var(--line);background:#f7faff;color:var(--ink);outline:none;width:100%;transition:.2s}.f input:focus,.f textarea:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(0,51,127,.12)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sec{font-size:13px;font-weight:800;color:var(--blue-dark);margin:18px 0 8px;display:flex;justify-content:space-between;align-items:center}
+.ph-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:10px}
+.ph-i{position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#dbe6f5}.ph-i img{width:100%;height:100%;object-fit:cover}
+.ph-i .t{position:absolute;inset:auto 0 0;display:flex;justify-content:center;gap:4px;padding:5px;background:linear-gradient(transparent,rgba(0,15,40,.75))}
+.ph-i .t button{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.9);font-weight:800;font-size:13px}.ph-i .t button:hover{background:var(--red);color:#fff}
+.rm{display:grid;grid-template-columns:1fr 150px 36px;gap:8px;margin-bottom:8px}.rm input{font:inherit;font-size:14px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:#f7faff;outline:none;min-width:0}.rm input:focus{border-color:var(--blue);background:#fff}
+.rm button{border-radius:10px;background:#fdecec;color:var(--red);font-weight:800}.rm button:hover{background:var(--red);color:#fff}
+.bar{position:sticky;bottom:12px;margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:rgba(0,31,77,.92);backdrop-filter:blur(14px);padding:12px 14px;border-radius:18px;color:#fff;font-size:13px;z-index:20}
+.bar .b2{background:rgba(255,255,255,.14);color:#fff}.bar .b2:hover{background:#fff;color:var(--blue)}.bar .b2.pri{background:var(--red)}.bar .b2.pri:hover{background:#fff;color:var(--red)}
+.help{background:#fff8e6;border:1px solid #f5d98a;border-radius:16px;padding:14px 16px;font-size:13.5px;color:#6b4e00;margin-bottom:18px}.help ol{margin:6px 0 0 18px;padding:0}
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);background:var(--blue-dark);color:#fff;padding:12px 20px;border-radius:14px;font-weight:600;font-size:14px;opacity:0;transition:.3s;z-index:200;pointer-events:none}.toast.on{opacity:1;transform:translate(-50%,0)}
+</style></head><body data-page="admin">
+<script src="../data/catalogo.js"></script><script src="../assets/header.js"></script><script src="../assets/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.body.prepend(TM_renderHeader("admin","../"));
+let data=JSON.parse(localStorage.getItem("tm_draft")||"null")||JSON.parse(JSON.stringify(TM.D));
+data.config=Object.assign({wa:"584125805433",rif:"",rtn:"",ttt:""},data.config||{});
+["hoteles","paquetes","tours","autos"].forEach(k=>data[k]=data[k]||[]);
+let tab="hoteles",sel=0;const NAMES={hoteles:"Hoteles",paquetes:"Paquetes",tours:"Tours (1 día)",autos:"Vehículos",config:"Datos de la empresa"};
+const save=()=>{try{localStorage.setItem("tm_draft",JSON.stringify(data))}catch(e){toast("Borrador demasiado grande para guardarse en el navegador; descarga el archivo.")}};
+function toast(t){const e=$(".toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2600)}
+const root=document.createElement("div");root.className="ad";document.body.append(root);
+document.body.insertAdjacentHTML("beforeend",'<div class="toast"></div>');
+function draw(){
+ root.innerHTML=`<h1>Editor del catálogo</h1><p class="sub">Agrega hoteles, paquetes, tours y vehículos. Los cambios se guardan como borrador en este navegador hasta que descargues el archivo.</p>
+ <div class="help"><b>Cómo publicar tus cambios:</b><ol><li>Edita lo que necesites aquí.</li><li>Pulsa <b>Descargar catalogo.js</b>.</li><li>Reemplaza el archivo <code>data/catalogo.js</code> en tu carpeta del sitio y vuelve a subir la carpeta a Netlify.</li></ol></div>
+ <div class="tabs">${["hoteles","paquetes","tours","autos","config"].map(k=>`<button data-t="${k}" class="${k===tab?"on":""}">${NAMES[k]}</button>`).join("")}</div><div id="body"></div>
+ <div class="bar"><button class="b2 pri" id="dl">Descargar catalogo.js</button><label class="b2" style="cursor:pointer">Importar catalogo.js<input type="file" id="imp" accept=".js,.json" hidden></label><button class="b2" id="rst">Descartar borrador</button><span id="sz"></span></div>`;
+ $$(".tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.t;sel=0;draw()});
+ tab==="config"?cfg():list();
+ $("#dl").onclick=()=>{const txt="window.TM_DATA = "+JSON.stringify(data,null,1)+";\n";const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"text/javascript"}));a.download="catalogo.js";a.click();toast("Descargado. Reemplaza data/catalogo.js y sube el sitio.")};
+ $("#imp").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const m=t.match(/=\s*([\s\S]*?);?\s*$/);data=JSON.parse(m[1]);save();draw();toast("Importado")}catch(x){toast("Archivo no válido")}})};
+ $("#rst").onclick=()=>{if(confirm("¿Descartar el borrador y volver al catálogo publicado?")){localStorage.removeItem("tm_draft");data=JSON.parse(JSON.stringify(TM.D));data.config=Object.assign({},data.config);draw()}};
+ const kb=Math.round(JSON.stringify(data).length/1024);$("#sz").textContent=`Tamaño: ${kb} KB`;
+}
+function cfg(){
+ const c=data.config;data.info=data.info||{};
+ $("#body").innerHTML=`<div class="pan"><div class="two"><div class="f"><label>RIF</label><input data-c="rif" value="${esc(c.rif)}"></div><div class="f"><label>Registro Turístico Nacional (RTN)</label><input data-c="rtn" value="${esc(c.rtn)}"></div><div class="f"><label>Licencia de turismo</label><input data-c="ttt" value="${esc(c.ttt)}"></div><div class="f"><label>WhatsApp (con código de país, sin +)</label><input data-c="wa" value="${esc(c.wa)}"></div></div></div>
+ ${["paquetes","tours","autos"].map(k=>`<div class="pan" style="margin-top:16px"><div class="sec" style="margin-top:0"><span>Información al pie de ${k==="paquetes"?"Paquetes":k==="tours"?"Tours":"Vehículos"}</span><button class="b2 sm" data-ai="${k}">+ Punto</button></div><div class="f"><label>Título</label><input data-it="${k}" value="${esc((data.info[k]||{}).title)}"></div><div id="inf-${k}"></div></div>`).join("")}`;
+ $$("[data-c]").forEach(i=>i.oninput=()=>{c[i.dataset.c]=i.value;save()});
+ ["paquetes","tours","autos"].forEach(k=>{data.info[k]=data.info[k]||{eyebrow:"Información",title:"",items:[]};const add=rowsEd($("#inf-"+k),data.info[k].items,["Título","Texto"],true);$(`[data-ai=${k}]`).onclick=add;$(`[data-it=${k}]`).oninput=e=>{data.info[k].title=e.target.value;save()}});
+}
+function list(){
+ const L=data[tab];if(sel>=L.length)sel=Math.max(0,L.length-1);
+ $("#body").innerHTML=`<div class="lay"><div class="pan"><button class="b2 pri" id="new" style="width:100%">+ Nuevo</button><div class="lst">${L.map((x,i)=>`<button data-i="${i}" class="${i===sel?"on":""}">${esc(x.name||"(sin nombre)")}</button>`).join("")||'<span style="color:var(--desc);font-size:13px">Aún no hay elementos.</span>'}</div></div><div class="pan" id="ed"></div></div>`;
+ $("#new").onclick=()=>{const id="n"+Date.now();L.push(tab==="hoteles"?{id,name:"Nuevo hotel",loc:"Mérida",note:"Tarifa por noche",photos:[],rooms:[["Habitación matrimonial","$00"]]}:tab==="tours"?{id,name:"Nuevo tour",loc:"Mérida · 1 día",sub:"",pp:0,inc:[],photos:[]}:tab==="paquetes"?{id,name:"Nuevo paquete",loc:"3 días · 2 noches",sub:"",inc:[],acts:[],photos:[],matrix:[{hotel:"Hotel",p:[null,null],g3:[null,null],g4:[null,null]}]}:{id,name:"Nuevo vehículo",loc:"",rate:50,regular:60,max:1,inc:[],specs:[["Motor",""]],photos:[]});sel=L.length-1;save();list()};
+ $$(".lst button").forEach(b=>b.onclick=()=>{sel=+b.dataset.i;list()});
+ if(L[sel])edit(L[sel],L);else $("#ed").innerHTML='<p style="color:var(--desc)">Crea el primer elemento con “+ Nuevo”.</p>';
+}
+function rowsEd(host,arr,ph,wide){
+ const draw=()=>{host.innerHTML=arr.map((r,i)=>`<div class="rm" style="grid-template-columns:${wide?"180px 1fr":"1fr 150px"} 36px"><input data-r="${i}" data-c="0" value="${esc(r[0])}" placeholder="${ph[0]}"><input data-r="${i}" data-c="1" value="${esc(r[1])}" placeholder="${ph[1]}"><button data-d="${i}" title="Quitar">×</button></div>`).join("");
+  $$("[data-r]",host).forEach(i=>i.oninput=()=>{arr[+i.dataset.r][+i.dataset.c]=i.value;save()});$$("[data-d]",host).forEach(b=>b.onclick=()=>{arr.splice(+b.dataset.d,1);save();draw()})};
+ draw();return()=>{arr.push(["",""]);save();draw()};
+}
+function edit(it,L){
+ const h=tab==="hoteles",t=tab==="paquetes",dt=tab==="tours",a=tab==="autos";
+ $("#ed").innerHTML=`<div class="two"><div class="f"><label>Nombre</label><input data-k="name" value="${esc(it.name)}"></div><div class="f"><label>${a?"Tipo / capacidad":t?"Duración":dt?"Lugar / duración":"Ubicación"}</label><input data-k="loc" value="${esc(it.loc)}"></div></div>
+ ${h?`<div class="f"><label>Nota de tarifas</label><input data-k="note" value="${esc(it.note)}"></div>`:""}
+ ${dt?`<div class="f"><label>Descripción corta</label><input data-k="sub" value="${esc(it.sub)}"></div><div class="f"><label>Precio por persona ($) — solo si no usas tarifas por grupo</label><input data-n="pp" type="number" value="${it.pp||0}"></div><div class="two"><div class="f"><label>Guía exclusivo (+$, 0 = no)</label><input data-n="guide" type="number" value="${it.guide||0}"></div><div class="f"><label>Anticipación mínima (días)</label><input data-n="minDays" type="number" value="${it.minDays||0}"></div></div><div class="f"><label>% de reserva</label><input data-n="deposit" type="number" value="${it.deposit||0}"></div><div class="f"><label>Itinerario (una línea por parada)</label><textarea data-k="acts" rows="4">${esc((it.acts||[]).join("\n"))}</textarea></div><div class="sec"><span>Tarifa total por grupo (personas → $)</span><button class="b2 sm" id="addt">+ Fila</button></div><div id="tl"></div><div class="f"><label>Incluye (una línea por elemento)</label><textarea data-k="inc" rows="4">${esc((it.inc||[]).join("\n"))}</textarea></div>`:""}
+ ${t?`<div class="f"><label>Descripción corta</label><input data-k="sub" value="${esc(it.sub)}"></div><div class="f"><label>Incluye (una línea por elemento)</label><textarea data-k="inc" rows="4">${esc((it.inc||[]).join("\n"))}</textarea></div><div class="f"><label>Actividades (una línea por elemento)</label><textarea data-k="acts" rows="4">${esc((it.acts||[]).join("\n"))}</textarea></div>`:""}
+ ${a?`<div class="two"><div class="f"><label>Precio promocional por día ($)</label><input data-n="rate" type="number" value="${it.rate||0}"></div><div class="f"><label>Precio regular por día ($, opcional)</label><input data-n="regular" type="number" value="${it.regular||0}"></div></div><div class="f"><label>Unidades disponibles</label><input data-n="max" type="number" min="1" value="${it.max||1}"></div>`:""}
+ <div class="sec"><span>Fotos (4 o 5 recomendadas, rotan automáticamente)</span><span><button class="b2 sm" id="addurl">+ URL</button> <label class="b2 sm" style="cursor:pointer">+ Subir<input type="file" id="up" accept="image/*" multiple hidden></label></span></div><div class="ph-list" id="pl"></div>
+ ${h?`<div class="sec"><span>Habitaciones y tarifas</span><button class="b2 sm" id="addr">+ Habitación</button></div><div id="rl"></div>`:""}
+ ${a?`<div class="sec"><span>Ficha técnica</span><button class="b2 sm" id="addr">+ Dato</button></div><div id="rl"></div>`:""}
+ ${t?`<div class="sec"><span>Precios por hotel (USD; deja vacío = “bajo consulta”)</span><button class="b2 sm" id="addm">+ Hotel</button></div><div style="font-size:11.5px;color:var(--desc);margin-bottom:8px">Columnas: 2 pers. baja · 2 pers. alta · 3 pers. baja · 3 pers. alta · 4 pers. baja · 4 pers. alta</div><div id="ml" style="overflow:auto"></div>`:""}
+ <div style="display:flex;gap:8px;margin-top:20px"><button class="b2" id="dup">Duplicar</button><button class="b2 red" id="del">Eliminar</button></div>`;
+ $$("[data-k]").forEach(i=>i.oninput=()=>{const k=i.dataset.k;it[k]=(k==="inc"||k==="acts")?i.value.split("\n").map(s=>s.trim()).filter(Boolean):i.value;save();if(k==="name")$(".lst .on").textContent=i.value||"(sin nombre)"});
+ $$("[data-n]").forEach(i=>i.oninput=()=>{it[i.dataset.n]=parseFloat(i.value)||0;save()});
+ const pl=()=>{it.photos=it.photos||[];$("#pl").innerHTML=it.photos.map((p,i)=>`<div class="ph-i"><img src="${esc(p)}" alt=""><div class="t"><button data-m="-1" data-i="${i}" title="Mover">←</button><button data-m="1" data-i="${i}" title="Mover">→</button><button data-x="${i}" title="Quitar">×</button></div></div>`).join("")||'<span style="color:var(--desc);font-size:13px">Sin fotos: se mostrarán imágenes de relleno.</span>';
+  $$("[data-m]").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,j=i+ +b.dataset.m;if(j<0||j>=it.photos.length)return;[it.photos[i],it.photos[j]]=[it.photos[j],it.photos[i]];save();pl()});
+  $$("[data-x]").forEach(b=>b.onclick=()=>{it.photos.splice(+b.dataset.x,1);save();pl()})};
+ pl();
+ $("#addurl").onclick=()=>{const u=prompt("Pega la URL de la imagen:");if(u){(it.photos=it.photos||[]).push(u.trim());save();pl()}};
+ $("#up").onchange=async e=>{for(const f of e.target.files){const d=await shrink(f);(it.photos=it.photos||[]).push(d)}save();pl();toast("Fotos agregadas (se optimizan a 1200 px)")};
+ if(h)$("#addr").onclick=rowsEd($("#rl"),it.rooms,["Habitación","$00"]);
+ if(a)$("#addr").onclick=rowsEd($("#rl"),it.specs=it.specs||[],["Dato","Valor"]);
+ if(t){const KEYS=[["p",0],["p",1],["g3",0],["g3",1],["g4",0],["g4",1]];
+  const ml=()=>{$("#ml").innerHTML='<div style="min-width:640px">'+it.matrix.map((r,i)=>`<div class="rm" style="grid-template-columns:150px repeat(6,62px) 36px"><input data-h="${i}" value="${esc(r.hotel)}" placeholder="Hotel">${KEYS.map(([g,j],n)=>`<input data-v="${i}" data-n="${n}" type="number" value="${(r[g]||[])[j]==null?"":r[g][j]}">`).join("")}<button data-d="${i}">×</button></div>`).join("")+'</div>';
+   $$("[data-h]").forEach(x=>x.oninput=()=>{it.matrix[+x.dataset.h].hotel=x.value;save()});
+   $$("[data-v]").forEach(x=>x.oninput=()=>{const r=it.matrix[+x.dataset.v],[g,j]=KEYS[+x.dataset.n];r[g]=r[g]||[null,null];r[g][j]=x.value===""?null:parseFloat(x.value);save()});
+   $$("#ml [data-d]").forEach(b=>b.onclick=()=>{it.matrix.splice(+b.dataset.d,1);save();ml()})};ml();
+  $("#addm").onclick=()=>{it.matrix.push({hotel:"",p:[null,null],g3:[null,null],g4:[null,null]});save();ml()}}
+ if(dt){const arr=Object.entries(it.tiers||{}).map(([k,v])=>[k,String(v)]);const sync=()=>{it.tiers={};arr.forEach(([k,v])=>{if(k!==""&&v!=="")it.tiers[k]=parseFloat(v)});save()};const add=rowsEd($("#tl"),arr,["Personas","Precio $"]);const w=add;$("#addt").onclick=()=>{w();};$("#tl").addEventListener("input",sync);$("#tl").addEventListener("click",()=>setTimeout(sync,0))}
+ $("#dup").onclick=()=>{const c=JSON.parse(JSON.stringify(it));c.id="n"+Date.now();c.name+=" (copia)";L.splice(sel+1,0,c);sel++;save();list()};
+ $("#del").onclick=()=>{if(confirm("¿Eliminar “"+it.name+"”?")){L.splice(sel,1);sel=0;save();list()}};
+}
+function shrink(f){return new Promise(res=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(1,1200/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",.78))};im.src=r.result};r.readAsDataURL(f)})}
+draw();
+});
+</script></body></html>

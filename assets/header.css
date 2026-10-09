@@ -1,0 +1,25 @@
+/* TransfersMérida · cabecera compartida (autocontenida) */
+.hdr{position:relative;z-index:60;padding:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.hdr *{box-sizing:border-box}
+.hdr-in{width:100%;margin:0;padding:14px max(20px,calc((100% - 1120px)/2)) 14px max(44px,calc((100% - 1120px)/2 + 24px));display:flex;align-items:center;justify-content:space-between;gap:24px;border-radius:0;position:relative;overflow:hidden;
+ background:linear-gradient(120deg,#001a45,#00337F 55%,#0a4aa8);border:0;border-bottom:1px solid rgba(255,255,255,.14);box-shadow:0 8px 24px rgba(0,25,70,.25),inset 0 1px 0 rgba(255,255,255,.18)}
+.hdr-in::before{content:"";position:absolute;width:260px;height:260px;left:-70px;top:-150px;border-radius:50%;background:radial-gradient(circle,rgba(0,154,255,.45),transparent 70%);pointer-events:none}
+.hdr-in::after{content:"";position:absolute;width:240px;height:240px;right:-60px;bottom:-170px;border-radius:50%;background:radial-gradient(circle,rgba(204,27,27,.5),transparent 70%);pointer-events:none}
+.hdr-in>*{position:relative;z-index:1}
+.hdr .sheen{position:absolute;top:0;bottom:0;left:0;width:34%;z-index:3;pointer-events:none;background:linear-gradient(105deg,transparent,rgba(255,255,255,.16) 45%,rgba(255,255,255,.34) 50%,rgba(255,255,255,.16) 55%,transparent);transform:translateX(-120%) skewX(-18deg);animation:hdrSheen 7s ease-in-out infinite}
+@keyframes hdrSheen{0%,58%{transform:translateX(-120%) skewX(-18deg)}88%,100%{transform:translateX(320%) skewX(-18deg)}}
+.hdr .logo{display:block;padding:4px 6px;animation:hdrFloat 7s ease-in-out infinite;transform-origin:center}
+.hdr .logo img{height:36px;width:auto;display:block;filter:drop-shadow(0 4px 10px rgba(0,10,40,.45))}
+@keyframes hdrFloat{0%,50%,100%{transform:translateY(0) rotate(0)}62%{transform:translateY(-4px) rotate(-.6deg) scale(1.02)}76%{transform:translateY(1px)}86%{transform:translateY(-1px)}}
+.hdr .menu{align-items:center;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:5px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}.hdr .menu::-webkit-scrollbar{display:none}
+.hdr .menu a{flex:0 0 auto;justify-content:center;display:inline-flex;align-items:center;text-align:center;gap:8px;color:rgba(255,255,255,.86);text-decoration:none;font-size:13.5px;font-weight:600;line-height:1.2;padding:10px 18px;border-radius:999px;white-space:nowrap;position:relative;overflow:hidden;transition:background .25s,color .25s,transform .3s cubic-bezier(.22,.8,.24,1);opacity:0;animation:hdrIn .6s cubic-bezier(.22,.8,.24,1) forwards;animation-delay:calc(var(--i)*70ms + 150ms)}
+.hdr .menu a svg{flex:none;width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s cubic-bezier(.22,.8,.24,1)}
+.hdr .menu a::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);transition:transform .7s cubic-bezier(.22,.8,.24,1)}
+.hdr .menu a:hover{background:rgba(255,255,255,.14);color:#fff;transform:translateY(-2px)}.hdr .menu a:hover::after{transform:translateX(130%)}.hdr .menu a:hover svg{transform:scale(1.18) rotate(-6deg)}
+.hdr .menu a:active{transform:scale(.96)}
+.hdr .menu a[aria-current=page]{background:linear-gradient(135deg,#e02525,#CC1B1B);color:#fff;box-shadow:0 6px 18px rgba(204,27,27,.5),inset 0 1px 0 rgba(255,255,255,.3);animation:hdrIn .6s cubic-bezier(.22,.8,.24,1) forwards,hdrPulse 4.5s ease-in-out infinite;animation-delay:calc(var(--i)*70ms + 150ms),1.5s}
+@keyframes hdrIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes hdrPulse{0%,70%,100%{box-shadow:0 6px 18px rgba(204,27,27,.5),inset 0 1px 0 rgba(255,255,255,.3)}85%{box-shadow:0 6px 26px rgba(255,70,70,.85),0 0 0 6px rgba(204,27,27,.18),inset 0 1px 0 rgba(255,255,255,.3)}}
+@media(max-width:700px){.hdr-in{flex-direction:column;align-items:center;padding:14px 16px;gap:10px;border-radius:0}.hdr .logo img{height:32px}.hdr .menu{max-width:100%}.hdr .menu a{padding:9px 14px}}
+@media(max-width:520px){.hdr .menu{width:100%;justify-content:flex-start;gap:2px}.hdr .menu a{padding:9px 12px;font-size:12.5px;gap:0}.hdr .menu a svg{display:none}.hdr .menu a:first-child{margin-left:auto}.hdr .menu a:last-child{margin-right:auto}}
+
