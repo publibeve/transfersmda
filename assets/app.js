@@ -105,6 +105,24 @@ const DP=(()=>{
  }
  return{open,close};
 })();
+/* ---------- visor de fotos a pantalla completa ---------- */
+const LB=(()=>{
+ let el,imgs=[],k=0,x0=null;
+ function build(){
+  el=document.createElement("div");el.className="lb";
+  el.innerHTML='<button class="lb-x" aria-label="Cerrar">&times;</button><button class="lb-a l" aria-label="Anterior">'+svg("l")+'</button><div class="lb-st"><img alt=""></div><button class="lb-a r" aria-label="Siguiente">'+svg("r")+'</button><div class="lb-c"></div>';
+  document.body.append(el);
+  el.querySelector(".lb-x").onclick=close;el.querySelector(".l").onclick=()=>show(k-1);el.querySelector(".r").onclick=()=>show(k+1);
+  el.addEventListener("click",e=>{if(e.target===el||e.target.classList.contains("lb-st"))close()});
+  el.addEventListener("pointerdown",e=>{x0=e.clientX});
+  el.addEventListener("pointerup",e=>{if(x0==null)return;const d=e.clientX-x0;x0=null;if(Math.abs(d)>50)show(k+(d<0?1:-1))});
+  document.addEventListener("keydown",e=>{if(!el.classList.contains("on"))return;if(e.key==="Escape")close();if(e.key==="ArrowLeft")show(k-1);if(e.key==="ArrowRight")show(k+1)});
+ }
+ function show(n){k=(n+imgs.length)%imgs.length;el.querySelector("img").src=imgs[k];el.querySelector(".lb-c").textContent=(k+1)+" / "+imgs.length;el.classList.toggle("one",imgs.length<2)}
+ function open(list,start){if(!list.length)return;if(!el)build();imgs=list;show(start||0);el.classList.add("on");document.documentElement.style.overflow="hidden"}
+ function close(){el&&el.classList.remove("on");document.documentElement.style.overflow=""}
+ return{open};
+})();
 /* ---------- slider ---------- */
 function slider(photos,kind,name,idx){
  const sc=SCENES[kind];
@@ -124,7 +142,7 @@ function initSlider(s,delay){
  $(".arw.l",s).onclick=()=>{go(i-1);stop();start()};$(".arw.r",s).onclick=()=>{go(i+1);stop();start()};
  dots.forEach((d,j)=>d.onclick=()=>{go(j);stop();start()});
  let x0=null;s.addEventListener("pointerdown",e=>{x0=e.clientX});
- s.addEventListener("pointerup",e=>{if(x0==null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>40){go(i+(dx<0?1:-1));stop();start()}});
+ s.addEventListener("pointerup",e=>{if(x0==null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>40){go(i+(dx<0?1:-1));stop();start()}else if(Math.abs(dx)<=8&&!e.target.closest("button")){const L=$$(".sl img",s).map(m=>m.currentSrc||m.src);if(L.length){const cur=$$(".sl",s)[i].querySelector("img");LB.open(L,Math.max(0,cur?L.indexOf(cur.currentSrc||cur.src):0))}}});
  new IntersectionObserver(es=>{vis=es[0].isIntersecting;vis?start():stop()},{threshold:.2}).observe(s);
 }
 /* ---------- dropdown personalizado ---------- */
@@ -172,7 +190,7 @@ function card(it,c,i){
   const R=L=>L.map(r=>`<button class="row" type="button"><span>${esc(r[0])}</span><b>${esc(r[1])}</b></button>`).join("");
   const rooms=it.rooms||[];
   mid=`<div class="rows">${R(rooms.slice(0,4))}${rooms.length>4?`<div class="more"><div>${R(rooms.slice(4))}</div></div>`:""}</div>${rooms.length>4?`<button class="toggle" type="button"><span>Ver las ${rooms.length-4} restantes</span>${svg("chev")}</button>`:""}<div class="note">${esc(it.note||"")} · toca una habitación para elegirla</div>`;
-  const mp=minPrice(rooms);if(mp)badge=`Desde $${mp}`;
+  
  }else if(tour){
   const f=tourFrom(it);if(f)badge=`Desde ${money(f)}`;
   mid=`<div class="note" style="font-weight:600">${esc(it.sub||"")}</div><ul class="chks">${(it.inc||[]).map(x=>`<li>${CHECK}<span>${esc(x)}</span></li>`).join("")}</ul>${(it.acts||[]).length?`<div class="more"><div><div class="acts-t">Actividades</div><ul class="chks acts">${it.acts.map(x=>`<li>${CHECK}<span>${esc(x)}</span></li>`).join("")}</ul></div></div><button class="toggle" type="button"><span>Ver actividades</span>${svg("chev")}</button>`:""}`;
@@ -269,7 +287,7 @@ function catalog(key){
  const grid=$(".grid",main);
  function draw(q){
   const L=list.filter(x=>!q||(x.name+" "+(x.loc||"")).toLowerCase().includes(q));
-  grid.className="grid"+(list.length===1?" solo":list.length===2?" duo":"");
+  grid.className="grid"+(document.body.dataset.page==="paquetes"||list.length===1?" solo":list.length===2?" duo":"");
   grid.innerHTML=L.length?L.map((x,i)=>card(x,c,i)).join(""):`<div class="empty-msg">No se encontraron resultados.</div>`;
   $$(".card",grid).forEach((el,i)=>{wire(el,c,L[i]);initSlider($(".slider",el),(i%5)*350)});
   $$(".card",grid).forEach((el,i)=>{el.style.setProperty("--d",(i%3)*70+"ms")});

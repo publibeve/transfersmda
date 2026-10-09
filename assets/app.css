@@ -165,3 +165,16 @@ body[data-page=tours] .slider{aspect-ratio:4/5}
 body[data-page=tours] .grid.solo .slider{aspect-ratio:auto}
 @media(max-width:860px){body[data-page=tours] .grid.solo .slider{aspect-ratio:4/5}}
 .card,.body,.flds{min-width:0}
+
+.slider:has(img){cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:300;background:rgba(0,10,30,.94);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;touch-action:pan-y;backdrop-filter:blur(8px)}
+.lb.on{opacity:1;pointer-events:auto}
+.lb-st{flex:1;height:100%;display:flex;align-items:center;justify-content:center;padding:56px 64px}
+.lb-st img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5);user-select:none;-webkit-user-drag:none}
+.lb-x{position:absolute;top:14px;right:16px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:28px;line-height:1;z-index:2}
+.lb-a{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;z-index:2}
+.lb-a svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.lb-a.l{left:14px}.lb-a.r{right:14px}.lb-x:hover,.lb-a:hover{background:rgba(255,255,255,.28)}
+.lb.one .lb-a,.lb.one .lb-c{display:none}
+.lb-c{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#fff;font-size:13px;font-weight:600;opacity:.8}
+@media(max-width:640px){.lb-st{padding:60px 8px}.lb-a{width:40px;height:40px}.lb-a.l{left:6px}.lb-a.r{right:6px}}
