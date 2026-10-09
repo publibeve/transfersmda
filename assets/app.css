@@ -24,7 +24,7 @@ main{max-width:1120px;margin:0 auto;padding:28px 20px 72px}
 .search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 /* grid + cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr));gap:24px}
-.card{position:relative;background:rgba(255,255,255,.92);border:1px solid #fff;border-radius:var(--r);overflow:hidden;box-shadow:0 12px 30px rgba(0,30,80,.09);display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s var(--ease);animation:cardIn .6s var(--ease) both;animation-delay:var(--d,0ms)}
+.card{position:relative;background:rgba(255,255,255,.92);border:0;border-radius:var(--r);overflow:hidden;box-shadow:0 12px 30px rgba(0,30,80,.09),0 0 0 1px rgba(0,30,80,.05);display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s var(--ease);animation:cardIn .6s var(--ease) both;animation-delay:var(--d,0ms)}
 @keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .card:hover{box-shadow:0 20px 44px rgba(0,30,80,.16)}
 .slider{position:relative;aspect-ratio:16/10;background:#c8ddf5;overflow:hidden;touch-action:pan-y;user-select:none}
@@ -140,10 +140,10 @@ main{max-width:1120px;margin:0 auto;padding:28px 20px 72px}
 @media(max-width:640px){.ddp{left:0!important;right:0;bottom:0;top:auto!important;width:100%!important;max-height:60vh;border-radius:24px 24px 0 0;padding:12px 12px calc(14px + env(safe-area-inset-bottom));transform:translateY(100%)}.ddp.on{transform:none}.ddi{padding:15px 14px}}
 .info{margin-top:44px}.info-h{text-align:center;margin-bottom:22px}.info-h h2{font-size:clamp(22px,4vw,32px);font-weight:900;letter-spacing:-.03em;color:var(--blue);margin:0 0 6px}.info-h p{color:var(--desc);margin:0 auto;max-width:560px}
 .info-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.info-c{background:rgba(255,255,255,.9);border:1px solid #fff;border-radius:18px;padding:18px 20px;box-shadow:0 8px 22px rgba(0,30,80,.07);border-left:4px solid var(--red)}
+.info-c{background:rgba(255,255,255,.9);border:0;border-radius:18px;padding:18px 20px;box-shadow:0 8px 22px rgba(0,30,80,.07);border-left:4px solid var(--red)}
 .info-c h3{margin:0 0 6px;font-size:15px;font-weight:800;color:var(--blue-dark)}.info-c p{margin:0;font-size:13.5px;color:var(--desc);line-height:1.55}
 
-.soon{grid-column:1/-1;text-align:center;background:rgba(255,255,255,.9);border:1px solid #fff;border-radius:24px;padding:48px 24px;box-shadow:0 12px 30px rgba(0,30,80,.09)}.soon h2{font-size:28px;font-weight:900;letter-spacing:-.03em;color:var(--blue);margin:0 0 8px}.soon p{color:var(--desc);margin:0 auto 22px;max-width:420px}
+.soon{grid-column:1/-1;text-align:center;background:rgba(255,255,255,.9);border:0;border-radius:24px;padding:48px 24px;box-shadow:0 12px 30px rgba(0,30,80,.09)}.soon h2{font-size:28px;font-weight:900;letter-spacing:-.03em;color:var(--blue);margin:0 0 8px}.soon p{color:var(--desc);margin:0 auto 22px;max-width:420px}
 
 /* diseño adaptable según la cantidad de elementos (imágenes 4:5 vertical, 1080×1350) */
 .grid.duo{grid-template-columns:repeat(2,minmax(0,1fr))}

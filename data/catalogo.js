@@ -971,5 +971,338 @@ window.TM_DATA = {
     }
    ]
   }
- ]
+ ],
+ "agencia": {
+  "schedule": [
+   {
+    "code": "CCS",
+    "airline": "LASER Airlines",
+    "day": 0,
+    "out": "04:00 PM",
+    "ret": "01:50 PM"
+   },
+   {
+    "code": "CCS",
+    "airline": "LASER Airlines",
+    "day": 2,
+    "out": "04:00 PM",
+    "ret": "02:00 PM"
+   },
+   {
+    "code": "CCS",
+    "airline": "LASER Airlines",
+    "day": 4,
+    "out": "04:00 PM",
+    "ret": "02:00 PM"
+   },
+   {
+    "code": "CCS",
+    "airline": "LASER Airlines",
+    "day": 6,
+    "out": "04:00 PM",
+    "ret": "02:00 PM"
+   },
+   {
+    "code": "CCS",
+    "airline": "Conviasa",
+    "day": 0,
+    "out": "08:20 PM",
+    "ret": "02:00 PM"
+   },
+   {
+    "code": "BLA",
+    "airline": "Conviasa",
+    "day": 0,
+    "out": "03:40 PM",
+    "ret": "06:00 PM"
+   },
+   {
+    "code": "PMV",
+    "airline": "Turpial Airlines",
+    "day": 3,
+    "out": "02:30 PM",
+    "ret": "12:00 PM"
+   },
+   {
+    "code": "PMV",
+    "airline": "Turpial Airlines",
+    "day": 6,
+    "out": "03:30 PM",
+    "ret": "01:00 PM"
+   },
+   {
+    "code": "PZO",
+    "airline": "Conviasa",
+    "day": 3,
+    "out": "12:30 PM",
+    "ret": "10:00 AM"
+   },
+   {
+    "code": "PMV",
+    "airline": "Conviasa",
+    "day": 4,
+    "out": "10:40 AM",
+    "ret": "08:30 AM"
+   },
+   {
+    "code": "PMV",
+    "airline": "Conviasa",
+    "day": 6,
+    "out": "06:00 PM",
+    "ret": "03:40 PM"
+   }
+  ],
+  "conditions": [
+   {
+    "id": "general",
+    "title": "Condiciones Generales de Compra",
+    "icon": "doc",
+    "color": "#00337F",
+    "open": true,
+    "items": [
+     "El boleto es de uso personal e intransferible; en la mayoría de los casos no se permite el cambio de nombre del pasajero.",
+     "Los boletos suelen tener una vigencia de hasta 1 año desde la fecha de emisión para ser reprogramados.",
+     "Todo cambio de fecha, ruta o itinerario está sujeto a una penalidad, más la diferencia de tarifa si aplica.",
+     "El \"no-show\" (no presentarse al vuelo) generalmente implica perder el valor del boleto, o que el tramo de regreso se cancele automáticamente.",
+     "Los boletos no reembolsables por causas no atribuibles a la aerolínea suelen poder usarse como abono a un nuevo pasaje, descontando la penalidad correspondiente."
+    ]
+   },
+   {
+    "id": "docs",
+    "title": "Documentación Requerida",
+    "icon": "shield",
+    "color": "#0E9488",
+    "open": true,
+    "items": [
+     "Vuelos nacionales (venezolanos): cédula de identidad vigente o vencida — es el único documento válido; no se aceptan copias, denuncias de extravío ni licencias de conducir.",
+     "Vuelos nacionales (extranjeros o turistas): pasaporte vigente.",
+     "Vuelos internacionales: pasaporte vigente con la vigencia mínima exigida por el país de destino.",
+     "Presentación recomendada en el aeropuerto: 2-3 horas antes en vuelos nacionales y 3-5 horas antes en vuelos internacionales (varía por aerolínea)."
+    ]
+   },
+   {
+    "id": "conviasa",
+    "title": "Conviasa",
+    "open": false,
+    "items": [
+     "Boleto válido por 1 año desde la fecha de emisión.",
+     "Todo cambio de boleto aplica penalidad; si hay diferencia de tarifa, se cobra adicional.",
+     "No se permite el cambio de nombre del pasajero.",
+     "Boletos no usados por causas no atribuibles a la aerolínea no son reembolsables, pero pueden abonarse a un nuevo boleto descontando la penalidad."
+    ],
+    "source": "conviasa.aero"
+   },
+   {
+    "id": "avior",
+    "title": "Avior Airlines",
+    "open": false,
+    "items": [
+     "Cambios sujetos a tarifa de reemisión más diferencia tarifaria; las condiciones varían según la tarifa (Light, Ultra, Business).",
+     "Tarifa Light no permite cambios; Ultra incluye un cambio gratuito; Business permite cambios ilimitados.",
+     "El \"no-show\" puede reprogramarse pagando una penalidad aproximada de 100 USD.",
+     "Los reembolsos (según la tarifa) suelen procesarse entre 7 y 14 días hábiles."
+    ],
+    "source": "aviorair.com"
+   },
+   {
+    "id": "laser",
+    "title": "LASER Airlines",
+    "open": false,
+    "items": [
+     "Tarifas económicas permiten cambios con penalidad; tarifas flexibles permiten cambios sin costo.",
+     "Se aplica cobro por cambio de fecha y por \"no-show\".",
+     "Notificar cualquier imposibilidad de viajar con al menos 24 horas de antelación.",
+     "Presentarse en el mostrador con 4 horas de antelación en vuelos nacionales y 5 horas en internacionales."
+    ],
+    "source": "laserairlines.com"
+   },
+   {
+    "id": "rutaca",
+    "title": "Rutaca Airlines",
+    "open": false,
+    "items": [
+     "Boleto válido por 1 año desde la fecha de emisión.",
+     "Los cambios de fecha o ruta están sujetos a penalidad.",
+     "El boleto es personal e intransferible.",
+     "Presentarse 2 horas antes en vuelos nacionales y 3 horas antes en vuelos internacionales."
+    ],
+    "source": "flyrutaca.com"
+   },
+   {
+    "id": "turpial",
+    "title": "Turpial Airlines",
+    "open": false,
+    "items": [
+     "Existen tarifas no reembolsables; el reembolso parcial descuenta tramos usados, cargos administrativos, penalidades e impuestos.",
+     "En reembolsos involuntarios (causa atribuible a la aerolínea) aplica el 100% del valor del boleto.",
+     "Cambios de fecha se gestionan directamente con la aerolínea.",
+     "Itinerarios sujetos a cambio o cancelación sin previo aviso por fuerza mayor."
+    ],
+    "source": "turpialairlines.com"
+   },
+   {
+    "id": "aeropostal",
+    "title": "Aeropostal",
+    "open": false,
+    "items": [
+     "Reembolsos o cambios sujetos a las condiciones de la tarifa adquirida; las cancelaciones suelen tener penalidad.",
+     "Si no te presentas al vuelo de ida, el tramo de regreso se cancela automáticamente y debe reconfirmarse con la aerolínea.",
+     "Presentarse en el aeropuerto con un mínimo de 2 horas de anticipación en vuelos nacionales."
+    ],
+    "source": "aerolineasvenezolanas.net"
+   },
+   {
+    "id": "estelar",
+    "title": "Aerolíneas Estelar",
+    "open": false,
+    "items": [
+     "Boleto no endosable, no transferible, con vigencia de 1 año desde la emisión.",
+     "Cambios de fecha o ruta sujetos a disponibilidad, diferencia tarifaria y penalidad de gestión.",
+     "En la mayoría de las tarifas, los cambios o reembolsos solo son gratuitos dentro de las 24 horas posteriores a la compra."
+    ],
+    "source": "flyestelar.com"
+   },
+   {
+    "id": "avianca",
+    "title": "Avianca",
+    "open": false,
+    "items": [
+     "Cambios permitidos hasta 35 minutos antes del vuelo nacional (1 hora antes en internacional) vía web, según la tarifa.",
+     "Tarifas Flex y Business permiten cambios sin cargo por cambio (puede aplicar diferencia tarifaria).",
+     "Reembolsos después del vuelo no se permiten en ninguna tarifa, salvo eventos operacionales de la aerolínea."
+    ],
+    "source": "avianca.com"
+   },
+   {
+    "id": "copa",
+    "title": "Copa Airlines",
+    "open": false,
+    "items": [
+     "Tarifas flexibles no tienen cargo por cambio, solo diferencia de tarifa; tarifas económicas no reembolsables pueden generar cargos de 0 a 200 USD más ajuste de tarifa.",
+     "Cancelación sin penalidad dentro de las 24 horas posteriores a la compra, bajo ciertas condiciones y canales.",
+     "Los reembolsos se procesan al medio de pago original, dentro de la vigencia del boleto."
+    ],
+    "source": "copaair.com"
+   },
+   {
+    "id": "wingo",
+    "title": "Wingo",
+    "open": false,
+    "items": [
+     "Todo cambio está sujeto a disponibilidad, diferencia de tarifa y penalidad.",
+     "Cancelación gratuita dentro de las 24 horas de la compra si faltan más de 7 días para el vuelo; las tarifas promocionales no son reembolsables fuera de ese plazo.",
+     "Costo referencial de cambio: 90-120 USD en rutas nacionales y 150-180 USD en internacionales (varía según ruta y tarifa)."
+    ],
+    "source": "wingo.com"
+   },
+   {
+    "id": "latam",
+    "title": "LATAM Airlines",
+    "open": false,
+    "items": [
+     "Todo cambio de fecha, origen, destino o itinerario queda sujeto a las condiciones de la tarifa contratada.",
+     "Vigencia del boleto: 12 meses desde la emisión (si la tarifa permite cambios o devoluciones).",
+     "Las devoluciones se procesan al medio de pago original dentro de los 7 días hábiles posteriores a la solicitud."
+    ],
+    "source": "latamairlines.com"
+   },
+   {
+    "id": "american",
+    "title": "American Airlines",
+    "open": false,
+    "items": [
+     "Cambios sin costo dentro de las primeras 24 horas de la compra, si la reserva se hizo con 7 o más días de anticipación.",
+     "Boletos de tarifa Económica Básica generalmente no son cambiables, salvo excepciones puntuales.",
+     "El reintegro total dentro de 24 horas requiere que el vuelo se haya reservado con al menos 7 días de anticipación (política vigente desde julio 2026)."
+    ],
+    "source": "aa.com"
+   },
+   {
+    "id": "plusultra",
+    "title": "Plus Ultra Líneas Aéreas",
+    "open": false,
+    "items": [
+     "Tarifa Ejecutiva Básica: cambios y reembolsos solo con penalidad. Tarifa Ejecutiva Flexible: cambios y reembolsos sin cargo.",
+     "Si el motivo del reembolso es atribuible a la aerolínea (cancelación, cambio de itinerario), el pasajero puede recibir la devolución total."
+    ],
+    "source": "plusultra.com"
+   },
+   {
+    "id": "aireuropa",
+    "title": "Air Europa",
+    "open": false,
+    "items": [
+     "Tarifa Flex permite cambios y reembolsos sin penalización antes del viaje; tarifa Lite permite cambios con penalización pero no reembolsos.",
+     "Cancelación sin riesgo dentro de las primeras 24 horas posteriores a la compra.",
+     "El vuelo solo puede cancelarse con reembolso si la tarifa es Flex o se contrató un seguro de cancelación."
+    ],
+    "source": "aireuropa.com"
+   },
+   {
+    "id": "venezolana",
+    "title": "Venezolana (RAVSA)",
+    "open": false,
+    "items": [
+     "Boleto válido por 365 días desde la emisión; personal, intransferible y no reembolsable en dinero (puede convertirse en nota de crédito con descuento administrativo).",
+     "Cambios de fecha sujetos a penalidad y posible diferencia tarifaria.",
+     "Si no te presentas al vuelo de ida, el regreso se cancela automáticamente y debe reconfirmarse con la aerolínea."
+    ],
+    "source": "ravsa.com.ve"
+   },
+   {
+    "id": "globalx",
+    "title": "Global X",
+    "open": false,
+    "items": [
+     "Aerolínea internacional con base en Miami; las condiciones de cambio y cancelación dependen de la tarifa adquirida al momento de la compra.",
+     "Recomendamos confirmar las condiciones específicas de tu tarifa directamente con la aerolínea antes de viajar."
+    ],
+    "source": "globalxair.com"
+   },
+   {
+    "id": "sasca",
+    "title": "SASCA Airlines",
+    "open": false,
+    "items": [
+     "Boleto válido por 180 días continuos desde la emisión; no reembolsable, no transferible, no endosable ni canjeable.",
+     "Si no vuelas el tramo de ida, el sistema cancela automáticamente el regreso.",
+     "Cambios de fecha y anulaciones generan penalidad más diferencia de tarifa si aplica.",
+     "Presentarse 1 hora y 30 minutos antes del vuelo."
+    ],
+    "source": "sascaairlines.com"
+   },
+   {
+    "id": "aerocaribe",
+    "title": "Aerocaribe",
+    "open": false,
+    "items": [
+     "Servicio no reembolsable ni transferible.",
+     "Reservación requerida con un mínimo de 30 días de anticipación.",
+     "Presentarse en el aeropuerto 2 horas antes de la salida."
+    ],
+    "source": "aerocaribe.aero"
+   },
+   {
+    "id": "bluestar",
+    "title": "Bluestar",
+    "open": false,
+    "items": [
+     "Aerolínea tipo chárter con vuelos regulares a Los Roques desde 2023.",
+     "Las condiciones específicas de cambio, cancelación y equipaje se detallan al confirmar la reserva — te las compartimos junto con tu cotización."
+    ],
+    "source": "bluestarve.com"
+   },
+   {
+    "id": "sundance",
+    "title": "Sundance Airlines",
+    "open": false,
+    "items": [
+     "Las reservas deben pagarse por completo para quedar confirmadas.",
+     "Cambios de fecha y hora sujetos a disponibilidad y penalidades adicionales, detalladas en la confirmación enviada por correo.",
+     "Cancelar o modificar un tramo requiere notificación con al menos 48 horas de anticipación."
+    ],
+    "source": "sundanceairlines.com"
+   }
+  ]
+ }
 };

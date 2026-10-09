@@ -245,13 +245,13 @@ function wire(cardEl,c,it){
   if(miss.length){miss.forEach(f=>{f.classList.remove("err");void f.offsetWidth;f.classList.add("err")});openDP(val.a&&fb?fb:fa);return}
   const w=c.what(name);
   let m=talked?`Ya pude revisar la información con la operadora y me interesa ${w}. ¿Qué más me pueden decir al respecto? ¿Qué condiciones aplican?`:`Hola, quisiera consultar disponibilidad para ${w}.`;
-  if(room)m+=`\nHabitación: ${room}`;
-  if(val.a)m+=`\n${c.lab[0]}: ${fmt(val.a)}`;
-  if(!single&&val.b){const n=nDays();m+=`\n${c.lab[1]}: ${fmt(val.b)}${n>0?` (${n} ${c.unit}${n>1?"s":""})`:""}`}
-  if(hot)m+=`\nHuéspedes: ${people}`;
-  if(tour){m+=`\nPersonas: ${people}`;if(hotel){m+=`\nHotel: ${hotel}\nTemporada: ${season}`;const r=calcTour();if(r&&r.total)m+=`\nPrecio de referencia: ${money(r.total)}`}}
-  if(dt){m+=`\nPersonas: ${people}`;const r=dtCalc();if(r){if(r.guide)m+=`\nGuía turístico exclusivo: Sí (+${money(it.guide)})`;m+=`\nTotal estimado: ${money(r.total)}`;if(it.deposit)m+=`\nReserva con el ${it.deposit}%: ${money(Math.round(r.total*it.deposit/100))}`}}
-  if(auto){m+=`\nVehículos: ${qty}`;const n=nDays();if(n>0)m+=`\nTotal estimado: ${money(it.rate*n*qty)}`}
+  if(room)m+=`\n🛏️ Habitación: ${room}`;
+  if(val.a)m+=`\n📅 ${c.lab[0]}: ${fmt(val.a)}`;
+  if(!single&&val.b){const n=nDays();m+=`\n📅 ${c.lab[1]}: ${fmt(val.b)}${n>0?` (${n} ${c.unit}${n>1?"s":""})`:""}`}
+  if(hot)m+=`\n👥 Huéspedes: ${people}`;
+  if(tour){m+=`\n👥 Personas: ${people}`;if(hotel){m+=`\n🏨 Hotel: ${hotel}\n🌤️ Temporada: ${season}`;const r=calcTour();if(r&&r.total)m+=`\n💵 Precio de referencia: ${money(r.total)}`}}
+  if(dt){m+=`\n👥 Personas: ${people}`;const r=dtCalc();if(r){if(r.guide)m+=`\n🧭 Guía turístico exclusivo: Sí (+${money(it.guide)})`;m+=`\n💵 Total estimado: ${money(r.total)}`;if(it.deposit)m+=`\n✅ Reserva con el ${it.deposit}%: ${money(Math.round(r.total*it.deposit/100))}`}}
+  if(auto){m+=`\n🚗 Vehículos: ${qty}`;const n=nDays();if(n>0)m+=`\n💵 Total estimado: ${money(it.rate*n*qty)}`}
   window.open(`https://wa.me/${C.wa}?text=${encodeURIComponent(m)}`,"_blank");
  };
  upd();

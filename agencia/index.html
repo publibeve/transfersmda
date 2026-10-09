@@ -916,6 +916,7 @@
   </div>
 </div>
 
+<script src="../data/catalogo.js"></script>
 <script>
 const WA = '584125805433';
 
@@ -1431,7 +1432,7 @@ const airports = [
 ];
 
 // ── CONDITIONS DATA (investigado en fuentes oficiales, ago 2026) ──
-const conditions = [
+const conditionsDefault = [
   { id:'general', title:'Condiciones Generales de Compra', icon:'doc', color:'#00337F', open:true, items:[
     'El boleto es de uso personal e intransferible; en la mayoría de los casos no se permite el cambio de nombre del pasajero.',
     'Los boletos suelen tener una vigencia de hasta 1 año desde la fecha de emisión para ser reprogramados.',
@@ -1549,6 +1550,7 @@ const conditions = [
     'Cancelar o modificar un tramo requiere notificación con al menos 48 horas de anticipación.'
   ], source:'sundanceairlines.com' },
 ];
+const conditions = (window.TM_DATA && TM_DATA.agencia && Array.isArray(TM_DATA.agencia.conditions) && TM_DATA.agencia.conditions.length) ? TM_DATA.agencia.conditions : conditionsDefault;
 
 // ── STATE ──
 let currentAirport = airports[0].id;
@@ -2154,7 +2156,7 @@ function normTxt(t) { return String(t).toLowerCase().normalize('NFD').replace(/[
 
 // ── PROGRAMACIÓN DE VUELOS DESDE/HACIA EL VIGÍA (únicas rutas con reglas; el resto es libre) ──
 // día: 0=lunes … 6=domingo · out = VIG→destino · ret = destino→VIG
-const VIG_SCHEDULE = [
+const VIG_DEFAULT = [
   ...[0,2,4,6].map(d => ({ code:'CCS', airline:'LASER Airlines', day:d, out:'04:00 PM', ret: d === 0 ? '01:50 PM' : '02:00 PM' })),
   { code:'CCS', airline:'Conviasa',        day:0, out:'08:20 PM', ret:'02:00 PM' },
   { code:'BLA', airline:'Conviasa',        day:0, out:'03:40 PM', ret:'06:00 PM' },
@@ -2164,6 +2166,7 @@ const VIG_SCHEDULE = [
   { code:'PMV', airline:'Conviasa',        day:4, out:'10:40 AM', ret:'08:30 AM' },
   { code:'PMV', airline:'Conviasa',        day:6, out:'06:00 PM', ret:'03:40 PM' },
 ];
+const VIG_SCHEDULE = (window.TM_DATA && TM_DATA.agencia && Array.isArray(TM_DATA.agencia.schedule)) ? TM_DATA.agencia.schedule : VIG_DEFAULT;
 const SW_ALIASES = { vigia:'VIG', 'el vigia':'VIG', merida:'VIG', caracas:'CCS', maiquetia:'CCS', margarita:'PMV', 'isla de margarita':'PMV', porlamar:'PMV', 'puerto ordaz':'PZO', 'ciudad guayana':'PZO', guayana:'PZO', barcelona:'BLA', anzoategui:'BLA' };
 function resolveCode(text) {
   const t = normTxt(String(text || '').trim());
@@ -2297,19 +2300,19 @@ function swSearch() {
   if (needsRet && !swRetDate) return;
 
   let msg = `Hola 🤗, quisiera cotizar el siguiente vuelo:\n\n`;
-  msg += `Origen: ${route.origin}\n`;
-  msg += `Destino: ${route.dest}\n`;
-  msg += `Tipo de viaje: ${needsRet ? 'Ida y vuelta' : 'Solo ida'}\n`;
-  msg += `Fecha de salida: ${fullFmt(swOutDate)}\n`;
+  msg += `🛫 Origen: ${route.origin}\n`;
+  msg += `🛬 Destino: ${route.dest}\n`;
+  msg += `🔁 Tipo de viaje: ${needsRet ? 'Ida y vuelta' : 'Solo ida'}\n`;
+  msg += `📅 Fecha de salida: ${fullFmt(swOutDate)}\n`;
   const _io = legInfo('out', swOutDate);
-  if (_io && _io.length) msg += `Vuelos programados ese día (referencia): ${_io.join(' · ')}\n`;
+  if (_io && _io.length) msg += `🕒 Vuelos programados ese día (referencia): ${_io.join(' · ')}\n`;
   if (needsRet && swRetDate) {
-    msg += `Fecha de regreso: ${fullFmt(swRetDate)}\n`;
+    msg += `📅 Fecha de regreso: ${fullFmt(swRetDate)}\n`;
     const _ir = legInfo('ret', swRetDate);
-    if (_ir && _ir.length) msg += `Vuelos programados ese día (referencia): ${_ir.join(' · ')}\n`;
+    if (_ir && _ir.length) msg += `🕒 Vuelos programados ese día (referencia): ${_ir.join(' · ')}\n`;
   }
   if (document.getElementById('swTransferChk').checked) {
-    msg += `\nTraslados al aeropuerto: quiero cotizarlos también (${needsRet ? 'ida y vuelta: 2 traslados' : 'solo ida: 1 traslado'}). ¿Qué promoción tienen disponible?\n`;
+    msg += `\n🚐 Traslados al aeropuerto: quiero cotizarlos también (${needsRet ? 'ida y vuelta: 2 traslados' : 'solo ida: 1 traslado'}). ¿Qué promoción tienen disponible?\n`;
   }
   msg += `\n¿Podrían confirmarme si esa ruta está disponible y, de ser así, qué aerolíneas, horarios y precio tienen para esas fechas? Entiendo que la ruta puede no estar disponible y que los vuelos están sujetos a cambios.`;
 
