@@ -26,7 +26,7 @@
 .help{background:#fff8e6;border:1px solid #f5d98a;border-radius:16px;padding:14px 16px;font-size:13.5px;color:#6b4e00;margin-bottom:18px}.help ol{margin:6px 0 0 18px;padding:0}
 .toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);background:var(--blue-dark);color:#fff;padding:12px 20px;border-radius:14px;font-weight:600;font-size:14px;opacity:0;transition:.3s;z-index:200;pointer-events:none}.toast.on{opacity:1;transform:translate(-50%,0)}
 </style></head><body data-page="admin">
-<script src="../data/catalogo.js"></script><script src="../assets/header.js"></script><script src="../assets/app.js"></script>
+<script src="../data/catalogo.js"></script><script src="../assets/header.js"></script><script src="../assets/app.js"></script><script src="../assets/publish.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -43,11 +43,13 @@ const root=document.createElement("div");root.className="ad";document.body.appen
 document.body.insertAdjacentHTML("beforeend",'<div class="toast"></div>');
 function draw(){
  root.innerHTML=`<h1>Editor del catálogo</h1><p class="sub">Agrega hoteles, paquetes, tours y vehículos. Los cambios se guardan como borrador en este navegador hasta que descargues el archivo.</p>
- <div class="help"><b>Cómo publicar tus cambios:</b><ol><li>Edita lo que necesites aquí.</li><li>Pulsa <b>Descargar catalogo.js</b>.</li><li>Reemplaza el archivo <code>data/catalogo.js</code> en tu carpeta del sitio y vuelve a subir la carpeta a Netlify.</li></ol></div>
+ <div class="help"><b>Cómo publicar tus cambios:</b><ol><li>Edita lo que necesites aquí.</li><li>Pulsa <b>Publicar en el sitio</b> (la primera vez pedirá conectar GitHub). En ~1 minuto los cambios están en línea.</li></ol></div>
  <div class="tabs">${["hoteles","paquetes","tours","autos","agencia","config"].map(k=>`<button data-t="${k}" class="${k===tab?"on":""}">${NAMES[k]}</button>`).join("")}</div><div id="body"></div>
- <div class="bar"><button class="b2 pri" id="dl">Descargar catalogo.js</button><label class="b2" style="cursor:pointer">Importar catalogo.js<input type="file" id="imp" accept=".js,.json" hidden></label><button class="b2" id="rst">Descartar borrador</button><span id="sz"></span></div>`;
+ <div class="bar"><button class="b2 pri" id="pub">Publicar en el sitio</button><button class="b2" id="ghc">Configurar GitHub</button><button class="b2" id="dl">Descargar catalogo.js</button><label class="b2" style="cursor:pointer">Importar catalogo.js<input type="file" id="imp" accept=".js,.json" hidden></label><button class="b2" id="rst">Descartar borrador</button><span id="sz"></span></div>`;
  $$(".tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.t;sel=0;draw()});
  tab==="config"?cfg():tab==="agencia"?ag():list();
+ $("#ghc").onclick=()=>TMPublish.setup();
+ $("#pub").onclick=async()=>{const b=$("#pub");if(!await TMPublish.ensure())return;b.disabled=true;b.textContent="Publicando…";try{await TMPublish.commit("data/catalogo.js","window.TM_DATA = "+JSON.stringify(data,null,1)+";\n","Actualización desde el admin");toast("Publicado ✓ El sitio se actualiza en ~1 minuto.")}catch(e){toast(TMPublish.friendly(e))}b.disabled=false;b.textContent="Publicar en el sitio"};
  $("#dl").onclick=()=>{const txt="window.TM_DATA = "+JSON.stringify(data,null,1)+";\n";const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"text/javascript"}));a.download="catalogo.js";a.click();toast("Descargado. Reemplaza data/catalogo.js y sube el sitio.")};
  $("#imp").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const m=t.match(/=\s*([\s\S]*?);?\s*$/);data=JSON.parse(m[1]);save();draw();toast("Importado")}catch(x){toast("Archivo no válido")}})};
  $("#rst").onclick=()=>{if(confirm("¿Descartar el borrador y volver al catálogo publicado?")){localStorage.removeItem("tm_draft");data=JSON.parse(JSON.stringify(TM.D));data.config=Object.assign({},data.config);draw()}};

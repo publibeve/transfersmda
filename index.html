@@ -695,6 +695,7 @@
     </div>
   </div>
 
+  <script src="assets/publish.js"></script>
   <script>
     // Copia fiel de este archivo tal como llegó, tomada antes de que el script toque nada.
     // La usa "Descargar archivo para publicar": a esta copia solo se le cambian los datos.
@@ -1656,8 +1657,10 @@ const TEMPLATE_LABELS = {"restaurantes": "Restaurantes", "servicios_profesionale
       html += `<div class="section-title">Datos</div>
         <div class="item-card">
           <div style="font-size:11px;font-weight:bold;color:var(--desc-color);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Publicar</div>
-          <p style="font-size:12px; color:var(--desc-color); margin-top:0; margin-bottom:12px;">Genera el archivo listo para subir a Netlify con lo que tienes ahora en el editor, aunque no hayas dado Guardar Cambios. Se descarga un ZIP: descomprímelo y arrastra la carpeta al sitio de esta empresa en Netlify.</p>
+          <p style="font-size:12px; color:var(--desc-color); margin-top:0; margin-bottom:12px;"><b>Publicar en el sitio ahora</b> envía lo que ves en el editor directo al sitio en línea (tarda ~1 minuto, sin subir archivos). Abajo, la opción manual: genera el archivo listo para subir a Netlify con lo que tienes ahora en el editor, aunque no hayas dado Guardar Cambios. Se descarga un ZIP: descomprímelo y arrastra la carpeta al sitio de esta empresa en Netlify.</p>
           <button id="publishBtn" class="save-btn" style="width:100%;" onclick="downloadPublishFile()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Descargar archivo para publicar</button>
+          <button id="ghBtn" class="save-btn" style="width:100%;margin-top:10px;background:#cc1b1b;" onclick="publishToGitHub()">Publicar en el sitio ahora</button>
+          <button class="add-btn" style="width:100%;margin-top:8px;" onclick="TMPublish.setup()">Configurar GitHub</button>
           <hr style="border:0; border-top:1px solid rgba(0,0,0,0.08); margin: 18px 0;">
           <div style="font-size:11px;font-weight:bold;color:var(--desc-color);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Respaldo</div>
           <p style="font-size:12px; color:var(--desc-color); margin-top:0; margin-bottom:12px;">Descarga o carga toda la configuración de este cliente (textos, colores, bloques, pestañas) como un archivo .json — útil para respaldar, duplicar como base para un cliente nuevo, o migrar entre dispositivos. La clave del editor nunca se incluye en el archivo exportado.</p>
@@ -2200,6 +2203,20 @@ const TEMPLATE_LABELS = {"restaurantes": "Restaurantes", "servicios_profesionale
       const lineEnd = __PRISTINE_HTML__.indexOf('\n', start);
       return __PRISTINE_HTML__.slice(0, start) + marker + json + '; ' + __PRISTINE_HTML__.slice(lineEnd);
     }
+    async function publishToGitHub() {
+      if (!tempData) return;
+      if (!(await TMPublish.ensure())) return;
+      const b = document.getElementById('ghBtn'); const orig = b.textContent;
+      b.disabled = true; b.textContent = 'Publicando…';
+      try {
+        await TMPublish.commit('index.html', buildPublishHTML(tempData), 'Actualización del landing desde el editor');
+        b.textContent = 'Publicado ✓ En ~1 minuto estará en línea';
+      } catch (err) {
+        b.textContent = orig;
+        appDialog({ type: 'alert', title: 'No se pudo publicar', message: TMPublish.friendly(err), okText: 'Entendido' });
+      }
+      setTimeout(() => { b.disabled = false; b.textContent = orig; }, 4000);
+    }
     function downloadPublishFile() {
       if (!tempData) return;
       let zip, zipName;
@@ -2411,5 +2428,5 @@ const TEMPLATE_LABELS = {"restaurantes": "Restaurantes", "servicios_profesionale
 
     applyLang(appData.lang || 'es');
     openTab('principal');
-  </script><script src="data/catalogo.js"></script>
+  </script>
 </body></html>
