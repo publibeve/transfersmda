@@ -110,7 +110,7 @@ const LB=(()=>{
  let el,imgs=[],k=0,x0=null;
  function build(){
   el=document.createElement("div");el.className="lb";
-  el.innerHTML='<button class="lb-x" aria-label="Cerrar">&times;</button><button class="lb-a l" aria-label="Anterior">'+svg("l")+'</button><div class="lb-st"><img alt=""></div><button class="lb-a r" aria-label="Siguiente">'+svg("r")+'</button><div class="lb-c"></div>';
+  el.innerHTML='<button class="lb-x" aria-label="Cerrar">&times;</button><button class="lb-a l" aria-label="Anterior">'+svg("l")+'</button><div class="lb-st"><img alt=""><video controls playsinline loop></video></div><button class="lb-a r" aria-label="Siguiente">'+svg("r")+'</button><div class="lb-c"></div>';
   document.body.append(el);
   el.querySelector(".lb-x").onclick=close;el.querySelector(".l").onclick=()=>show(k-1);el.querySelector(".r").onclick=()=>show(k+1);
   el.addEventListener("click",e=>{if(e.target===el||e.target.classList.contains("lb-st"))close()});
@@ -118,31 +118,34 @@ const LB=(()=>{
   el.addEventListener("pointerup",e=>{if(x0==null)return;const d=e.clientX-x0;x0=null;if(Math.abs(d)>50)show(k+(d<0?1:-1))});
   document.addEventListener("keydown",e=>{if(!el.classList.contains("on"))return;if(e.key==="Escape")close();if(e.key==="ArrowLeft")show(k-1);if(e.key==="ArrowRight")show(k+1)});
  }
- function show(n){k=(n+imgs.length)%imgs.length;el.querySelector("img").src=imgs[k];el.querySelector(".lb-c").textContent=(k+1)+" / "+imgs.length;el.classList.toggle("one",imgs.length<2)}
+ function show(n){k=(n+imgs.length)%imgs.length;const isV=/\.(mp4|webm|mov)(\?|#|$)/i.test(imgs[k]),im=el.querySelector("img"),vd=el.querySelector("video");vd.pause();if(isV){im.style.display="none";vd.style.display="block";vd.src=imgs[k];vd.muted=false;vd.play().catch(()=>{vd.muted=true;vd.play().catch(()=>{})})}else{vd.style.display="none";vd.removeAttribute("src");vd.load();im.style.display="block";im.src=imgs[k]}el.querySelector(".lb-c").textContent=(k+1)+" / "+imgs.length;el.classList.toggle("one",imgs.length<2)}
  function open(list,start){if(!list.length)return;if(!el)build();imgs=list;show(start||0);el.classList.add("on");document.documentElement.style.overflow="hidden"}
- function close(){el&&el.classList.remove("on");document.documentElement.style.overflow=""}
+ function close(){if(el){el.classList.remove("on");const v=el.querySelector("video");v.pause()}document.documentElement.style.overflow=""}
  return{open};
 })();
 /* ---------- slider ---------- */
-function slider(photos,kind,name,idx){
+function slider(photos,kind,name,idx,video){
  const sc=SCENES[kind];
+ const vl=(Array.isArray(video)?video:video?[video]:[]).filter(Boolean);
+ if(vl.length){const ph=(photos||[]).filter(p=>typeof p==="string"),poster=ph[0]?` poster="${esc(ph[0])}"`:"",many=vl.length>1;return `<div class="slider vid" data-n="${vl.length}" data-lb="${esc(JSON.stringify([...vl,...ph]))}">${vl.map((v,k)=>`<div class="sl"><video src="${esc(v)}"${poster} ${k===0?"autoplay ":""}muted ${many?"":"loop "}playsinline preload="${k===0?"auto":"metadata"}" aria-label="${esc(name)} video ${k+1}"></video></div>`).join("")}<button class="arw l" aria-label="Anterior">${svg("l")}</button><button class="arw r" aria-label="Siguiente">${svg("r")}</button><div class="dots">${vl.map((_,k)=>`<button aria-label="Video ${k+1}"></button>`).join("")}</div></div>`}
  const slides=(photos&&photos.length?photos:[0,1,2,3]).map((p,i)=>typeof p==="string"?`<div class="sl"><img src="${esc(p)}" alt="${esc(name)} foto ${i+1}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=&quot;ph p${i%4}&quot;>'+TM.ico('${sc[i%4]}')+'</div>'"></div>`:`<div class="sl"><div class="ph p${i%4}">${svg(sc[i%4])}<small>${esc(name)}</small></div></div>`);
  const n=slides.length;
  return `<div class="slider" data-n="${n}">${slides.join("")}<button class="arw l" aria-label="Anterior">${svg("l")}</button><button class="arw r" aria-label="Siguiente">${svg("r")}</button><div class="dots">${slides.map((_,i)=>`<button aria-label="Foto ${i+1}"></button>`).join("")}</div></div>`;
 }
 window.TM.ico=svg;
 function initSlider(s,delay){
- const sl=$$(".sl",s),dots=$$(".dots button",s),n=sl.length;let i=0,t=null,vis=true,hov=false;
- const go=k=>{i=(k+n)%n;sl.forEach((x,j)=>x.classList.toggle("on",j===i));dots.forEach((x,j)=>x.classList.toggle("on",j===i))};
+ const sl=$$(".sl",s),dots=$$(".dots button",s),n=sl.length;let i=0,t=null,vis=true,hov=false;const vids=$$("video",s);
+ const go=k=>{i=(k+n)%n;sl.forEach((x,j)=>x.classList.toggle("on",j===i));dots.forEach((x,j)=>x.classList.toggle("on",j===i));if(vids.length)vids.forEach((v,j)=>{if(j===i){if(n>1)v.currentTime=0;v.play().catch(()=>{})}else v.pause()})};
  go(0);
- const stop=()=>{clearInterval(t);t=null};
- const start=()=>{if(n>1&&!t&&vis&&!hov)t=setInterval(()=>go(i+1),4200+delay)};
- s.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse"){hov=true;stop()}});
- s.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse"){hov=false;start()}});
+ const stop=()=>{clearInterval(t);t=null;if(vids.length&&vids[i])vids[i].pause()};
+ const start=()=>{if(vids.length){if(vis&&vids[i])vids[i].play().catch(()=>{});return}if(n>1&&!t&&vis&&!hov)t=setInterval(()=>go(i+1),4200+delay)};
+ if(vids.length&&n>1)vids.forEach(v=>v.addEventListener("ended",()=>go(i+1)));
+ s.addEventListener("pointerenter",e=>{if(!vids.length&&e.pointerType==="mouse"){hov=true;stop()}});
+ s.addEventListener("pointerleave",e=>{if(!vids.length&&e.pointerType==="mouse"){hov=false;start()}});
  $(".arw.l",s).onclick=()=>{go(i-1);stop();start()};$(".arw.r",s).onclick=()=>{go(i+1);stop();start()};
  dots.forEach((d,j)=>d.onclick=()=>{go(j);stop();start()});
  let x0=null;s.addEventListener("pointerdown",e=>{x0=e.clientX});
- s.addEventListener("pointerup",e=>{if(x0==null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>40){go(i+(dx<0?1:-1));stop();start()}else if(Math.abs(dx)<=8&&!e.target.closest("button")){const L=$$(".sl img",s).map(m=>m.currentSrc||m.src);if(L.length){const cur=$$(".sl",s)[i].querySelector("img");LB.open(L,Math.max(0,cur?L.indexOf(cur.currentSrc||cur.src):0))}}});
+ s.addEventListener("pointerup",e=>{if(x0==null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>40){go(i+(dx<0?1:-1));stop();start()}else if(Math.abs(dx)<=8&&!e.target.closest("button")&&s.dataset.lb){try{LB.open(JSON.parse(s.dataset.lb),i)}catch(_){}}else if(Math.abs(dx)<=8&&!e.target.closest("button")){const L=$$(".sl img",s).map(m=>m.currentSrc||m.src);if(L.length){const cur=$$(".sl",s)[i].querySelector("img");LB.open(L,Math.max(0,cur?L.indexOf(cur.currentSrc||cur.src):0))}}});
  new IntersectionObserver(es=>{vis=es[0].isIntersecting;vis?start():stop()},{threshold:.2}).observe(s);
 }
 /* ---------- dropdown personalizado ---------- */
@@ -210,7 +213,7 @@ function card(it,c,i){
  else if(dt){const T=it.tiers?Object.keys(it.tiers).map(Number).sort((a,b)=>a-b):null;flds=date("a",c.lab[0])+stp("Personas",T?T[0]:1,T?T[T.length-1]:30,T?T[0]:2)+(it.guide?`<label class="chk" style="grid-column:1/-1"><input type="checkbox" data-guide><span class="box">${CHECK}</span><span>Agregar guía turístico exclusivo (+${money(it.guide)})</span></label>`:"")}
  else flds=date("a",c.lab[0])+date("b",c.lab[1])+stp("Vehículos",1,it.max||1,1,true);
  const est=(tour||auto||dt)?`<div class="est"></div>`:"";
- return `<article class="card" data-name="${esc(it.name)}" data-i="${i}"><div class="media" style="position:relative">${badge?`<div class="badge">${esc(badge)}</div>`:""}${slider(it.photos,c.key,it.name,i)}</div><div class="body"><div class="loc">${esc(it.loc||"")}</div><h2>${esc(it.name)}</h2>${mid}<div class="flds">${flds}<div class="nts"></div></div>${est}<label class="chk op"><input type="checkbox"><span class="box">${CHECK}</span><span>Ya hablé con una operadora</span></label><button class="btn" type="button">${WA}Consultar disponibilidad</button></div></article>`;
+ return `<article class="card" data-name="${esc(it.name)}" data-i="${i}"><div class="media" style="position:relative">${badge?`<div class="badge">${esc(badge)}</div>`:""}${slider(it.photos,c.key,it.name,i,(c.key==="tours"||c.key==="paquetes")?(it.videos&&it.videos.length?it.videos:it.video):"")}</div><div class="body"><div class="loc">${esc(it.loc||"")}</div><h2>${esc(it.name)}</h2>${mid}<div class="flds">${flds}<div class="nts"></div></div>${est}<label class="chk op"><input type="checkbox"><span class="box">${CHECK}</span><span>Ya hablé con una operadora</span></label><button class="btn" type="button">${WA}Consultar disponibilidad</button></div></article>`;
 }
 function wire(cardEl,c,it){
  const hot=c.key==="hoteles",tour=c.key==="paquetes",dt=c.key==="tours",auto=c.key==="autos",single=tour||dt,name=cardEl.dataset.name;
@@ -282,7 +285,8 @@ function catalog(key){
  const c=CFG[key],list=D[c.key]||[];
  chrome({hoteles:"hoteles",paquetes:"paquetes",tours:"tours",autos:"rental-cars"}[key]);
  const main=document.createElement("main");
- main.innerHTML=`<section class="hero"><span class="eyebrow">${c.eyebrow}</span><h1>${c.h1}</h1><p>${c.sub}</p><div class="search">${svg("search")}<input type="search" placeholder="${c.search}" aria-label="${c.search}"></div></section><div class="grid"></div>${infoHTML(key)}`;
+ const hh=((window.TM_DATA||{}).heroes||{})[c.key]||{},hi=hh.img?String(hh.img).replace(/'/g,"%27"):"";
+ main.innerHTML=`<section class="hero${hi?" has-img":""}"${hi?` style="--hero-img:url('${esc(hi)}');--hero-dim:${((hh.dim==null?55:hh.dim)/100)}"`:""}><span class="eyebrow">${c.eyebrow}</span><h1>${c.h1}</h1><p>${c.sub}</p><div class="search">${svg("search")}<input type="search" placeholder="${c.search}" aria-label="${c.search}"></div></section><div class="grid"></div>${infoHTML(key)}`;
  document.body.insertBefore(main,$(".ftr"));
  const grid=$(".grid",main);
  function draw(q){

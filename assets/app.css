@@ -178,3 +178,20 @@ body[data-page=tours] .grid.solo .slider{aspect-ratio:auto}
 .lb.one .lb-a,.lb.one .lb-c{display:none}
 .lb-c{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#fff;font-size:13px;font-weight:600;opacity:.8}
 @media(max-width:640px){.lb-st{padding:60px 8px}.lb-a{width:40px;height:40px}.lb-a.l{left:6px}.lb-a.r{right:6px}}
+
+.slider.vid .sl{opacity:1}.slider.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0a1a33}
+.slider.vid::before{content:"";position:absolute;right:12px;top:12px;z-index:3;width:34px;height:34px;border-radius:50%;background:rgba(0,15,40,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/16px no-repeat}
+.lb-st video{max-width:100%;max-height:100%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5);background:#000;display:none}
+
+.slider.vid{cursor:zoom-in}
+
+.slider.vid{aspect-ratio:9/16;max-height:78vh;width:100%}
+body[data-page=tours] .slider.vid,body[data-page=paquetes] .slider.vid{aspect-ratio:9/16}
+.grid.solo .slider.vid{aspect-ratio:auto;max-height:none;min-height:100%}
+@media(max-width:860px){.grid.solo .slider.vid,body[data-page=tours] .grid.solo .slider.vid{aspect-ratio:9/16;max-height:78vh;min-height:0;flex:none}.grid.solo .media{max-width:380px;margin:0 auto}}
+.slider.vid[data-n="1"] .dots,.slider.vid[data-n="1"] .arw{display:none}
+.slider.vid:not([data-n="1"]) .arw{opacity:1}
+
+.hero.has-img{background-image:linear-gradient(rgba(0,18,54,var(--hero-dim,.55)),rgba(0,18,54,calc(var(--hero-dim,.55) + .12))),var(--hero-img);background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero.has-img::before,.hero.has-img::after{display:none}
+.hero.has-img h1,.hero.has-img p{text-shadow:0 2px 14px rgba(0,10,30,.45)}
