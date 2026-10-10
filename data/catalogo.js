@@ -479,7 +479,7 @@ window.TM_DATA = {
     ],
     [
      "Kilometraje ilimitado",
-     "Aplica siempre que el vehículo sea utilizado exclusivamente dentro del Estado Mérida, desde la Alcabala de Las González hasta la Laguna de Mucubají, Pico el Águila. Dentro de esta zona podrás disfrutar libremente de los principales atractivos turísticos de Mérida, incluyendo parques temáticos, sitios turísticos y toda la zona del Páramo. 🏔️"
+     "Aplica siempre que el vehículo sea utilizado exclusivamente dentro del Estado Mérida, desde la Alcabala de Las González hasta la Laguna de Mucubají, Pico el Águila. Dentro de esta zona podrás disfrutar libremente de los principales atractivos turísticos de Mérida, incluyendo parques temáticos, sitios turísticos y toda la zona del Páramo."
     ]
    ]
   },
