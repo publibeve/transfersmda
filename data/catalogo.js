@@ -401,10 +401,10 @@ window.TM_DATA = {
    "id": "a1",
    "name": "Changan Alsvin 2026",
    "loc": "Sedán ejecutivo · 5 pasajeros",
-   "rate": 50,
-   "regular": 60,
+   "rate": 90,
+   "regular": 0,
    "max": 2,
-   "price": "$50 por día",
+   "price": "€90 por día",
    "inc": [],
    "specs": [
     [
@@ -430,12 +430,15 @@ window.TM_DATA = {
     [
      "A/C",
      "Sí incluye"
+    ],
+    [
+     "Kilometraje",
+     "Ilimitado (Estado Mérida)"
     ]
    ],
    "photos": [
     "/img/autos-1791593503643-1.jpg",
     "/img/autos-1791593505949-2.jpg",
-    "/img/autos-1791593507520-3.jpg",
     "/img/autos-1791593509064-4.jpg"
    ]
   }
@@ -443,48 +446,40 @@ window.TM_DATA = {
  "info": {
   "autos": {
    "eyebrow": "Antes de alquilar",
-   "title": "Requisitos y condiciones",
-   "sub": "Para un servicio seguro para todos, el conductor debe cumplir con lo siguiente.",
+   "title": "Requisitos y condiciones básicas",
+   "sub": "Tarifa en euros (€) por día. Para un servicio seguro para todos, ten en cuenta lo siguiente.",
    "items": [
     [
-     "Edad mínima",
-     "Conductor principal con mínimo 21 años. Menores de 25 pueden estar sujetos a condiciones adicionales."
+     "Documentos",
+     "Cédula de identidad o pasaporte vigente."
     ],
     [
      "Licencia de conducir",
-     "Licencia válida y vigente. Extranjeros: licencia internacional o permiso de su país junto con el pasaporte."
+     "Licencia de conducir vigente."
     ],
     [
-     "Documentos",
-     "Cédula o pasaporte vigente. Se presentan los originales al momento de la entrega."
+     "Edad mínima",
+     "Ser mayor de 23 años."
     ],
     [
      "Depósito de garantía",
-     "Depósito reembolsable al inicio del alquiler; el monto varía según vehículo y duración. Consultar al reservar."
+     "300$ reembolsable al entregar el vehículo en las mismas condiciones."
+    ],
+    [
+     "Conductores autorizados",
+     "El vehículo será conducido únicamente por las personas previamente autorizadas."
     ],
     [
      "Combustible",
-     "Se entrega con tanque lleno y debe devolverse igual; de lo contrario se cobra la diferencia."
+     "El vehículo se entrega con el nivel de combustible acordado y debe ser devuelto en las mismas condiciones."
     ],
     [
-     "Seguro",
-     "Incluye seguro básico de responsabilidad civil. Coberturas ampliadas contra daños y robo: consultar."
+     "Multas y daños",
+     "El cliente será responsable por multas, infracciones o daños ocasionados por mal uso del vehículo."
     ],
     [
-     "Permitido",
-     "Circular por Mérida y estados vecinos (previa coordinación), turismo y traslados personales, conductor adicional registrado con licencia válida."
-    ],
-    [
-     "Restricciones",
-     "Prohibido subarrendar, conducir bajo efectos de alcohol o sustancias, salir del país y usarlo como transporte público remunerado no autorizado."
-    ],
-    [
-     "Tarifas y tiempo",
-     "Se cobran días completos, sin devoluciones por entrega anticipada. Precio promocional por tiempo limitado, sujeto a cambio. Temporada alta (jul–sep y nov–ene): consultar disponibilidad."
-    ],
-    [
-     "Multas, averías y daños",
-     "Las multas son responsabilidad del conductor. En caso de avería o accidente, avisa de inmediato por WhatsApp. Se hace inspección con registro fotográfico en la entrega y recepción."
+     "Kilometraje ilimitado",
+     "Aplica siempre que el vehículo sea utilizado exclusivamente dentro del Estado Mérida, desde la Alcabala de Las González hasta la Laguna de Mucubají, Pico el Águila. Dentro de esta zona podrás disfrutar libremente de los principales atractivos turísticos de Mérida, incluyendo parques temáticos, sitios turísticos y toda la zona del Páramo. 🏔️"
     ]
    ]
   },
