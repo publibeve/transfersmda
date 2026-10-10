@@ -435,45 +435,6 @@ window.TM_DATA = {
    "photos": [
     "https://changanvzla.com/wp-content/uploads/2024/10/Alsvin-perfil-v1l.png"
    ]
-  },
-  {
-   "id": "a2",
-   "name": "JAC Sunray 2024",
-   "loc": "Van / Minibús · hasta 17 pasajeros",
-   "rate": 50,
-   "regular": 60,
-   "max": 1,
-   "price": "$50 por día",
-   "inc": [],
-   "specs": [
-    [
-     "Motor",
-     "2.7L Turbo Diésel"
-    ],
-    [
-     "Potencia",
-     "150 HP"
-    ],
-    [
-     "Transmisión",
-     "Manual 6 vel."
-    ],
-    [
-     "Torque",
-     "355 Nm"
-    ],
-    [
-     "Tanque",
-     "80 litros"
-    ],
-    [
-     "A/C",
-     "Cabina y pasajeros"
-    ]
-   ],
-   "photos": [
-    "https://s3-giant-motors-cms-media-prod.s3.us-east-1.amazonaws.com/SunrayPasa_1.png"
-   ]
   }
  ],
  "info": {
