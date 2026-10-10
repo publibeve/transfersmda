@@ -1352,15 +1352,15 @@ window.TM_DATA = {
    "dim": 55
   },
   "paquetes": {
-   "img": "/img/portada-paquetes-1791592901227.jpg",
+   "img": "/img/portada-paquetes-1791593045179.jpg",
    "dim": 55
   },
   "tours": {
-   "img": "/img/portada-tours-1791592898725.jpg",
+   "img": "/img/portada-tours-1791593101539.jpg",
    "dim": 55
   },
   "autos": {
-   "img": "/img/portada-autos-1791592904662.jpg",
+   "img": "/img/portada-autos-1791593085893.jpg",
    "dim": 55
   }
  }
