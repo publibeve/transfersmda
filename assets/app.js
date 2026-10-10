@@ -182,6 +182,7 @@ const CFG={
 };
 const minPrice=L=>{const v=[];L.forEach(r=>(String(r[1]).match(/\d+(?:[.,]\d+)?/g)||[]).forEach(x=>v.push(parseFloat(x.replace(",",".")))));return v.length?Math.min(...v):null};
 const money=n=>"$"+Number(n).toLocaleString("es-VE");
+const moneyE=n=>"€"+Number(n).toLocaleString("es-VE");
 const GR={2:"p",3:"g3",4:"g4"};
 const alta=d=>{const m=d.getMonth()+1,dd=d.getDate(),k=m*100+dd;return (k>=716&&k<=915)||k>=1116||k<=115};
 const CHECK='<svg viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>';
@@ -202,8 +203,8 @@ function card(it,c,i){
   badge=T?`Desde ${money(f)}`:(it.pp?`${money(it.pp)} por persona`:"");
   mid=`<div class="note" style="font-weight:600">${esc(it.sub||"")}</div>${T?`<div class="price">${money(f)}<small> para ${T[0]} personas · tarifa por grupo</small></div>`:(it.pp?`<div class="price">${money(it.pp)}<small> por persona</small></div>`:"")}<ul class="chks">${(it.inc||[]).map(x=>`<li>${CHECK}<span>${esc(x)}</span></li>`).join("")}</ul>${(it.acts||[]).length?`<div class="more"><div><div class="acts-t">Itinerario</div><ul class="chks acts">${it.acts.map(x=>`<li>${CHECK}<span>${esc(x)}</span></li>`).join("")}</ul></div></div><button class="toggle" type="button"><span>Ver itinerario</span>${svg("chev")}</button>`:""}`;
  }else{
-  badge=it.regular&&it.rate&&it.regular>it.rate?`Promo ${money(it.rate)}/día`:"";
-  mid=`<div class="price">${it.regular&&it.regular>it.rate?`<s>${money(it.regular)}</s>`:""}${money(it.rate||0)}<small> por día / vehículo</small></div>${it.regular>it.rate?`<div class="save">Ahorras ${money(it.regular-it.rate)} por día</div>`:""}<div class="specs">${(it.specs||[]).map(s=>`<div><span>${esc(s[0])}</span><b>${esc(s[1])}</b></div>`).join("")}</div>`;
+  badge=it.regular&&it.rate&&it.regular>it.rate?`Promo ${moneyE(it.rate)}/día`:"";
+  mid=`<div class="price">${it.regular&&it.regular>it.rate?`<s>${moneyE(it.regular)}</s>`:""}${moneyE(it.rate||0)}<small> por día / vehículo</small></div>${it.regular>it.rate?`<div class="save">Ahorras ${moneyE(it.regular-it.rate)} por día</div>`:""}<div class="specs">${(it.specs||[]).map(s=>`<div><span>${esc(s[0])}</span><b>${esc(s[1])}</b></div>`).join("")}</div>`;
  }
  const date=(k,l)=>`<button class="fld" data-f="${k}" type="button"><span class="lb">${l}</span><span class="v empty">Elegir</span></button>`;
  const stp=(lb,min,max,v,span)=>`<div class="fld stp"${span?' style="grid-column:1/-1"':""}><span class="lb">${lb}</span><div class="ct"><button type="button" data-s="-1" aria-label="Menos">${svg("minus")}</button><span class="n" data-min="${min}" data-max="${max}">${v}</span><button type="button" data-s="1" aria-label="Más">${svg("plus")}</button></div></div>`;
@@ -248,7 +249,7 @@ function wire(cardEl,c,it){
   }
   if(auto){
    if(n<=0)est.innerHTML=val.a&&val.b?`<div class="est-empty" style="color:var(--red)">La devolución debe ser posterior a la recogida</div>`:`<div class="est-empty">Selecciona las fechas para ver el precio estimado</div>`;
-   else{const tot=it.rate*n*qty,reg=(it.regular||it.rate)*n*qty;est.innerHTML=`<div class="est-l">${n} día${n>1?"s":""} × ${qty} vehículo${qty>1?"s":""}</div><div class="est-v">${money(tot)}</div>${reg>tot?`<div class="est-s"><s>${money(reg)}</s> · ahorras ${money(reg-tot)}</div>`:""}`}
+   else{const tot=it.rate*n*qty,reg=(it.regular||it.rate)*n*qty;est.innerHTML=`<div class="est-l">${n} día${n>1?"s":""} × ${qty} vehículo${qty>1?"s":""}</div><div class="est-v">${moneyE(tot)}</div>${reg>tot?`<div class="est-s"><s>${moneyE(reg)}</s> · ahorras ${moneyE(reg-tot)}</div>`:""}`}
   }
  }
  const minD=()=>{if(!(dt&&it.minDays))return null;const d=day0(new Date());d.setDate(d.getDate()+it.minDays);return d};
@@ -272,7 +273,7 @@ function wire(cardEl,c,it){
   if(hot)m+=`\n👥 Huéspedes: ${people}`;
   if(tour){m+=`\n👥 Personas: ${people}`;if(hotel){m+=`\n🏨 Hotel: ${hotel}\n🌤️ Temporada: ${season}`;const r=calcTour();if(r&&r.total)m+=`\n💵 Precio de referencia: ${money(r.total)}`}}
   if(dt){m+=`\n👥 Personas: ${people}`;const r=dtCalc();if(r){if(r.guide)m+=`\n🧭 Guía turístico exclusivo: Sí (+${money(it.guide)})`;m+=`\n💵 Total estimado: ${money(r.total)}`;if(it.deposit)m+=`\n✅ Reserva con el ${it.deposit}%: ${money(Math.round(r.total*it.deposit/100))}`}}
-  if(auto){m+=`\n🚗 Vehículos: ${qty}`;const n=nDays();if(n>0)m+=`\n💵 Total estimado: ${money(it.rate*n*qty)}`}
+  if(auto){m+=`\n🚗 Vehículos: ${qty}\n♾️ Kilometraje ilimitado (Estado Mérida)`;const n=nDays();if(n>0)m+=`\n💵 Total estimado: ${moneyE(it.rate*n*qty)}`}
   window.open(`https://wa.me/${C.wa}?text=${encodeURIComponent(m)}`,"_blank");
  };
  upd();
