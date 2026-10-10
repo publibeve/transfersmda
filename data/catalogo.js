@@ -301,7 +301,10 @@ window.TM_DATA = {
    "note": "Tarifas con IVA",
    "photos": [
     "/img/hoteles-1791591840440-1.jpg",
-    "/img/hoteles-1791590973021-2.jpg"
+    "/img/hoteles-1791590973021-2.jpg",
+    "/img/hoteles-1791592063212-1.jpg",
+    "/img/hoteles-1791592065452-2.jpg",
+    "/img/hoteles-1791592093810-1.jpg"
    ],
    "rooms": [
     [
