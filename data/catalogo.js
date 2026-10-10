@@ -433,7 +433,10 @@ window.TM_DATA = {
     ]
    ],
    "photos": [
-    "https://changanvzla.com/wp-content/uploads/2024/10/Alsvin-perfil-v1l.png"
+    "/img/autos-1791593503643-1.jpg",
+    "/img/autos-1791593505949-2.jpg",
+    "/img/autos-1791593507520-3.jpg",
+    "/img/autos-1791593509064-4.jpg"
    ]
   }
  ],
