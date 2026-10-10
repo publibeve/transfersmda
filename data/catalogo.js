@@ -3,7 +3,9 @@ window.TM_DATA = {
   "wa": "584125805433",
   "rif": "J-41302545-0",
   "rtn": "21403",
-  "ttt": "TTT-840"
+  "ttt": "TTT-840",
+  "siteName": "Transfers Mérida",
+  "favicon": "https://i.postimg.cc/q7BmN5dx/FAVICON-8.png"
  },
  "hoteles": [
   {
@@ -11,7 +13,16 @@ window.TM_DATA = {
    "name": "Hotel Venetur Mérida",
    "loc": "Mérida",
    "note": "Tarifa por noche",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589440978-6.jpg",
+    "/img/hoteles-1791589439381-5.jpg",
+    "/img/hoteles-1791589434572-2.jpg",
+    "/img/hoteles-1791589437609-4.jpg",
+    "/img/hoteles-1791589442775-7.jpg",
+    "/img/hoteles-1791589445876-9.jpg",
+    "/img/hoteles-1791589447386-10.jpg",
+    "/img/hoteles-1791589449091-11.jpg"
+   ],
    "rooms": [
     [
      "Hab. Matrimonial",
@@ -137,7 +148,15 @@ window.TM_DATA = {
    "name": "Milla Suite",
    "loc": "Mérida",
    "note": "Temporada baja / temporada alta",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589741326-10.jpg",
+    "/img/hoteles-1791589730723-3.jpg",
+    "/img/hoteles-1791589736711-7.jpg",
+    "/img/hoteles-1791589738133-8.jpg",
+    "/img/hoteles-1791589727018-1.jpg",
+    "/img/hoteles-1791589735287-6.jpg",
+    "/img/hoteles-1791589742845-11.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial (1-2 pax)",
@@ -182,7 +201,12 @@ window.TM_DATA = {
    "name": "Posada Glorias Patrias",
    "loc": "Mérida",
    "note": "Por noche + IVA",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791591614528-1.jpg",
+    "/img/hoteles-1791591616815-2.jpg",
+    "/img/hoteles-1791591618753-3.jpg",
+    "/img/hoteles-1791591620358-4.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial sencilla",
@@ -203,7 +227,13 @@ window.TM_DATA = {
    "name": "Hotel Tibisay",
    "loc": "Mérida",
    "note": "Sin desayuno / con desayuno",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791591666792-1.jpg",
+    "/img/hoteles-1791591669055-2.jpg",
+    "/img/hoteles-1791591670642-3.jpg",
+    "/img/hoteles-1791591672373-4.jpg",
+    "/img/hoteles-1791591674064-5.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial Deluxe",
@@ -232,7 +262,13 @@ window.TM_DATA = {
    "name": "Convención Hotel Boutique",
    "loc": "Mérida",
    "note": "Tarifa con desayuno",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589976279-2.jpg",
+    "/img/hoteles-1791589974002-1.jpg",
+    "/img/hoteles-1791589978073-3.jpg",
+    "/img/hoteles-1791589979778-4.jpg",
+    "/img/hoteles-1791589981286-5.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial Superior Queen (1 pax)",
@@ -258,12 +294,9 @@ window.TM_DATA = {
    "loc": "Mérida",
    "note": "Tarifas con IVA",
    "photos": [
-    "https://i.postimg.cc/QC0DG8FK/Hotel-los-Lirios-1.jpg",
-    "https://i.postimg.cc/593bF3sN/Hotel-los-Lirios-2.jpg",
-    "https://i.postimg.cc/NG4Br4d0/Hotel-los-Lirios-3.jpg",
-    "https://i.postimg.cc/j2ZT0xDP/Hotel-los-Lirios-4.jpg",
-    "https://i.postimg.cc/j2ZT0xD7/Hotel-los-Lirios-5.jpg",
-    "https://i.postimg.cc/0jcvRkzm/Hotel-los-Lirios-6.jpg"
+    "/img/hoteles-1791590970873-1.jpg",
+    "/img/hoteles-1791590973021-2.jpg",
+    "/img/hoteles-1791590974557-3.jpg"
    ],
    "rooms": [
     [
