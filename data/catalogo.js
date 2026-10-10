@@ -1348,7 +1348,7 @@ window.TM_DATA = {
  },
  "heroes": {
   "hoteles": {
-   "img": "/img/portada-hoteles-1791592207126.jpg",
+   "img": "/img/portada-hoteles-1791592559961.jpg",
    "dim": 55
   },
   "paquetes": {
@@ -1360,7 +1360,7 @@ window.TM_DATA = {
    "dim": 55
   },
   "autos": {
-   "img": "",
+   "img": "/img/portada-autos-1791592726258.jpg",
    "dim": 55
   }
  }
