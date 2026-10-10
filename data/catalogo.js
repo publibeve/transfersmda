@@ -1345,5 +1345,23 @@ window.TM_DATA = {
     "source": "sundanceairlines.com"
    }
   ]
+ },
+ "heroes": {
+  "hoteles": {
+   "img": "/img/portada-hoteles-1791592207126.jpg",
+   "dim": 55
+  },
+  "paquetes": {
+   "img": "",
+   "dim": 55
+  },
+  "tours": {
+   "img": "",
+   "dim": 55
+  },
+  "autos": {
+   "img": "",
+   "dim": 55
+  }
  }
 };
