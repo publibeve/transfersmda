@@ -95,7 +95,13 @@ window.TM_DATA = {
    "name": "Hotel La Pedregosa",
    "loc": "Mérida",
    "note": "Tarifa por noche",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791591697418-1.jpg",
+    "/img/hoteles-1791591700626-3.jpg",
+    "/img/hoteles-1791591702059-4.jpg",
+    "/img/hoteles-1791591699010-2.jpg",
+    "/img/hoteles-1791591703603-5.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial King (1-2 pers.)",
@@ -294,9 +300,8 @@ window.TM_DATA = {
    "loc": "Mérida",
    "note": "Tarifas con IVA",
    "photos": [
-    "/img/hoteles-1791590970873-1.jpg",
-    "/img/hoteles-1791590973021-2.jpg",
-    "/img/hoteles-1791590974557-3.jpg"
+    "/img/hoteles-1791591840440-1.jpg",
+    "/img/hoteles-1791590973021-2.jpg"
    ],
    "rooms": [
     [
