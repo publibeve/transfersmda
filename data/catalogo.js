@@ -3,7 +3,9 @@ window.TM_DATA = {
   "wa": "584125805433",
   "rif": "J-41302545-0",
   "rtn": "21403",
-  "ttt": "TTT-840"
+  "ttt": "TTT-840",
+  "siteName": "Transfers Mérida",
+  "favicon": "https://i.postimg.cc/q7BmN5dx/FAVICON-8.png"
  },
  "hoteles": [
   {
@@ -11,7 +13,16 @@ window.TM_DATA = {
    "name": "Hotel Venetur Mérida",
    "loc": "Mérida",
    "note": "Tarifa por noche",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589440978-6.jpg",
+    "/img/hoteles-1791589439381-5.jpg",
+    "/img/hoteles-1791589434572-2.jpg",
+    "/img/hoteles-1791589437609-4.jpg",
+    "/img/hoteles-1791589442775-7.jpg",
+    "/img/hoteles-1791589445876-9.jpg",
+    "/img/hoteles-1791589447386-10.jpg",
+    "/img/hoteles-1791589449091-11.jpg"
+   ],
    "rooms": [
     [
      "Hab. Matrimonial",
@@ -84,7 +95,13 @@ window.TM_DATA = {
    "name": "Hotel La Pedregosa",
    "loc": "Mérida",
    "note": "Tarifa por noche",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791591697418-1.jpg",
+    "/img/hoteles-1791591700626-3.jpg",
+    "/img/hoteles-1791591702059-4.jpg",
+    "/img/hoteles-1791591699010-2.jpg",
+    "/img/hoteles-1791591703603-5.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial King (1-2 pers.)",
@@ -137,7 +154,15 @@ window.TM_DATA = {
    "name": "Milla Suite",
    "loc": "Mérida",
    "note": "Temporada baja / temporada alta",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589741326-10.jpg",
+    "/img/hoteles-1791589730723-3.jpg",
+    "/img/hoteles-1791589736711-7.jpg",
+    "/img/hoteles-1791589738133-8.jpg",
+    "/img/hoteles-1791589727018-1.jpg",
+    "/img/hoteles-1791589735287-6.jpg",
+    "/img/hoteles-1791589742845-11.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial (1-2 pax)",
@@ -182,7 +207,12 @@ window.TM_DATA = {
    "name": "Posada Glorias Patrias",
    "loc": "Mérida",
    "note": "Por noche + IVA",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791591614528-1.jpg",
+    "/img/hoteles-1791591616815-2.jpg",
+    "/img/hoteles-1791591618753-3.jpg",
+    "/img/hoteles-1791591620358-4.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial sencilla",
@@ -203,7 +233,13 @@ window.TM_DATA = {
    "name": "Hotel Tibisay",
    "loc": "Mérida",
    "note": "Sin desayuno / con desayuno",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791591666792-1.jpg",
+    "/img/hoteles-1791591669055-2.jpg",
+    "/img/hoteles-1791591670642-3.jpg",
+    "/img/hoteles-1791591672373-4.jpg",
+    "/img/hoteles-1791591674064-5.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial Deluxe",
@@ -232,7 +268,13 @@ window.TM_DATA = {
    "name": "Convención Hotel Boutique",
    "loc": "Mérida",
    "note": "Tarifa con desayuno",
-   "photos": [],
+   "photos": [
+    "/img/hoteles-1791589976279-2.jpg",
+    "/img/hoteles-1791589974002-1.jpg",
+    "/img/hoteles-1791589978073-3.jpg",
+    "/img/hoteles-1791589979778-4.jpg",
+    "/img/hoteles-1791589981286-5.jpg"
+   ],
    "rooms": [
     [
      "Matrimonial Superior Queen (1 pax)",
@@ -258,12 +300,11 @@ window.TM_DATA = {
    "loc": "Mérida",
    "note": "Tarifas con IVA",
    "photos": [
-    "https://i.postimg.cc/QC0DG8FK/Hotel-los-Lirios-1.jpg",
-    "https://i.postimg.cc/593bF3sN/Hotel-los-Lirios-2.jpg",
-    "https://i.postimg.cc/NG4Br4d0/Hotel-los-Lirios-3.jpg",
-    "https://i.postimg.cc/j2ZT0xDP/Hotel-los-Lirios-4.jpg",
-    "https://i.postimg.cc/j2ZT0xD7/Hotel-los-Lirios-5.jpg",
-    "https://i.postimg.cc/0jcvRkzm/Hotel-los-Lirios-6.jpg"
+    "/img/hoteles-1791591840440-1.jpg",
+    "/img/hoteles-1791590973021-2.jpg",
+    "/img/hoteles-1791592063212-1.jpg",
+    "/img/hoteles-1791592065452-2.jpg",
+    "/img/hoteles-1791592093810-1.jpg"
    ],
    "rooms": [
     [
@@ -392,46 +433,10 @@ window.TM_DATA = {
     ]
    ],
    "photos": [
-    "https://changanvzla.com/wp-content/uploads/2024/10/Alsvin-perfil-v1l.png"
-   ]
-  },
-  {
-   "id": "a2",
-   "name": "JAC Sunray 2024",
-   "loc": "Van / Minibús · hasta 17 pasajeros",
-   "rate": 50,
-   "regular": 60,
-   "max": 1,
-   "price": "$50 por día",
-   "inc": [],
-   "specs": [
-    [
-     "Motor",
-     "2.7L Turbo Diésel"
-    ],
-    [
-     "Potencia",
-     "150 HP"
-    ],
-    [
-     "Transmisión",
-     "Manual 6 vel."
-    ],
-    [
-     "Torque",
-     "355 Nm"
-    ],
-    [
-     "Tanque",
-     "80 litros"
-    ],
-    [
-     "A/C",
-     "Cabina y pasajeros"
-    ]
-   ],
-   "photos": [
-    "https://s3-giant-motors-cms-media-prod.s3.us-east-1.amazonaws.com/SunrayPasa_1.png"
+    "/img/autos-1791593503643-1.jpg",
+    "/img/autos-1791593505949-2.jpg",
+    "/img/autos-1791593507520-3.jpg",
+    "/img/autos-1791593509064-4.jpg"
    ]
   }
  ],
@@ -1304,5 +1309,23 @@ window.TM_DATA = {
     "source": "sundanceairlines.com"
    }
   ]
+ },
+ "heroes": {
+  "hoteles": {
+   "img": "/img/portada-hoteles-1791592559961.jpg",
+   "dim": 55
+  },
+  "paquetes": {
+   "img": "/img/portada-paquetes-1791593045179.jpg",
+   "dim": 55
+  },
+  "tours": {
+   "img": "/img/portada-tours-1791593101539.jpg",
+   "dim": 55
+  },
+  "autos": {
+   "img": "/img/portada-autos-1791593085893.jpg",
+   "dim": 55
+  }
  }
 };
