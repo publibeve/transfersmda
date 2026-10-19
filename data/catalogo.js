@@ -393,7 +393,20 @@ window.TM_DATA = {
    "guide": 50,
    "minDays": 5,
    "deposit": 50,
-   "photos": []
+   "photos": [
+    "/img/tours-1792395002627-1.jpg",
+    "/img/tours-1792395005294-2.jpg",
+    "/img/tours-1792395006858-3.jpg",
+    "/img/tours-1792395014203-7.jpg",
+    "/img/tours-1792395015971-8.jpg",
+    "/img/tours-1792395017937-9.jpg",
+    "/img/tours-1792395019546-10.jpg",
+    "/img/tours-1792395021268-11.jpg",
+    "/img/tours-1792395028479-15.jpg",
+    "/img/tours-1792395030281-16.jpg",
+    "/img/tours-1792395032392-17.jpg"
+   ],
+   "videos": []
   }
  ],
  "autos": [
@@ -564,7 +577,13 @@ window.TM_DATA = {
     "Mercado Principal y Parque La Venezuela de Antier o Los Aleros (a elegir) y/o Zoológico",
     "Chorros de Milla"
    ],
-   "photos": [],
+   "photos": [
+    "/img/paquetes-1792395074583-1.jpg",
+    "/img/paquetes-1792395076833-2.jpg",
+    "/img/paquetes-1792395078447-3.jpg",
+    "/img/paquetes-1792395080064-4.jpg",
+    "/img/paquetes-1792395082434-5.jpg"
+   ],
    "matrix": [
     {
      "hotel": "Posada Casa Sol",
@@ -686,7 +705,8 @@ window.TM_DATA = {
       823
      ]
     }
-   ]
+   ],
+   "videos": []
   },
   {
    "id": "t2",
@@ -705,7 +725,19 @@ window.TM_DATA = {
     "Mercado Principal y Parque La Venezuela de Antier o Los Aleros (a elegir) y/o Zoológico",
     "Chorros de Milla"
    ],
-   "photos": [],
+   "photos": [
+    "/img/paquetes-1792395092853-1.jpg",
+    "/img/paquetes-1792395094838-2.jpg",
+    "/img/paquetes-1792395096460-3.jpg",
+    "/img/paquetes-1792395098180-4.jpg",
+    "/img/paquetes-1792395099873-5.jpg",
+    "/img/paquetes-1792395101600-6.jpg",
+    "/img/paquetes-1792395103370-7.jpg",
+    "/img/paquetes-1792395104970-8.jpg",
+    "/img/paquetes-1792395107017-9.jpg",
+    "/img/paquetes-1792395109375-10.jpg",
+    "/img/paquetes-1792395111872-11.jpg"
+   ],
    "matrix": [
     {
      "hotel": "Posada Casa Sol",
@@ -827,7 +859,8 @@ window.TM_DATA = {
       923
      ]
     }
-   ]
+   ],
+   "videos": []
   },
   {
    "id": "t3",
@@ -847,7 +880,26 @@ window.TM_DATA = {
     "Mercado Principal y Parque La Venezuela de Antier o Los Aleros (a elegir) y/o Zoológico",
     "Chorros de Milla"
    ],
-   "photos": [],
+   "photos": [
+    "/img/paquetes-1792395109884-1.jpg",
+    "/img/paquetes-1792395114099-2.jpg",
+    "/img/paquetes-1792395117252-3.jpg",
+    "/img/paquetes-1792395118915-4.jpg",
+    "/img/paquetes-1792395120531-5.jpg",
+    "/img/paquetes-1792395122207-6.jpg",
+    "/img/paquetes-1792395123939-7.jpg",
+    "/img/paquetes-1792395125877-8.jpg",
+    "/img/paquetes-1792395127563-9.jpg",
+    "/img/paquetes-1792395129166-10.jpg",
+    "/img/paquetes-1792395130787-11.jpg",
+    "/img/paquetes-1792395132422-12.jpg",
+    "/img/paquetes-1792395134037-13.jpg",
+    "/img/paquetes-1792395135627-14.jpg",
+    "/img/paquetes-1792395137309-15.jpg",
+    "/img/paquetes-1792395138863-16.jpg",
+    "/img/paquetes-1792395140513-17.jpg",
+    "/img/paquetes-1792395142155-18.jpg"
+   ],
    "matrix": [
     {
      "hotel": "Posada Casa Sol",
@@ -969,7 +1021,8 @@ window.TM_DATA = {
       1549
      ]
     }
-   ]
+   ],
+   "videos": []
   }
  ],
  "agencia": {
