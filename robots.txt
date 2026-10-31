@@ -1,0 +1,4 @@
+# Sitio de diseño en revisión: sin indexar.
+# Sin Disallow a propósito: Google debe poder rastrear para ver el noindex.
+User-agent: *
+Allow: /
