@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<title>Presentación de servicios | Transfers Mérida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#00337F;--blue-d:#001F4D;--blue-m:#0a4aa8;--red:#CC1B1B;--gold:#F5A623;--ink:#0a1a33;--soft:#5a6b85;--ease:cubic-bezier(.22,.8,.24,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#06122b;font-family:Montserrat,Inter,"Segoe UI",system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;margin:-540px 0 0 -960px;width:1920px;height:1080px;transform-origin:center center;background:#fff;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.slide{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;background:linear-gradient(135deg,#eaf3ff 0%,#fff 48%,#fff8e2 100%);transition:opacity .55s var(--ease),transform .7s var(--ease),visibility 0s .7s;transform:translateX(70px)}
+.slide.prev{transform:translateX(-70px)}
+.slide.on{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s}
+.slide::before,.slide::after{content:"";position:absolute;border-radius:50%;border:5px dotted rgba(0,98,207,.22);pointer-events:none}
+.slide::before{width:620px;height:620px;left:-210px;bottom:-260px}
+.slide::after{width:520px;height:520px;right:-170px;top:-190px;border-color:rgba(204,27,27,.2)}
+.slide.dark{background:var(--blue-d);color:#fff}
+.slide.dark::before,.slide.dark::after{border-color:rgba(255,255,255,.14)}
+.logo-tab{position:absolute;left:0;top:0;z-index:5;width:250px;height:120px;background:linear-gradient(135deg,var(--blue),var(--blue-d));border-radius:0 0 34px 0;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,31,77,.35)}
+.logo-tab img{width:180px}
+.pill{display:inline-block;background:var(--blue);color:#fff;font-weight:700;font-size:32px;padding:8px 30px;border-radius:12px 12px 0 0;letter-spacing:.2px}
+.rib{display:inline-block;background:var(--red);color:#fff;font-weight:900;letter-spacing:-.03em;line-height:1.02;padding:12px 44px 16px;box-shadow:0 14px 0 -4px rgba(0,31,77,.18),0 22px 40px rgba(204,27,27,.3);position:relative}
+.rib::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:10px;background:rgba(0,0,0,.18);clip-path:polygon(0 0,100% 0,96% 100%,4% 100%)}
+.titlebox{position:absolute;z-index:3}
+.h-sub{font-size:30px;font-weight:600;color:var(--blue);margin-top:26px}
+.stripe{position:absolute;left:0;right:0;height:14px;background:linear-gradient(90deg,var(--red) 0 38%,var(--gold) 38% 72%,var(--blue) 72%);z-index:2}
+ul.dots{list-style:none}
+ul.dots li{position:relative;padding-left:34px;margin:0 0 14px;font-size:27px;line-height:1.28;font-weight:600;color:var(--blue-d)}
+ul.dots li::before{content:"";position:absolute;left:0;top:.5em;width:14px;height:14px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px rgba(204,27,27,.15)}
+.foot{position:absolute;left:0;right:0;bottom:26px;text-align:center;font-size:19px;letter-spacing:3px;color:#8a97ad;font-weight:600;z-index:2}
+.dark .foot{color:rgba(255,255,255,.6)}
+.slide [data-a]{opacity:0;transform:translateY(34px);transition:opacity .7s var(--ease),transform .8s var(--ease);transition-delay:calc(var(--i,0)*90ms + 120ms)}
+.slide [data-a=l]{transform:translateX(-60px)}.slide [data-a=r]{transform:translateX(60px)}.slide [data-a=z]{transform:scale(.9)}
+.slide.on [data-a]{opacity:1;transform:none}
+.float{animation:flo 6s ease-in-out infinite}
+@keyframes flo{50%{transform:translateY(-14px)}}
+.cut{filter:drop-shadow(0 30px 34px rgba(0,20,60,.35))}
+img{display:block;-webkit-user-drag:none;user-select:none}
+.ph{display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#dbe8fb,#f3f8ff);border:4px dashed #9db4d6;border-radius:26px;color:#5a73a1;font-weight:700;font-size:22px;padding:14px}
+.ph svg{width:100px;height:66px;stroke:#7f98c4;fill:none;stroke-width:2;margin:0 auto 8px;stroke-linecap:round;stroke-linejoin:round}
+.ph small{display:block;font-size:17px;font-weight:600;opacity:.8;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:14px;background:#1faa59;color:#fff;font-weight:800;font-size:28px;padding:20px 38px;border-radius:20px;box-shadow:0 14px 30px rgba(31,170,89,.35);transition:transform .2s,filter .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-3px);filter:brightness(1.07)}
+.btn svg{width:34px;height:34px;fill:#fff;flex:none}
+.tag{display:inline-block;background:#fff;border:3px solid rgba(0,51,127,.12);color:var(--blue);font-weight:700;font-size:23px;padding:10px 20px;border-radius:99px;margin:0 10px 12px 0;box-shadow:0 6px 16px rgba(0,30,80,.07)}
+.seg{display:inline-flex;background:#fff;border-radius:99px;padding:7px;box-shadow:0 10px 26px rgba(0,30,80,.12);border:2px solid rgba(0,51,127,.1)}
+.seg button{white-space:nowrap;padding:12px 28px;border-radius:99px;font-weight:800;font-size:24px;color:var(--blue);transition:background .25s,color .25s}
+.seg button.on{background:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(0,51,127,.3)}
+table.px{border-collapse:separate;border-spacing:0 5px;width:100%}
+.px th{background:var(--blue);color:#fff;font-size:22px;font-weight:700;padding:11px 22px;text-align:left}
+.px th:first-child{border-radius:14px 0 0 14px}.px th:last-child{border-radius:0 14px 14px 0;text-align:center}
+.px td{background:#fff;font-size:23px;font-weight:600;padding:7px 22px;color:var(--blue-d);box-shadow:0 4px 12px rgba(0,30,80,.06)}
+.px td:first-child{border-radius:14px 0 0 14px}.px td:last-child{border-radius:0 14px 14px 0;text-align:center;font-weight:900;font-size:28px;color:var(--red)}
+.px tr:nth-child(even) td{background:#eaf3ff}
+.price-badge{position:absolute;z-index:4;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff7,transparent 55%),var(--gold);color:var(--blue-d);display:flex;flex-direction:column;align-items:center;justify-content:center;border:8px solid #fff;box-shadow:0 22px 50px rgba(0,20,60,.35);text-align:center;line-height:1}
+.price-badge small{font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.price-badge b{font-size:84px;font-weight:900;letter-spacing:-.05em;margin:4px 0}
+.card{background:rgba(255,255,255,.92);border-radius:34px;box-shadow:0 22px 50px rgba(0,30,80,.14);position:relative}
+.unit-card{cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease);overflow:hidden}
+.unit-card:hover{box-shadow:0 34px 70px rgba(0,30,80,.22)}
+.slide.on .unit-card[data-a]:hover{transform:translateY(-12px);transition-delay:0s}
+.unit-card .im{height:300px;display:grid;place-items:center;background:linear-gradient(180deg,#eaf3ff,#fff);padding:20px}
+.unit-card .im img{max-width:100%;max-height:260px;object-fit:contain;filter:drop-shadow(0 18px 18px rgba(0,20,60,.3))}
+.unit-card .im .ph{width:100%;height:100%}
+.unit-card h3{font-size:32px;font-weight:900;color:var(--blue-d);padding:20px 90px 4px 28px;letter-spacing:-.02em;line-height:1.1;min-height:92px}
+.unit-card p{font-size:23px;font-weight:600;color:var(--soft);padding:0 90px 28px 28px}
+.unit-card .go{position:absolute;right:20px;bottom:22px;width:54px;height:54px;border-radius:50%;background:var(--red);display:grid;place-items:center;transition:transform .3s}
+.unit-card:hover .go{transform:translateX(6px)}
+.unit-card .go svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.spec{display:flex;align-items:center;gap:18px;font-size:27px;font-weight:700;color:var(--blue-d);margin-bottom:16px}
+.spec i{flex:none;width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,var(--blue),var(--blue-m));display:grid;place-items:center;box-shadow:0 10px 20px rgba(0,51,127,.3)}
+.spec i svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.gal{display:grid;gap:18px}
+.gal .g{border-radius:24px;overflow:hidden;box-shadow:0 14px 30px rgba(0,30,80,.18);background:#dbe8fb;cursor:zoom-in;transition:transform .3s var(--ease)}
+.gal .g:hover{transform:scale(1.03)}
+.gal .g img,.gal .g .ph{width:100%;height:100%;object-fit:cover;border-radius:0}
+.corp{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.corp .card{padding:34px 34px 38px;text-align:center}
+.corp .cim{height:250px;display:grid;place-items:center;margin-bottom:18px}
+.corp .cim img{max-width:100%;max-height:240px;object-fit:contain;filter:drop-shadow(0 18px 18px rgba(0,20,60,.3))}
+.corp .cim .ph{width:100%;height:100%}
+.corp h3{font-size:42px;font-weight:900;color:var(--blue);letter-spacing:-.03em;line-height:1.05}
+.corp p{font-size:26px;font-weight:600;color:var(--soft);margin-top:14px;line-height:1.3}
+.corp .cap{display:inline-block;margin-top:16px;background:var(--red);color:#fff;font-weight:800;font-size:26px;padding:8px 22px;border-radius:99px}
+.num{display:grid;grid-template-columns:96px 1fr;gap:26px;align-items:start}
+.num>b{width:96px;height:112px;background:var(--red);color:#fff;font-size:50px;font-weight:900;display:grid;place-items:center;border-radius:20px;box-shadow:0 14px 0 -4px rgba(0,31,77,.16)}
+.num h4{font-size:30px;font-weight:900;color:var(--blue);letter-spacing:.3px;margin-bottom:8px}
+.num p{font-size:25px;font-weight:500;color:#34455f;line-height:1.38}
+.stat{display:flex;align-items:center;gap:26px;padding:26px 34px}
+.stat b{font-size:78px;font-weight:900;color:var(--red);letter-spacing:-.05em;line-height:1;min-width:190px}
+.stat span{font-size:28px;font-weight:700;color:var(--blue-d);line-height:1.25}
+.chipbtn{background:#fff;border-radius:22px;padding:14px 10px;text-align:center;box-shadow:0 8px 20px rgba(0,30,80,.1);border:3px solid transparent;cursor:pointer;transition:transform .2s var(--ease),border-color .2s,background .2s}
+.chipbtn:hover{transform:translateY(-4px)}
+.chipbtn.on{background:var(--blue);color:#fff;border-color:var(--gold)}
+.chipbtn small{display:block;font-size:19px;font-weight:700;opacity:.75}
+.chipbtn b{display:block;font-size:34px;font-weight:900;letter-spacing:-.03em;color:var(--red)}
+.chipbtn.on b{color:#fff}
+.stepper{display:flex;align-items:center;gap:22px}
+.stepper button{width:78px;height:78px;border-radius:50%;background:var(--blue);color:#fff;font-size:46px;font-weight:700;line-height:1;display:grid;place-items:center;box-shadow:0 12px 24px rgba(0,51,127,.3);transition:transform .15s,background .2s}
+.stepper button:hover{background:var(--red)}.stepper button:active{transform:scale(.9)}
+.stepper span{font-size:92px;font-weight:900;color:var(--blue);min-width:130px;text-align:center;letter-spacing:-.04em}
+.chk{display:flex;align-items:center;gap:16px;font-size:26px;font-weight:700;color:var(--blue-d);cursor:pointer;user-select:none}
+.chk i{width:44px;height:44px;border-radius:12px;border:4px solid #9db4d6;background:#fff;display:grid;place-items:center;transition:background .2s,border-color .2s;flex:none}
+.chk i svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .2s}
+.chk.on i{background:var(--red);border-color:var(--red)}.chk.on i svg{opacity:1}
+.hrow{display:grid;grid-template-columns:1fr 200px;align-items:center;gap:10px;background:#fff;border-radius:18px;padding:0 24px;height:56px;margin-bottom:8px;box-shadow:0 6px 16px rgba(0,30,80,.08);border:3px solid transparent;cursor:pointer;transition:transform .2s var(--ease),border-color .2s}
+.hrow:hover{transform:translateX(6px)}
+.hrow.on{border-color:var(--red);background:#fff4f4}
+.hrow span{font-size:24px;font-weight:700;color:var(--blue-d)}
+.hrow b{font-size:30px;font-weight:900;color:var(--red);text-align:right}
+.hrow b.q{font-size:21px;color:var(--soft);font-weight:700}
+.pcard{cursor:pointer;overflow:hidden;transition:box-shadow .3s}
+.pcard .band{height:150px;background-size:cover;background-position:center;position:relative}
+.pcard .band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,24,70,.1),rgba(0,24,70,.65))}
+.pcard h3{font-size:44px;font-weight:900;color:var(--blue);letter-spacing:-.03em;padding:20px 30px 0}
+.pcard p{font-size:25px;font-weight:700;color:var(--soft);padding:4px 30px 0}
+.pcard .from{padding:12px 30px 24px;font-size:24px;font-weight:700;color:var(--blue-d)}.pcard .from b{font-size:46px;color:var(--red);letter-spacing:-.03em}
+.pcard:hover{box-shadow:0 34px 70px rgba(0,30,80,.24)}
+.slide.on .pcard[data-a]:hover{transform:translateY(-12px);transition-delay:0s}
+.icard{padding:20px 28px}
+.icard h5{font-size:26px;font-weight:900;color:var(--blue);margin-bottom:6px}
+.icard p{font-size:22px;font-weight:500;color:#34455f;line-height:1.38}
+#pkInfo .icard{padding:18px 26px}
+#pkInfo .icard p{font-size:21px;line-height:1.34}
+.pay{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.pay .card{padding:34px 20px;text-align:center}
+.pay .card b{display:block;font-size:34px;font-weight:900;color:var(--blue);margin:14px 0 8px}
+.pay .card span{font-size:22px;font-weight:600;color:var(--soft)}
+.pay .ic{width:110px;height:110px;border-radius:30px;margin:0 auto;display:grid;place-items:center;font-size:54px;font-weight:900;color:#fff}
+.titlebox{left:0!important;right:0;text-align:center}
+.slogo{position:absolute;right:50px;top:30px;width:200px;z-index:6}
+.slide.bgb{background:linear-gradient(135deg,#00337F 0%,#001F4D 100%)}
+.slide.bgr{background:linear-gradient(135deg,#CC1B1B 0%,#8a0f0f 100%)}
+.dark .h-sub,.dark ul.dots li,.dark .spec{color:#fff}
+.dark .pill{background:#fff;color:var(--blue)}
+.bgr .pill{background:var(--blue-d);color:#fff}
+.bgr .rib{background:#fff;color:var(--red)}
+.qs{height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
+.qs b{font-size:190px;font-weight:900;color:var(--red);letter-spacing:-.05em;line-height:1}
+.qs span{font-size:40px;font-weight:800;color:var(--blue-d);line-height:1.25;margin-top:20px}
+.wtab{display:flex;align-items:center;gap:22px;width:100%;height:140px;margin-bottom:22px;padding:0 28px;border-radius:30px;background:rgba(255,255,255,.1);border:3px solid rgba(255,255,255,.2);color:#fff;font-weight:800;font-size:28px;text-align:left;transition:background .3s,transform .3s var(--ease),color .3s}
+.wtab b{flex:none;width:76px;height:76px;border-radius:20px;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:36px;font-weight:900}
+.wtab:hover{background:rgba(255,255,255,.2)}
+.wtab.on{background:#fff;color:var(--blue);border-color:var(--gold);transform:translateX(18px)}
+.wtab.on b{background:var(--red);color:#fff}
+.wbody{animation:wIn .5s var(--ease)}
+@keyframes wIn{from{opacity:0;transform:translateX(30px)}}
+.slide::before,.slide::after{display:none!important}
+.orb{position:absolute;border-radius:50%;filter:blur(50px);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
+.o1{width:640px;height:640px;left:-160px;top:520px;background:rgba(204,27,27,.38)}
+.o2{width:760px;height:760px;right:-200px;top:-220px;background:rgba(40,110,230,.55);animation-duration:18s}
+.o3{width:380px;height:380px;right:260px;bottom:-120px;background:rgba(245,166,35,.32);animation-duration:11s}
+@keyframes drift{to{transform:translate(70px,-50px) scale(1.12)}}
+.cv-logo{animation:logoIn 1.3s var(--ease) both,glow 4s ease-in-out 1.3s infinite}
+@keyframes logoIn{from{opacity:0;transform:scale(.78) translateY(-40px)}}
+@keyframes glow{50%{filter:drop-shadow(0 0 34px rgba(255,255,255,.55))}}
+.cv-kick{position:absolute;left:0;right:0;top:450px;text-align:center;font-size:30px;font-weight:800;letter-spacing:9px;color:var(--gold)}
+.cv-line{position:absolute;left:0;right:0;top:505px;text-align:center;font-size:58px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.cv-words{position:absolute;left:0;right:0;top:575px;height:160px}
+.cv-words span{position:absolute;left:0;right:0;text-align:center;font-size:130px;font-weight:900;letter-spacing:-.04em;line-height:1.1;color:#fff;text-shadow:0 10px 40px rgba(0,0,0,.35);opacity:0;animation:cvw 10s infinite}
+.cv-words span:nth-child(2){animation-delay:2.5s}.cv-words span:nth-child(3){animation-delay:5s}.cv-words span:nth-child(4){animation-delay:7.5s}
+@keyframes cvw{0%{opacity:0;transform:translateY(50px)}6%,22%{opacity:1;transform:none}28%,100%{opacity:0;transform:translateY(-50px)}}
+.cv-tag{position:absolute;left:0;right:0;top:770px;text-align:center;font-size:32px;font-weight:600;color:rgba(255,255,255,.85)}
+.roadline{position:absolute;left:0;right:0;bottom:180px;height:6px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 60px,transparent 60px 120px);animation:road 2.4s linear infinite}
+@keyframes road{to{background-position:120px 0}}
+.hrow{height:50px;margin-bottom:6px}.hrow b{font-size:28px}
+.cv-kick{top:320px!important;font-size:24px!important;letter-spacing:7px!important;color:rgba(255,255,255,.75)!important}
+.cv-h{position:absolute;left:0;right:0;top:370px;text-align:center;font-size:124px;font-weight:900;letter-spacing:-.045em;line-height:1.04;color:#fff}
+.cv-chip{display:inline-grid;place-items:center;width:230px;height:104px;border-radius:99px;font-size:70px;vertical-align:middle;position:relative;top:-8px;background:linear-gradient(135deg,#d92a2a,#9c1010);box-shadow:0 18px 40px rgba(0,0,0,.35),inset 0 2px 0 rgba(255,255,255,.35);letter-spacing:0}
+.cv-cards{position:absolute;left:0;right:0;top:700px;height:300px}
+.cv-c{position:absolute;top:0;width:262px;height:246px;border-radius:34px;padding:26px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 30px 50px rgba(0,10,40,.4);animation:cvf 5s ease-in-out var(--d) infinite}
+.cv-c i{font-style:normal;font-size:78px;line-height:1}
+.cv-c b{font-size:27px;font-weight:800;line-height:1.15}
+.cv-c.c1{background:linear-gradient(160deg,#fff,#dbe8fb);color:var(--blue-d)}
+.cv-c.c2{background:linear-gradient(160deg,#e03030,#a01212);color:#fff}
+.cv-c.c3{background:linear-gradient(160deg,#2f6fd8,#0a3a99);color:#fff;border:2px solid rgba(255,255,255,.25)}
+.cv-c:nth-child(1){left:132px;rotate:-5deg;margin-top:34px}
+.cv-c:nth-child(2){left:432px;rotate:-2deg;margin-top:6px}
+.cv-c:nth-child(3){left:732px;rotate:2deg;margin-top:26px}
+.cv-c:nth-child(4){left:1032px;rotate:-2deg;margin-top:0}
+.cv-c:nth-child(5){left:1332px;rotate:3deg;margin-top:26px}
+.cv-c:nth-child(6){left:1632px;rotate:5deg;margin-top:40px}
+@keyframes cvf{50%{transform:translateY(-16px)}}
+.o3{background:rgba(120,180,255,.3)!important}
+.foot{font-size:17px!important;letter-spacing:2px!important;bottom:22px!important;font-weight:600!important;color:#8a97ad!important}
+.dark .foot,.cat .foot{color:rgba(255,255,255,.6)!important}
+.pk-grid{position:absolute;left:110px;right:110px;top:300px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.pk-c{padding:34px 44px 30px;text-align:center}
+.pk-i{width:84px;height:84px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-m));display:grid;place-items:center;font-size:44px;box-shadow:0 12px 24px rgba(0,51,127,.3)}
+.pk-c h3{font-size:38px;font-weight:900;color:var(--blue);margin-bottom:10px;letter-spacing:-.02em}
+.pk-c p{font-size:25px;font-weight:600;color:var(--blue-d);line-height:1.35;padding:12px 0;border-top:2px solid rgba(0,51,127,.1)}
+.ico{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.14em;flex:none}
+.tag .ico{margin-right:8px;font-size:26px}
+.cv-logo-w{}
+.cv-chip{width:auto!important;height:auto!important;font-size:inherit!important;padding:0 46px 10px!important;top:0!important;vertical-align:baseline!important;line-height:1.1}
+.cv-kick{top:330px!important}.cv-h{top:380px!important}
+.cv-cards{top:735px!important}
+.cv-c{padding:84px 54px 24px 20px!important;justify-content:flex-end!important;text-align:center;border:2px solid rgba(255,255,255,.28)}
+.cv-c b{font-size:28px!important}
+.cv-c:hover{z-index:20}
+.cv-b{position:absolute;left:50%;top:-46px;margin-left:-55px;width:110px;height:110px;border-radius:50%;display:grid;place-items:center;font-size:58px;box-shadow:0 18px 30px rgba(0,10,40,.35)}
+.c1 .cv-b{background:var(--blue);color:#fff}.c2 .cv-b,.c3 .cv-b{background:#fff;color:var(--blue)}.c2 .cv-b{color:var(--red)}
+.cv-c:nth-child(1){left:292px!important}.cv-c:nth-child(2){left:507px!important}.cv-c:nth-child(3){left:722px!important}.cv-c:nth-child(4){left:937px!important}.cv-c:nth-child(5){left:1152px!important}.cv-c:nth-child(6){left:1367px!important}
+.pk-grid{top:285px!important;gap:60px!important}
+.pk-c{padding:22px 36px 16px!important}
+.pk-i{width:58px!important;height:58px!important;margin:0 auto 8px!important;font-size:32px!important;color:#fff}
+.pk-c h3{font-size:34px!important;margin-bottom:6px!important}
+.pk-c p{font-size:22px!important;padding:6px 0!important;line-height:1.3!important}
+.pk-strip{position:absolute;left:110px;width:1700px;top:790px;height:200px}
+.pk-vp{overflow:hidden;border-radius:24px;height:200px}
+.pk-track{display:flex;gap:16px;transition:transform .5s var(--ease)}
+.pk-s{flex:none;width:270px;height:200px;border-radius:24px;overflow:hidden;background:#dbe8fb;box-shadow:0 12px 26px rgba(0,30,80,.18);cursor:zoom-in}
+.pk-s img,.pk-s .ph{width:100%;height:100%;object-fit:cover;border-radius:0}
+.pk-s .ph{font-size:20px;border-width:3px;border-radius:24px}.pk-s .ph svg{width:64px;height:42px}
+.pk-arr{position:absolute;top:50%;margin-top:-28px;width:56px;height:56px;border-radius:50%;background:var(--blue);z-index:3;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,30,80,.35)}
+.pk-arr.l{left:-28px}.pk-arr.r{right:-28px}
+.pk-arr svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:3.400;stroke-linecap:round;stroke-linejoin:round}
+.pk-arr[disabled]{opacity:.3;cursor:default}
+.cl-t{position:absolute;left:0;right:0;text-align:center;color:#fff}
+
+*{-webkit-tap-highlight-color:transparent}
+button,a,.hrow,.chipbtn,.wtab,.unit-card,.pcard,.hot{touch-action:manipulation}
+.qs b[data-count]{font-variant-numeric:tabular-nums}
+.qs b.gold{color:#E8960A;text-shadow:0 5px 0 rgba(150,80,0,.18)}
+.cat .nok{background:#CC1B1B!important;border:2px solid #CC1B1B!important;color:#fff!important}
+.pay{height:650px}
+.pay .card{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px}
+.pay .ic{width:200px;height:200px;border-radius:54px;font-size:96px}
+.pay .card b{font-size:48px;margin:30px 0 12px}
+.pay .card span{font-size:28px;line-height:1.3}
+.cl-btns{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:40px}
+.pk-show{position:absolute;left:110px;top:300px;width:660px;height:680px;border-radius:36px;overflow:hidden;background:linear-gradient(135deg,#dbe8fb,#f3f8ff);box-shadow:0 30px 60px rgba(0,30,80,.3);cursor:zoom-in}
+.pk-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s}
+.pk-stack img.on{opacity:1}
+.pk-ph{position:absolute;inset:0;display:grid;place-content:center;text-align:center;color:#5a73a1;font-weight:700;font-size:28px;gap:10px;border:4px dashed #9db4d6;border-radius:36px;padding:30px}
+.pk-ph .ico{font-size:110px;margin:0 auto;stroke-width:1.4}
+.pk-ph small{font-size:19px;font-weight:600;opacity:.8}
+.pk-show .pk-arr{display:none;width:64px;height:64px;margin-top:-32px;background:rgba(0,31,77,.55);backdrop-filter:blur(6px)}
+.pk-show.multi .pk-arr{display:grid}
+.pk-show .pk-arr.l{left:16px}.pk-show .pk-arr.r{right:16px}
+.pk-dots{position:absolute;left:0;right:0;bottom:20px;display:flex;gap:10px;justify-content:center;pointer-events:none}
+.pk-dots i{width:12px;height:12px;border-radius:99px;background:rgba(255,255,255,.55);transition:width .3s,background .3s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.pk-dots i.on{width:34px;background:#fff}
+.pk-info{position:absolute;left:810px;top:300px;width:1000px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+body.editing [data-ek],body.editing [data-bind]{outline:2px dashed rgba(204,27,27,.55);outline-offset:3px;cursor:text}
+body.editing [data-ek]:focus,body.editing [data-bind]:focus{outline:3px solid var(--red);background:rgba(255,235,150,.35)}
+#ebar{position:fixed;top:10px;right:10px;z-index:85;display:none;align-items:center;gap:8px;background:rgba(0,22,60,.94);color:#fff;padding:8px 10px 8px 16px;border-radius:99px;box-shadow:0 14px 34px rgba(0,0,0,.45);font-size:14px;font-weight:700;backdrop-filter:blur(10px)}
+body.editing #ebar{display:flex}
+#ebar button{padding:9px 16px;border-radius:99px;background:rgba(255,255,255,.16);font-weight:800;font-size:14px;color:#fff}
+#ebar button.ok{background:#1faa59}
+#ebar button.rs{background:#CC1B1B}
+#lb{touch-action:none;user-select:none}
+#lb img{transition:transform .25s var(--ease);will-change:transform;max-width:96vw;max-height:94vh;object-fit:contain;border-radius:8px}
+#lb.drag img{transition:none}
+.lbb{position:absolute;width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;backdrop-filter:blur(8px);z-index:3}
+.lbb svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.lbb.x{top:20px;right:20px}.lbb.p{left:20px;top:50%;margin-top:-34px}.lbb.n{right:20px;top:50%;margin-top:-34px}
+#lb:not(.multi) .lbb.p,#lb:not(.multi) .lbb.n{display:none}
+#lbc{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#fff;font-weight:700;font-size:18px;opacity:.85}
+/* ===== tema Mérida te abraza (CATUREM) ===== */
+.slide.cat{background:#01185C;color:#fff;font-family:"Baloo 2",Montserrat,system-ui,sans-serif}
+.slide.cat::before{border-color:rgba(254,220,1,.22);width:760px;height:760px;left:-260px;bottom:-300px}
+.slide.cat::after{border-color:rgba(1,157,232,.28)}
+.cat .logo-tab{background:#fff}
+.cat .eyebrow{display:inline-block;background:#FEDC01;color:#01185C;font-weight:800;font-size:28px;padding:6px 26px;border-radius:99px;letter-spacing:.5px}
+.cat h1{font-size:150px;font-weight:800;line-height:.92;letter-spacing:-.02em}
+.cat h1 em{font-style:normal;color:#fff}
+.cat .cbtn2{display:inline-flex;align-items:center;gap:14px;background:#FEDC01;color:#01185C;font-weight:800;font-size:32px;padding:18px 40px;border-radius:99px;box-shadow:0 14px 30px rgba(0,0,0,.35);transition:transform .2s}
+.cat .cbtn2:hover{transform:translateY(-3px)}
+.cat .panel{background:#fff;color:#01185C;border-radius:44px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.cat .hot{display:block;background:#fff;color:#01185C;border-radius:30px;padding:22px 26px;box-shadow:0 14px 34px rgba(0,0,0,.3);cursor:pointer;border:5px solid transparent;transition:transform .25s var(--ease),border-color .2s}
+.slide.on .cat .hot:hover,.cat .hot:hover{border-color:#FEDC01}
+.cat .hot h4{font-size:32px;font-weight:800;line-height:1.05;min-height:68px}
+.cat .hot b{font-size:78px;font-weight:800;color:#258E39;letter-spacing:-.04em;line-height:1}
+.cat .hot small{display:block;font-size:22px;font-weight:600;color:#4b5b8a}
+.cat .hot.best{background:#FEDC01}.cat .hot.best b{color:#01185C}.cat .hot.best small{color:#01185C}
+.cat .hot .best-t{display:inline-block;background:#01185C;color:#FEDC01;font-size:20px;font-weight:800;padding:2px 14px;border-radius:99px;margin-bottom:6px}
+.cat .okc{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.14);border-radius:22px;padding:14px 20px;font-size:27px;font-weight:600;line-height:1.15}
+.cat .okc i{flex:none;width:40px;height:40px;border-radius:50%;background:#258E39;display:grid;place-items:center}
+.cat .okc i svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.cat .nok{display:inline-block;background:rgba(255,103,1,.18);border:2px solid #FF6701;color:#ffb98a;font-weight:700;font-size:24px;padding:8px 22px;border-radius:99px;margin-right:12px}
+.cat .dest{display:inline-block;background:#019DE8;color:#fff;font-weight:800;font-size:25px;padding:10px 24px;border-radius:99px;margin:0 10px 12px 0}
+.cat .foot{color:rgba(255,255,255,.65);letter-spacing:1px;font-size:19px;font-weight:600}
+/* controles */
+#ui{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));pointer-events:none}
+#ui>*{pointer-events:auto}
+.cbtn{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);display:grid;place-items:center;color:#fff;transition:background .2s,transform .15s}
+.cbtn:hover{background:rgba(255,255,255,.3)}.cbtn:active{transform:scale(.9)}
+.cbtn svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+#dots{display:flex;gap:7px;align-items:center;padding:0 6px;max-width:60vw;overflow:hidden}
+#dots button{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);transition:width .35s var(--ease),background .25s;flex:none}
+#dots button.on{width:30px;border-radius:99px;background:#fff}
+#cnt{color:#fff;font-weight:700;font-size:14px;min-width:54px;text-align:center;opacity:.85}
+#bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:60;transition:width .5s var(--ease);width:0}
+#menu{position:fixed;top:0;right:0;bottom:0;width:min(360px,86vw);z-index:70;background:rgba(0,22,60,.96);backdrop-filter:blur(18px);transform:translateX(105%);transition:transform .45s var(--ease);padding:70px 18px 24px;overflow:auto;color:#fff}
+#menu.on{transform:none}
+#menu button.it{display:flex;gap:14px;width:100%;text-align:left;padding:13px 14px;border-radius:14px;font-weight:700;font-size:15px;align-items:center;transition:background .2s}
+#menu button.it:hover{background:rgba(255,255,255,.1)}
+#menu button.it.on{background:var(--red)}
+#menu button.it i{font-style:normal;opacity:.6;width:26px;font-size:13px}
+#menu .x{position:absolute;top:14px;right:14px}
+#lb{position:fixed;inset:0;z-index:90;background:rgba(0,10,30,.92);display:none;place-items:center;padding:30px;cursor:zoom-out}
+#lb.on{display:grid}#lb img{max-width:100%;max-height:100%;border-radius:16px;box-shadow:0 30px 80px #000}
+@media (prefers-reduced-motion:reduce){.cv-words span:first-child{opacity:1!important}*{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="viewport"><div id="stage">
+
+<!-- 1 · PORTADA -->
+<section class="slide dark bgb" data-t="Portada" data-nologo>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div style="position:absolute;left:0;right:0;top:104px;text-align:center"><img class="cv-logo" src="img/logo-white.svg" alt="Transfers Mérida" style="width:460px;margin:0 auto"></div>
+  <div class="cv-kick" data-a style="--i:4">15 AÑOS DE EXPERIENCIA · MÉRIDA, VENEZUELA</div>
+  <h1 class="cv-h" data-a style="--i:6">Viaja por <span class="cv-chip">Mérida</span><br>con quien la conoce</h1>
+  <div class="cv-cards">
+    <div class="cv-c c1" style="--d:0.0s"><span class="cv-b"><svg class="ico"><use href="#i-plane"/></svg></span><b>Traslados</b></div>
+    <div class="cv-c c2" style="--d:0.5s"><span class="cv-b"><svg class="ico"><use href="#i-car"/></svg></span><b>Rent a Car</b></div>
+    <div class="cv-c c3" style="--d:1.0s"><span class="cv-b"><svg class="ico"><use href="#i-van"/></svg></span><b>Unidades</b></div>
+    <div class="cv-c c1" style="--d:1.5s"><span class="cv-b"><svg class="ico"><use href="#i-compass"/></svg></span><b>Tours</b></div>
+    <div class="cv-c c2" style="--d:2.0s"><span class="cv-b"><svg class="ico"><use href="#i-hotel"/></svg></span><b>Paquetes</b></div>
+    <div class="cv-c c3" style="--d:2.5s"><span class="cv-b"><svg class="ico"><use href="#i-heart"/></svg></span><b>Mérida te abraza</b></div>
+  </div>
+</section>
+
+<!-- 2 · QUIÉNES SOMOS -->
+<section class="slide" data-t="¿Quiénes somos?">
+  <div class="titlebox" style="top:70px" data-a><div class="pill">Conócenos</div><br><div class="rib" style="font-size:96px">¿Quiénes somos?</div></div>
+  <div style="position:absolute;left:120px;top:370px;width:1680px;display:grid;grid-template-columns:repeat(3,1fr);gap:60px">
+    <div class="card qs" data-a="z" style="--i:1"><b class="gold" data-count="15" data-dyn>0</b><span>años de experiencia en el sector turístico</span></div>
+    <div class="card qs" data-a="z" style="--i:2"><b data-count="10" data-prefix="+" data-dyn>+0</b><span>unidades listas para atenderte</span></div>
+    <div class="card qs" data-a="z" style="--i:3"><b data-count="100" data-suffix="%" data-dyn>0%</b><span>dedicados a la experiencia</span></div>
+  </div>
+</section>
+
+<!-- 3 · POR QUÉ VIAJAR CON NOSOTROS -->
+<section class="slide dark bgb" data-t="¿Por qué viajar con nosotros?">
+  <div class="titlebox" style="top:70px" data-a><div class="pill">Nuestras ventajas</div><br><div class="rib" style="font-size:86px">¿Por qué viajar con nosotros?</div></div>
+  <div id="whyTabs" data-a="l" style="--i:1;position:absolute;left:110px;top:330px;width:560px"></div>
+  <div class="card" id="whyCard" data-a="r" style="--i:2;position:absolute;left:740px;top:330px;width:1070px;height:626px;padding:56px 70px;overflow:hidden"></div>
+</section>
+
+<!-- 4 · TRASLADOS AL AEROPUERTO -->
+<section class="slide" data-t="Traslados al aeropuerto">
+  <div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+  <div class="titlebox" style="left:330px;top:56px" data-a><div class="pill">Nuestro servicio principal</div><br><div class="rib" style="font-size:78px">Traslados al Aeropuerto</div><div class="h-sub" style="margin-top:22px">entre Mérida y el aeropuerto de El Vigía</div></div>
+  <div style="position:absolute;left:110px;top:330px;width:760px">
+    <div data-a style="--i:1;font-size:30px;font-weight:900;color:var(--blue);margin-bottom:16px">Servicio compartido y/o privado</div>
+    <ul class="dots" data-a style="--i:2"><li>Salidas diarias de acuerdo a la hora de vuelo</li><li>Puntualidad y seguridad</li><li>Unidades cómodas y acondicionadas</li><li>Servicio a domicilio</li><li>Agua y snack a cada pasajero</li><li>Equipaje de hasta 30 kg + 10 kg de mano con artículo personal</li></ul>
+    <div data-a style="--i:3;margin-top:26px"><span class="tag"><svg class="ico"><use href="#i-paw"/></svg>Pet friendly</span><span class="tag"><svg class="ico"><use href="#i-bag"/></svg>Equipaje adicional</span><span class="tag"><svg class="ico"><use href="#i-user"/></svg>Asistencia en cada traslado</span><span class="tag"><svg class="ico"><use href="#i-medkit"/></svg>Botiquín de emergencia</span></div>
+  </div>
+  <div style="position:absolute;left:960px;top:330px;width:850px">
+    <div data-a="r" style="--i:2;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div class="seg" id="segTar"><button class="on" data-k="0">Tarifa neta</button><button data-k="1">Agencia / Corp.</button></div>
+      <div style="font-size:24px;font-weight:800;color:var(--red);white-space:nowrap">desde <span id="desde" data-dyn style="font-size:46px">25$</span> / persona</div>
+    </div>
+    <table class="px" data-a="r" style="--i:3"><thead><tr><th>Pasajeros · servicio compartido</th><th style="text-align:center">Precio</th></tr></thead><tbody id="tbTar"></tbody></table>
+  </div>
+  <div style="position:absolute;left:110px;width:780px;bottom:100px;font-size:19px;font-weight:600;color:#6b7c97" data-a>Unidades según volumen de pasajeros. Tarifas por persona en dólares. Servicio privado y otros destinos: consultar. Confirma la vigencia de las tarifas con nuestro equipo.</div>
+</section>
+
+<!-- 5 · RENT A CAR -->
+<section class="slide" data-t="Rent a Car · Sedán">
+  <div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+  <div class="titlebox" style="left:330px;top:70px" data-a><div class="pill">Rent a Car</div><br><div class="rib" style="font-size:92px">Alquiler de sedán</div></div>
+  <div style="position:absolute;left:110px;top:320px;width:900px">
+    <div data-a="l" style="--i:1;position:relative;height:540px;border-radius:34px;overflow:hidden;box-shadow:0 26px 60px rgba(0,30,80,.25);background:#dbe8fb" id="carMain"></div>
+    <div data-a style="--i:2;display:flex;gap:16px;margin-top:18px" id="carThumbs"></div>
+  </div>
+  <div class="price-badge" data-a="z" style="--i:3;left:830px;top:270px;rotate:-8deg"><small>Tarifa</small><b>€90</b><small>por día</small></div>
+  <div style="position:absolute;left:1090px;top:350px;width:720px">
+    <div data-a style="--i:1;font-size:56px;font-weight:900;color:var(--blue);letter-spacing:-.03em;line-height:1">Changan Alsvin 2026</div>
+    <div data-a style="--i:1;font-size:28px;font-weight:700;color:var(--soft);margin:10px 0 24px">Sedán ejecutivo · 5 pasajeros</div>
+    <div data-a style="--i:2"><span class="tag"><svg class="ico"><use href="#i-gear"/></svg>Automática DCT</span><span class="tag"><svg class="ico"><use href="#i-snow"/></svg>Aire acondicionado</span><span class="tag"><svg class="ico"><use href="#i-wrench"/></svg>1.5L Turbo · 107 HP</span><span class="tag"><svg class="ico"><use href="#i-infinity"/></svg>Km ilimitado</span></div>
+    <div data-a style="--i:3;margin-top:20px;background:#fff;border-radius:26px;padding:24px 28px;border-left:12px solid var(--gold);box-shadow:0 12px 28px rgba(0,30,80,.14);font-size:24px;font-weight:600;line-height:1.4;color:#243656"><b style="color:var(--red)"><svg class="ico"><use href="#i-pin"/></svg> Kilometraje ilimitado</b> dentro del Estado Mérida: desde la Alcabala de Las González hasta la Laguna de Mucubají (Pico El Águila). Parques temáticos, sitios turísticos y toda la zona del Páramo.</div>
+    <div data-a style="--i:4;margin-top:28px"><a class="btn" target="_blank" rel="noopener" data-wa="Hola, quisiera cotizar el alquiler del Changan Alsvin 2026."><svg viewBox="0 0 24 24"><use href="#waI"/></svg>Cotizar alquiler</a></div>
+  </div>
+</section>
+
+<!-- 7 · UNIDADES (resumen) -->
+<section class="slide dark bgb" data-t="Unidades">
+  <div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+  <div class="titlebox" style="left:330px;top:70px" data-a><div class="pill">Conoce nuestras</div><br><div class="rib" style="font-size:96px">Unidades</div></div>
+  <div style="position:absolute;left:110px;right:110px;top:400px;display:grid;grid-template-columns:repeat(4,1fr);gap:34px" id="unitGrid"></div>
+</section>
+
+<!--UNITS-->
+
+<!-- CORPORATIVOS -->
+<section class="slide dark bgr" data-t="Flota corporativa">
+  <div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+  <div class="titlebox" style="left:330px;top:70px" data-a><div class="pill">Flota corporativa</div><br><div class="rib" style="font-size:88px">Vehículos para empresas</div></div>
+  <div class="corp" style="position:absolute;left:110px;right:110px;top:330px">
+    <div class="card" data-a style="--i:1"><div class="cim" id="cpA"></div><h3>Camionetas grandes</h3><p>Confort y espacio para ejecutivos, grupos reducidos y traslados de alto nivel.</p></div>
+    <div class="card" data-a style="--i:2"><div class="cim" id="cpB"></div><h3>Encava</h3><p>Traslados de personal y grupos grandes con comodidad y seguridad.</p><span class="cap">Hasta 30 personas</span></div>
+    <div class="card" data-a style="--i:3"><div class="cim" id="cpC"></div><h3>Pick-up</h3><p>Unidades rústicas para rutas de montaña y terrenos exigentes.</p></div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:905px;text-align:center" data-a><a class="btn" id="waCorp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#waI"/></svg>Cotizar flota corporativa</a></div>
+</section>
+
+<!-- TOUR PÁRAMO MÁGICO -->
+<section class="slide" data-t="Tour de un día · Páramo Mágico">
+  <div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+  <div class="titlebox" style="left:330px;top:56px" data-a><div class="pill">Tours de un día</div><br><div class="rib" style="font-size:86px">Tour Páramo Mágico</div></div>
+  <div data-a="l" style="--i:1;position:absolute;left:110px;top:320px;width:660px;height:660px;border-radius:36px;overflow:hidden;box-shadow:0 30px 60px rgba(0,30,80,.3);background:url('img/portada-tours.webp') center/cover">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,24,70,.05) 35%,rgba(0,24,70,.85))"></div>
+    <div style="position:absolute;left:34px;right:34px;bottom:34px;color:#fff"><div style="font-size:24px;font-weight:700;opacity:.85">Mérida · de 9:00 a.m. a 7:00 p.m.</div><div style="font-size:44px;font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-top:6px">Disposición de la unidad todo el día</div></div>
+  </div>
+  <div style="position:absolute;left:830px;top:320px;width:980px">
+    <div data-a style="--i:1;font-size:34px;font-weight:900;color:var(--blue);margin-bottom:14px">Recorrido</div>
+    <div data-a style="--i:2;display:grid;grid-template-columns:1fr 1fr;gap:0 40px"><ul class="dots" id="tAct1"></ul><ul class="dots" id="tAct2"></ul></div>
+    <div data-a style="--i:3;font-size:34px;font-weight:900;color:var(--blue);margin:8px 0 14px">Incluye</div>
+    <div data-a style="--i:4" id="tInc"></div>
+    <div data-a style="--i:5;margin-top:20px"><a class="btn" target="_blank" rel="noopener" data-wa="Hola, quisiera información del Tour Páramo Mágico."><svg viewBox="0 0 24 24"><use href="#waI"/></svg>Consultar este tour</a></div>
+  </div>
+</section>
+
+<!-- TOUR · TARIFAS -->
+<section class="slide" data-t="Tour Páramo Mágico · Tarifas">
+  <div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+  <div class="titlebox" style="left:330px;top:56px" data-a><div class="pill">Tour Páramo Mágico</div><br><div class="rib" style="font-size:86px">Tarifas por grupo</div></div>
+  <div class="card" data-a="l" style="--i:1;position:absolute;left:110px;top:320px;width:820px;height:660px;padding:34px 40px">
+    <div style="font-size:26px;font-weight:800;color:var(--soft)">Número de personas</div>
+    <div class="stepper" style="margin:8px 0 18px"><button id="tMinus" aria-label="Menos">−</button><span id="tN" data-dyn>2</span><button id="tPlus" aria-label="Más">+</button></div>
+    <div class="chk" id="tGuide"><i><svg viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg></i><span>Agregar guía turístico exclusivo (+$<span id="tGP">50</span>)</span></div>
+    <div style="margin-top:22px;background:linear-gradient(135deg,var(--blue),var(--blue-m));color:#fff;border-radius:28px;padding:22px 30px">
+      <div style="font-size:22px;font-weight:700;opacity:.85">Total del grupo</div>
+      <div id="tTot" data-dyn style="font-size:84px;font-weight:900;letter-spacing:-.04em;line-height:1">$165</div>
+      <div id="tSub" data-dyn style="font-size:22px;font-weight:600;opacity:.9;margin-top:6px"></div>
+    </div>
+    <div style="margin-top:20px"><a class="btn" id="tWa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><use href="#waI"/></svg>Cotizar este tour</a></div>
+  </div>
+  <div style="position:absolute;left:980px;top:320px;width:830px">
+    <div data-a="r" style="--i:1;font-size:32px;font-weight:900;color:var(--blue);margin-bottom:14px">Tarifa total según el tamaño del grupo</div>
+    <div data-a="r" style="--i:2;display:grid;grid-template-columns:repeat(4,1fr);gap:14px" id="tTiers"></div>
+    <div data-a="r" style="--i:3;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px" id="tInfo"></div>
+  </div>
+</section>
+
+<!-- PAQUETES (portada) -->
+<section class="slide dark bgb" data-t="Paquetes todo incluido">
+  <div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+  <div class="titlebox" style="left:330px;top:56px" data-a><div class="pill">Conoce Mérida</div><br><div class="rib" style="font-size:86px">Paquetes todo incluido</div></div>
+  <div data-a style="--i:1;position:absolute;left:110px;top:300px;width:1700px;height:230px;border-radius:34px;overflow:hidden;background:url('img/portada-paquetes.webp') center/cover;box-shadow:0 24px 54px rgba(0,30,80,.25)">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,24,70,.82),rgba(0,24,70,.2))"></div>
+    <div style="position:absolute;left:44px;top:50%;transform:translateY(-50%);color:#fff"><div style="font-size:50px;font-weight:900;letter-spacing:-.03em;line-height:1.05">Diferentes opciones en tiempo,<br>alojamiento y precio</div><div style="font-size:26px;font-weight:600;opacity:.9;margin-top:10px">Diseñado para una experiencia de altura · Reserva con el 40%</div></div>
+  </div>
+  <div id="pkGrid" style="position:absolute;left:110px;right:110px;top:570px;display:grid;grid-template-columns:repeat(3,1fr);gap:36px"></div>
+</section>
+
+<!--PAQUETES-->
+
+<!-- MÉRIDA TE ABRAZA 1 -->
+<section class="slide cat" data-t="Mérida te abraza">
+  <div class="logo-tab" style="width:260px"><img src="img/logo-color.svg" alt="" style="width:190px"></div>
+  <div style="position:absolute;right:-120px;top:-120px;width:620px;height:620px;border-radius:50%;background:#FEDC01;opacity:.1"></div>
+  <div style="position:absolute;left:110px;top:200px;width:1000px">
+    <div data-a style="--i:0"><span class="eyebrow">Campaña · Cámara de Turismo del Estado Mérida</span></div>
+    <h1 data-a style="--i:1;margin-top:34px">Mérida<br><em>te abraza</em></h1>
+    <div data-a style="--i:2;font-size:44px;font-weight:700;line-height:1.15;margin-top:30px;max-width:900px">5 días y 4 noches en el estado más amable de Venezuela</div>
+    <div data-a style="--i:3;font-size:29px;font-weight:500;line-height:1.35;margin-top:22px;max-width:900px;opacity:.9">Traslados, alojamiento, tours guiados y una probadita de la cocina andina, todo en un solo paquete.</div>
+    <div data-a style="--i:4;margin-top:48px"><a class="cbtn2" target="_blank" rel="noopener" data-wa="Hola, quisiera reservar el paquete Mérida te abraza (5 días / 4 noches)."><svg viewBox="0 0 24 24" style="width:36px;height:36px;fill:#01185C"><use href="#waI"/></svg>Reservar por WhatsApp</a></div>
+  </div>
+  <div class="panel" data-a="r" style="--i:3;position:absolute;left:1230px;top:260px;width:580px;padding:44px 48px;text-align:center">
+    <div style="font-size:28px;font-weight:700;color:#4b5b8a">Desde</div>
+    <div style="font-size:150px;font-weight:800;line-height:.95;letter-spacing:-.05em;color:#258E39"><span style="font-size:80px;vertical-align:top;position:relative;top:14px">$</span><span id="mtaFrom">263</span></div>
+    <div style="font-size:28px;font-weight:700;color:#01185C">por persona · hab. doble</div>
+    <div style="margin:28px auto 0;display:inline-block;background:#FEDC01;color:#01185C;font-weight:800;font-size:44px;padding:8px 36px;border-radius:99px">5D · 4N</div>
+    <div style="font-size:22px;font-weight:600;color:#4b5b8a;margin-top:22px;line-height:1.3">Tarifas según el hotel elegido.</div>
+  </div>
+</section>
+
+<!-- MÉRIDA TE ABRAZA 2 -->
+<section class="slide cat" data-t="Mérida te abraza · Tarifas por hotel">
+  <div class="logo-tab" style="width:260px"><img src="img/logo-color.svg" alt="" style="width:190px"></div>
+  <div style="position:absolute;left:0;right:0;text-align:center;top:56px" data-a><span class="eyebrow">Mérida te abraza · 5D / 4N</span><div style="font-size:92px;font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:14px">Elige tu <em style="font-style:normal">alojamiento</em></div></div>
+  <div id="mtaHotels" style="position:absolute;left:210px;right:210px;top:360px;display:grid;grid-template-columns:repeat(3,1fr);gap:44px"></div>
+  <div data-a style="--i:9;position:absolute;left:110px;right:110px;bottom:100px;font-size:25px;font-weight:600;color:#fff;opacity:.9;text-align:center">Todas las opciones incluyen los mismos tours, traslados y guía. Tarifas por persona, habitación doble; sujetas a variación por temporada y disponibilidad. Toca un hotel para cotizar.</div>
+</section>
+
+<!-- MÉRIDA TE ABRAZA 3 -->
+<section class="slide cat" data-t="Mérida te abraza · Qué incluye">
+  <div class="logo-tab" style="width:260px"><img src="img/logo-color.svg" alt="" style="width:190px"></div>
+  <div style="position:absolute;left:0;right:0;text-align:center;top:56px" data-a><span class="eyebrow">Mérida te abraza · 5D / 4N</span><div style="font-size:92px;font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:14px">El recorrido <em style="font-style:normal">incluye</em></div></div>
+  <div id="mtaInc" style="position:absolute;left:110px;top:330px;width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:16px"></div>
+  <div data-a style="--i:5;position:absolute;left:110px;top:700px;width:1100px"><div id="mtaNo"></div><div style="font-size:26px;font-weight:800;color:#fff;margin:26px 0 12px">El destino: lo que te espera</div><div><span class="dest">Teleférico Mukumbarí</span><span class="dest">Páramo de Mérida</span><span class="dest">Casco histórico</span><span class="dest">El Valle y La Culata</span></div></div>
+  <div class="panel" data-a="r" style="--i:3;position:absolute;left:1280px;top:330px;width:530px;padding:38px 40px">
+    <div style="font-size:36px;font-weight:800;line-height:1.1;color:#01185C">Una iniciativa de la Cámara de Turismo del Estado Mérida</div>
+    <div style="font-size:23px;font-weight:600;line-height:1.4;color:#34455f;margin-top:16px">Mérida te abraza reúne a los prestadores afiliados a <b>CATUREM</b> para ofrecer paquetes accesibles y demostrar que Mérida sigue recibiendo con calidez a quien la visita.</div>
+    <div style="font-size:22px;font-weight:700;line-height:1.35;color:#258E39;margin-top:16px">Paquete comercializado por Transfers Mérida, agencia aliada de la campaña.</div>
+    <div style="display:inline-block;background:#FEDC01;font-weight:800;font-size:22px;padding:6px 20px;border-radius:99px;margin-top:16px">Comisión para agencias: <span id="mtaCom">5%</span></div>
+  </div>
+</section>
+
+<!-- PAGOS Y CONTACTO -->
+<section class="slide dark bgb" data-t="Métodos de pago">
+  <div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+  <div class="titlebox" style="left:330px;top:70px" data-a><div class="pill">Métodos de pago</div><br><div class="rib" style="font-size:88px">Aceptamos</div></div>
+  <div class="pay" style="position:absolute;left:110px;right:110px;top:330px">
+    <div class="card" data-a style="--i:1"><div class="ic" style="background:linear-gradient(135deg,#1f5fbf,#00337F)">Bs.</div><b>Pago móvil</b><span>Transferencia bancaria</span></div>
+    <div class="card" data-a style="--i:2"><div class="ic" style="background:linear-gradient(135deg,#2fb86d,#15803D)">$</div><b>Divisas</b><span>Efectivo en dólares o euros</span></div>
+    <div class="card" data-a style="--i:3"><div class="ic" style="background:linear-gradient(135deg,#7d3cf0,#4b1fb3)">Z</div><b>Zelle</b><span>Transferencia internacional</span></div>
+    <div class="card" data-a style="--i:4"><div class="ic" style="background:linear-gradient(135deg,#F5A623,#d68607)">B</div><b>Binance Pay</b><span>Consulta disponibilidad al reservar</span></div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="slide dark bgb" data-t="Cierre" data-nologo data-nofoot>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div style="position:absolute;left:0;right:0;top:190px;text-align:center"><img class="cv-logo" src="img/logo-white.svg" alt="Transfers Mérida" style="width:820px;margin:0 auto"></div>
+  <div class="cl-t" data-a style="--i:3;top:500px;font-size:58px;font-weight:900;letter-spacing:-.01em">TRANSFERS MDA, C.A.</div>
+  <div class="cl-t" data-a style="--i:4;top:590px;font-size:30px;font-weight:600;letter-spacing:3px;opacity:.9">RIF J-41302545-0 · RTN 21403 · LICENCIA DE TURISMO TTT-840</div>
+  <div class="cl-t" data-a style="--i:5;top:650px;font-size:30px;font-weight:600;letter-spacing:3px;opacity:.9">MÉRIDA, VENEZUELA</div>
+  <div class="cl-btns" data-a style="--i:6;top:800px">
+    <a class="btn" target="_blank" rel="noopener" href="https://wa.me/584147234680?text=Hola%2C%20quisiera%20informaci%C3%B3n%20de%20sus%20servicios."><svg viewBox="0 0 24 24"><use href="#waI"/></svg>+58 414 723 4680</a>
+    <a class="btn" target="_blank" rel="noopener" href="https://wa.me/584125805433?text=Hola%2C%20quisiera%20informaci%C3%B3n%20de%20sus%20servicios."><svg viewBox="0 0 24 24"><use href="#waI"/></svg>+58 412 580 5433</a>
+  </div>
+</section>
+
+</div></div>
+
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.500V19l-2 1.500V22l3.500-1 3.500 1v-1.500L13 19v-5.500z"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17h14M3 17v-4l2-5h14l2 5v4M7 17v2M17 17v2M3 13h18"/><circle cx="7.500" cy="14.500" r=".6"/><circle cx="16.500" cy="14.500" r=".6"/></symbol><symbol id="i-van" viewBox="0 0 24 24"><path d="M2 7h12l5 5v5h-2M2 7v10h2M8 17h7M14 7v5h5"/><circle cx="6" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.500 8.500-2 5-5 2 2-5z"/></symbol><symbol id="i-hotel" viewBox="0 0 24 24"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16M15 10h4a1 1 0 0 1 1 1v10M2 21h20M8 8h3M8 12h3M8 16h3"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.300-8-11a4.500 4.500 0 0 1 8-2.800A4.500 4.500 0 0 1 20 10c0 5.700-8 11-8 11z"/></symbol><symbol id="i-paw" viewBox="0 0 24 24"><circle cx="6" cy="11" r="1.800"/><circle cx="10" cy="6.500" r="1.800"/><circle cx="14" cy="6.500" r="1.800"/><circle cx="18" cy="11" r="1.800"/><path d="M12 12c-3 0-5 3-5 5.500 0 1.500 1.500 2.500 3 2 1-.3 1.500-.5 2-.5s1 .2 2 .5c1.500.5 3-.5 3-2 0-2.500-2-5.500-5-5.500z"/></symbol><symbol id="i-bag" viewBox="0 0 24 24"><path d="M7 8h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2zM9 8V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3M9 12v5M15 12v5"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.500"/><path d="M5 21c0-4 3.100-7 7-7s7 3 7 7"/></symbol><symbol id="i-medkit" viewBox="0 0 24 24"><path d="M4 7h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1zM9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M12 11v6M9 14h6"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol><symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 2v20M4 6l16 12M20 6 4 18"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.700 6.300a4 4 0 0 0-5 5L3 18l3 3 6.700-6.700a4 4 0 0 0 5-5l-2.500 2.500-2.500-.5-.5-2.500z"/></symbol><symbol id="i-infinity" viewBox="0 0 24 24"><path d="M18 7.800c-3 0-4.500 2.200-6 4.200-1.500 2-3 4.200-6 4.200a4.200 4.200 0 1 1 0-8.400c3 0 4.500 2.200 6 4.200 1.500 2 3 4.200 6 4.200a4.200 4.200 0 1 0 0-8.400z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11.500a7 7 0 0 1 14 0C19 15 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M8.500 13.500 7 21l5-3 5 3-1.500-7.500"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.500" r="3.500"/></symbol><symbol id="waI" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm4.8 13.7c-.2.6-1.2 1.1-1.7 1.2-.5.1-1.1.1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.8-4.5-4-.1-.2-1-1.4-1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.8c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.7.8c.3.1.5.2.5.3.1.1.1.7-.1 1.2Z"/></symbol></defs></svg>
+<div id="ui">
+  <button class="cbtn" id="bPrev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+  <div id="dots"></div><div id="cnt"></div>
+  <button class="cbtn" id="bNext" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+  <button class="cbtn" id="bMenu" aria-label="Índice"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <button class="cbtn" id="bEdit" aria-label="Editar"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM13.500 6.500l4 4"/></svg></button>
+  <button class="cbtn" id="bFull" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+<div id="menu"><button class="cbtn x" id="mClose" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div id="mList"></div></div>
+<div id="ebar"><span>Modo edición: toca un texto para corregirlo</span><button class="ok" id="eDone">Listo</button><button id="eExp">Exportar</button><button id="eImp">Importar</button><button class="rs" id="eRes">Restablecer</button><input type="file" id="eFile" accept=".json" hidden></div>
+<div id="lb"><img alt=""><button class="lbb x" id="lbX" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button><button class="lbb p" id="lbP" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><button class="lbb n" id="lbN" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button><div id="lbc"></div></div>
+
+<script>
+/* ============ DATOS EDITABLES ============ */
+const WA="584125805433";
+const wa=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
+// Tours y paquetes de tu sitio (data/catalogo.js)
+const SITE={"tours":[{"id":"d1","name":"Tour Páramo Mágico","loc":"Mérida · 9:00 a.m. – 7:00 p.m.","sub":"Disposición de la unidad de 9:00 a.m. a 7:00 p.m.","acts":["Casa de Juan el Molinero","Monumento al Perro Nevado","Capilla de Piedra","Laguna de Mucubají","Monumento Loca Luz Caraballo","Refugio Mifafí","El Collado del Cóndor"],"inc":["Traslado de ida y retorno","Fresas con crema","Entradas","Snack sencillo","Hidratación","Wi-Fi y aire acondicionado"],"tiers":{"2":165,"3":180,"4":220,"5":235,"6":250,"7":260,"8":270,"9":290,"10":305,"11":315,"12":330},"guide":50,"minDays":5,"deposit":50}],"paquetes":[{"id":"t1","name":"Mérida Valle","loc":"3 días · 2 noches","sub":"Viaja VIP a los rincones más icónicos de Mérida. Reserva con el 40%.","inc":["Alojamiento en habitaciones dobles, triples o cuádruples","Desayuno diario en el hotel y cena de bienvenida el día de llegada","Entradas al teleférico y otras actividades","Traslados internos en la ciudad para cada ruta"],"acts":["Ruta El Valle: Casa Ángel del Sol (contacto con colibríes) y caminata por el Bosque Sagrado","Teleférico Mukumbarí, a más de 4.200 m de altura","Mercado Principal y Parque La Venezuela de Antier o Los Aleros (a elegir) y/o Zoológico","Chorros de Milla"],"matrix":[{"hotel":"Posada Casa Sol","p":[356,453],"g3":[584,615],"g4":[676,879]},{"hotel":"Hotel Milla Suites","p":[345,421],"g3":[586,603],"g4":[725,805]},{"hotel":"Hotel Venetur","p":[367,null],"g3":[593,null],"g4":[727,null]},{"hotel":"Hotel La Pedregosa","p":[null,null],"g3":[null,null],"g4":[null,null]},{"hotel":"Convención Hotel Boutique","p":[379,453],"g3":[588,604],"g4":[797,835]},{"hotel":"Hotel Park","p":[null,null],"g3":[null,null],"g4":[null,null]},{"hotel":"Hotel Belensate","p":[407,485],"g3":[644,648],"g4":[783,1011]},{"hotel":"Hotel Tibisay","p":[380,455],"g3":[607,605],"g4":[733,823]}]},{"id":"t2","name":"Mérida Páramo","loc":"3 días · 2 noches","sub":"Viaja VIP a los rincones más icónicos de Mérida. Reserva con el 40%.","inc":["Alojamiento en habitaciones dobles, triples o cuádruples","Desayuno diario en el hotel y cena de bienvenida el día de llegada","Entradas al teleférico y otras actividades","Traslados internos en la ciudad para cada ruta"],"acts":["Páramo Mágico: Monumento del Perro Nevado, Capilla de Piedra Juan Félix Sánchez, Laguna de Mucubají, Collado del Cóndor y Monumento Loca Luz Caraballo","Teleférico Mukumbarí, a más de 4.200 m de altura","Mercado Principal y Parque La Venezuela de Antier o Los Aleros (a elegir) y/o Zoológico","Chorros de Milla"],"matrix":[{"hotel":"Posada Casa Sol","p":[461,632],"g3":[592,791],"g4":[624,1037]},{"hotel":"Hotel Milla Suites","p":[417,555],"g3":[564,688],"g4":[679,861]},{"hotel":"Hotel Venetur","p":[483,null],"g3":[704,null],"g4":[725,null]},{"hotel":"Hotel La Pedregosa","p":[515,null],"g3":[625,null],"g4":[749,null]},{"hotel":"Convención Hotel Boutique","p":[507,632],"g3":[599,769],"g4":[867,947]},{"hotel":"Hotel Park","p":[536,611],"g3":[637,772],"g4":[805,976]},{"hotel":"Hotel Belensate","p":[564,696],"g3":[712,857],"g4":[837,1299]},{"hotel":"Hotel Tibisay","p":[509,635],"g3":[637,772],"g4":[739,923]}]},{"id":"t3","name":"Mérida Full","loc":"5 días · 4 noches","sub":"El paquete más completo: Páramo y Valle. Reserva con el 40%.","inc":["Alojamiento en habitaciones dobles, triples o cuádruples","Desayuno diario en el hotel y cena de bienvenida el día de llegada","Entradas al teleférico y otras actividades","Traslados internos en la ciudad para cada ruta"],"acts":["Páramo Mágico: Monumento del Perro Nevado, Capilla de Piedra Juan Félix Sánchez, Laguna de Mucubají, Collado del Cóndor y Monumento Loca Luz Caraballo","Ruta El Valle: Casa Ángel del Sol (contacto con colibríes) y caminata por el Bosque Sagrado","Teleférico Mukumbarí, a más de 4.200 m de altura","Mercado Principal y Parque La Venezuela de Antier o Los Aleros (a elegir) y/o Zoológico","Chorros de Milla"],"matrix":[{"hotel":"Posada Casa Sol","p":[792,1029],"g3":[1009,1322],"g4":[1091,1778]},{"hotel":"Hotel Milla Suites","p":[714,861],"g3":[951,1105],"g4":[1132,1399]},{"hotel":"Hotel Venetur","p":[898,null],"g3":[1249,null],"g4":[1329,null]},{"hotel":"Hotel La Pedregosa","p":[931,null],"g3":[1107,null],"g4":[1336,null]},{"hotel":"Convención Hotel Boutique","p":[925,1029],"g3":[1072,1279],"g4":[1569,1597]},{"hotel":"Hotel Park","p":[880,1088],"g3":[1109,1285],"g4":[1397,1656]},{"hotel":"Hotel Belensate","p":[997,1157],"g3":[1279,1456],"g4":[1512,2301]},{"hotel":"Hotel Tibisay","p":[930,1034],"g3":[1146,1285],"g4":[1314,1549]}]}],"info":{"tours":{"eyebrow":"Importante","title":"Condiciones de los tours","sub":"Ten en cuenta lo siguiente antes de reservar.","items":[["Anticipación","Reserva con mínimo 5 días de anticipación para organizar tu itinerario."],["Reserva","Se reserva con el 50% del pago."],["Tarifa por grupo","La tarifa corresponde al total del grupo según el número de personas (de 2 a 12)."],["Asistencia","El recorrido incluye asistencia general en el traslado."],["Guía exclusivo","Si deseas un guía turístico exclusivo para profundizar en la historia de cada sitio, se puede agregar por un costo adicional de $50."]]},"paquetes":{"eyebrow":"Importante","title":"Consideraciones del paquete","sub":"Revisa estos puntos antes de reservar.","items":[["Reserva y financiamiento","Reserva con el 40% del total. Plan de financiamiento: 40% inicial y dos cuotas del 30% (sujeto a aprobación)."],["Temporada baja","Del 20/01 al 15/07 y del 16/09 al 15/11 (sin contar carnavales y Semana Santa)."],["Temporada alta","Del 16/07 al 15/09 y del 16/11 al 15/01."],["Disponibilidad","El hotel está sujeto a disponibilidad según la fecha escogida. El paquete puede ajustarse según tu itinerario de llegada y salida."],["Boletos aéreos","La opción con boletos aéreos puede estar sujeta a disponibilidad según fecha y ruta. Consulta con nosotros."],["Traslados","Los traslados aeropuerto – hotel – aeropuerto en Mérida se consultan por separado."],["Vigencia de tarifas","Tarifas vigentes hasta enero de 2027. Precios en USD, sujetos a cambio sin previo aviso."]]}}};
+// Mérida te abraza (tomado de la página de la campaña)
+const MTA={comision:"5%",incluye:["Traslados aeropuerto – hotel – aeropuerto","Alojamiento 4 noches en habitación doble","Desayuno diario en el hotel","City tour por Mérida","Tour al Páramo","Tour al Valle y La Culata","Almuerzo durante los tours","Guía de turismo en todos los tours"],noIncluye:["No incluye cenas","No incluye entrada a museos"],hoteles:[["Hotel El Cid",263],["Hotel Venetur",345],["Convención Hotel Boutique",406]]};
+// Tarifas traslado aeropuerto: [descripción, pública, agencia/corp]
+const TARIFAS=[["1 pasajero one-way",25,22],["1 pasajero round-trip o 2 one-way",40,34],["3 pasajeros one-way",45,38],["4 pasajeros one-way",60,52],["5 pasajeros one-way",75,65],["6 pasajeros one-way",90,78],["7 pasajeros one-way",105,null],["8 pasajeros one-way",120,null],["9 pasajeros one-way",135,null],["10 pasajeros one-way",150,null]];
+const CHANGAN=["img/changan-1.webp","img/changan-2.webp","img/changan-3.webp","img/changan-4.webp"];
+const UNITS=[
+ {id:"jac",name:"JAC Sunray 2025",sub:"Van ejecutiva",img:"img/jac-sunray.webp",specs:[["users","12 puestos"],["snow","Aire acondicionado"],["seat","Asientos reclinables"],["usb","Dos puertos USB por fila"]],gal:["img/jac-1.webp","img/jac-2.webp","img/jac-3.webp","img/jac-4.webp","img/jac-5.webp"]},
+ {id:"merc",name:"Mercedes-Benz 313",sub:"Van / Sprinter",img:"img/mercedes-313.webp|img/mercedes-313.png",specs:[["users","Capacidad: consultar"],["snow","Aire acondicionado"]],gal:["img/mercedes-313-1.webp","img/mercedes-313-2.webp","img/mercedes-313-3.webp"]},
+ {id:"foton",name:"FOTON View C2 techo alto",sub:"Van · 2024",img:"img/foton-c2-techo-alto.webp|img/foton-c2-techo-alto.png|img/foton-c2.webp",specs:[["users","8 puestos"],["snow","Aire acondicionado"],["seat","Asientos reclinables"]],gal:["img/foton-1.webp","img/foton-2.webp","img/foton-3.webp"]},
+ {id:"chan",name:"Changan Alsvin 2026",sub:"Sedán ejecutivo",img:CHANGAN[0],nocut:true,specs:[["users","5 pasajeros"],["snow","Aire acondicionado"],["gear","Automática DCT"],["bolt","1.5L BlueCore Turbo · 107 HP"]],gal:CHANGAN}
+];
+const WHY=[["01","Conocimientos turísticos","La mejor manera de complementar un viaje es conocer la historia y la cultura, basado en el talento de la gente y en la riqueza del patrimonio cultural de la ciudad.","map"],["02","Años de servicio","Tiempo que demuestra nuestra capacidad laboral. Nos dedicamos al 100% a ofrecer la mejor experiencia a todos nuestros clientes.","medal"],["03","Unidades de lujo","Medios de transporte exclusivos para cada traslado. Contamos con vehículos sedán, SUV (camioneta), pick-up (rústicos), vans y Encava.","van"],["04","Somos pet friendly","Amamos las mascotas y tenemos tratos especiales para ellas. Sabemos lo importante que puede ser viajar con ellas.","paw"]];
+const LSK="tm_deck_v1";
+let SAVED={texts:{},data:null},DIRTY=false;
+try{const r=JSON.parse(localStorage.getItem(LSK)||"null");if(r){SAVED.texts=r.texts||{};SAVED.data=r.data||null}}catch(e){}
+if(SAVED.data){try{const d=SAVED.data;if(d.TARIFAS)TARIFAS.splice(0,TARIFAS.length,...d.TARIFAS);if(d.MTA)Object.assign(MTA,d.MTA);if(d.SITE)Object.assign(SITE,d.SITE);if(d.WHY)WHY.splice(0,WHY.length,...d.WHY)}catch(e){}}
+const ROOTS={TARIFAS,MTA,SITE,WHY};
+function setPath(path,val){const k=path.split(".");let o=ROOTS[k[0]];for(let i=1;i<k.length-1;i++)o=o[k[i]];o[k[k.length-1]]=val}
+function persist(d){try{if(d||SAVED.data)SAVED.data={TARIFAS,MTA,SITE,WHY};localStorage.setItem(LSK,JSON.stringify(SAVED))}catch(e){}}
+const CORP={A:"img/corp-camioneta.webp|img/corp-camioneta.png",B:"img/corp-encava.webp|img/corp-encava.png",C:"img/corp-pickup.webp|img/corp-pickup.png"};
+/* ============ ICONOS ============ */
+const IC={users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 5a3 3 0 0 1 0 6M18 14c2 .6 3 2.5 3 6"/>',snow:'<path d="M12 2v20M4 6l16 12M20 6 4 18"/>',seat:'<path d="M7 3v8a3 3 0 0 0 3 3h7v6M7 14v6M10 17h10"/>',usb:'<path d="M12 3v14M8 7l4-4 4 4M7 13h4v4H7zM15 12h3v3h-3z"/><circle cx="12" cy="20" r="2"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',car:'<path d="M5 17h14M3 17v-4l2-5h14l2 5v4M7 17v2M17 17v2M3 13h18"/>'};
+const svg=k=>`<svg viewBox="0 0 24 24">${IC[k]||IC.car}</svg>`;
+const PHSVG='<svg viewBox="0 0 24 24"><path d="M5 17h14M3 17v-4l2-5h14l2 5v4M7 17v2M17 17v2M3 13h18"/></svg>';
+const CHECK='<svg viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const money=n=>"$"+Number(n).toLocaleString("es-VE");
+/* ============ IMÁGENES CON RESPALDO ============ */
+function loadImg(el){
+  if(el._l)return;el._l=1;
+  const list=(el.dataset.src||"").split("|").filter(Boolean);let k=0;
+  const place=()=>{const d=document.createElement("div");d.className="ph";d.style.width="100%";d.style.height="100%";d.style.minHeight="120px";d.innerHTML=PHSVG+"<div>Imagen próximamente<small>"+(list[0]||"").replace(/^img\//,"")+"</small></div>";if(el.parentNode)el.replaceWith(d)};
+  const tryNext=()=>{if(k>=list.length){place();return}el.onerror=tryNext;el.src=list[k++]};
+  if(!list.length)return place();tryNext();
+}
+function mkImg(src,alt,cls,style){const i=document.createElement("img");i.dataset.src=src;i.alt=alt||"";if(cls)i.className=cls;if(style)i.style.cssText=style;loadImg(i);return i}
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const WAB='<svg viewBox="0 0 24 24"><use href="#waI"/></svg>';
+/* ============ CONSTRUIR DIAPOSITIVAS ============ */
+(function(){
+  const stage=document.getElementById("stage");
+  const anchorOf=n=>[...stage.childNodes].find(x=>x.nodeType===8&&x.nodeValue.trim()===n);
+  // ---- unidades (resumen)
+  const grid=document.getElementById("unitGrid");
+  UNITS.forEach((u,n)=>{
+    const c=document.createElement("div");c.className="card unit-card";c.dataset.a="";c.style.setProperty("--i",n+1);c.dataset.go="unit-"+u.id;
+    c.innerHTML=`<div class="im"></div><h3>${u.name}</h3><p>${u.sub}</p><span class="go"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span>`;
+    c.querySelector(".im").append(mkImg(u.img,u.name));grid.append(c);
+  });
+  // ---- una lámina por unidad
+  const ua=anchorOf("UNITS");
+  UNITS.forEach((u,k)=>{
+    const s=document.createElement("section");s.className="slide"+(k%2===0?" dark bgb":"");s.dataset.t=u.name;s.id="unit-"+u.id;
+    const sp=(n=>n>=5?[3,3,2,2,2]:n===4?[3,3,3,3]:n===3?[3,3,6]:n===2?[3,3]:[6])(Math.min(u.gal.length,5));
+    s.innerHTML=`<div class="logo-tab"><img src="img/logo-white.svg" alt=""></div>
+    <div class="titlebox" style="left:330px;top:70px" data-a><div class="pill">Conoce nuestras unidades</div><br><div class="rib" style="font-size:${u.name.length>22?68:88}px">${u.name}</div><div class="h-sub" style="margin-top:20px">${u.sub}</div></div>
+    <div style="position:absolute;left:110px;top:430px;width:620px">${u.specs.map((x,i)=>`<div class="spec" data-a style="--i:${i+1}"><i>${svg(x[0])}</i>${x[1]}</div>`).join("")}
+      <div data-a style="--i:6;margin-top:30px"><a class="btn" target="_blank" rel="noopener" data-wa="Hola, quisiera información sobre la unidad ${u.name}.">${WAB}Cotizar</a></div></div>
+    <div class="gal" style="position:absolute;left:780px;top:350px;width:1030px;height:630px;grid-template-columns:repeat(6,1fr);grid-template-rows:1fr 1fr">${u.gal.slice(0,5).map((g,i)=>`<div class="g" data-a="z" style="--i:${i+2};grid-column:span ${sp[i]}"></div>`).join("")}</div>
+    ${u.nocut?"":'<div class="u-main" style="position:absolute;left:640px;top:640px;width:500px;pointer-events:none;z-index:4"></div>'}
+`;
+    ua.parentNode.insertBefore(s,ua);
+    $$(".g",s).forEach((g,i)=>g.append(mkImg(u.gal[i],u.name+" foto "+(i+1))));
+    const m=$(".u-main",s);if(m)m.append(mkImg(u.img,u.name,"cut float","width:100%"));
+  });
+  ua.remove();
+  // ---- changan (rent a car)
+  const main=document.getElementById("carMain"),th=document.getElementById("carThumbs");
+  let carIx=0;main.onclick=()=>openLB(CHANGAN,carIx);const setCar=i=>{carIx=i;main.innerHTML="";main.append(mkImg(CHANGAN[i],"Changan Alsvin 2026","","width:100%;height:100%;object-fit:cover"));[...th.children].forEach((t,j)=>t.style.outline=j===i?"5px solid var(--red)":"5px solid transparent")};
+  CHANGAN.forEach((src,i)=>{const b=document.createElement("button");b.style.cssText="width:210px;height:96px;border-radius:18px;overflow:hidden;background:#dbe8fb;box-shadow:0 8px 18px rgba(0,30,80,.18);outline-offset:3px";b.append(mkImg(src,"foto "+(i+1),"","width:100%;height:100%;object-fit:cover"));b.onclick=()=>setCar(i);th.append(b)});
+  setCar(0);
+  // ---- corporativos
+  [["cpA",CORP.A,"Camioneta grande"],["cpB",CORP.B,"Encava"],["cpC",CORP.C,"Pick-up"]].forEach(([id,src,alt])=>document.getElementById(id).append(mkImg(src,alt)));
+  document.getElementById("waCorp").href=wa("Hola, quisiera cotizar vehículos corporativos (camionetas, Encava o pick-up).");
+  // ---- tarifas aeropuerto
+  const tb=document.getElementById("tbTar");let mode=0;
+  const mny=v=>v==null?'<span style="font-size:22px;color:var(--soft)">Consultar</span>':v+"$";
+  const drawT=()=>{tb.innerHTML=TARIFAS.map((r,i)=>`<tr><td data-bind="TARIFAS.${i}.0">${r[0]}</td><td data-bind="TARIFAS.${i}.${mode?2:1}" data-num>${mny(mode?r[2]:r[1])}</td></tr>`).join("");document.getElementById("desde").textContent=(mode?TARIFAS[0][2]:TARIFAS[0][1])+"$"};
+  drawT();$$("#segTar button").forEach(b=>b.onclick=()=>{mode=+b.dataset.k;$$("#segTar button").forEach(x=>x.classList.toggle("on",x===b));drawT()});
+  // ---- tour de un día
+  const T=(SITE.tours||[])[0];
+  if(T){
+    const half=Math.ceil(T.acts.length/2);
+    $("#tAct1").innerHTML=T.acts.slice(0,half).map((a,j)=>`<li data-bind="SITE.tours.0.acts.${j}" style="font-size:25px;margin-bottom:10px">${esc(a)}</li>`).join("");
+    $("#tAct2").innerHTML=T.acts.slice(half).map((a,j)=>`<li data-bind="SITE.tours.0.acts.${j+half}" style="font-size:25px;margin-bottom:10px">${esc(a)}</li>`).join("");
+    $("#tInc").innerHTML=T.inc.map((a,j)=>`<span class="tag" data-bind="SITE.tours.0.inc.${j}">${esc(a)}</span>`).join("");
+    const tiers=Object.keys(T.tiers).map(Number).sort((a,b)=>a-b);let n=tiers[0],guide=false;
+    $("#tGP").textContent=T.guide;
+    const tt=$("#tTiers");tt.innerHTML=tiers.map(k=>`<div class="chipbtn" data-n="${k}"><small>${k} personas</small><b data-bind="SITE.tours.0.tiers.${k}" data-num>${money(T.tiers[k])}</b></div>`).join("")+`<div class="chipbtn" style="background:var(--gold);cursor:default"><small style="color:var(--blue-d)">Guía exclusivo</small><b style="color:var(--blue-d)" data-bind="SITE.tours.0.guide" data-num>+${money(T.guide)}</b></div>`;
+    const upd=()=>{const base=T.tiers[n],tot=base+(guide?T.guide:0),dep=Math.round(tot*T.deposit/100);
+      $("#tN").textContent=n;$("#tTot").textContent=money(tot);
+      $("#tSub").textContent=`≈ ${money(Math.round(tot/n))} por persona · reserva con el ${T.deposit}%: ${money(dep)}`;
+      $$(".chipbtn[data-n]",tt).forEach(c=>c.classList.toggle("on",+c.dataset.n===n));
+      $("#tGuide").classList.toggle("on",guide);
+      $("#tWa").href=wa(`Hola, quisiera cotizar el Tour Páramo Mágico.\nPersonas: ${n}\nGuía exclusivo: ${guide?"Sí":"No"}\nTotal estimado: ${money(tot)}\nReserva con el ${T.deposit}%: ${money(dep)}`)};
+    $("#tMinus").onclick=()=>{n=Math.max(tiers[0],n-1);upd()};$("#tPlus").onclick=()=>{n=Math.min(tiers[tiers.length-1],n+1);upd()};
+    $("#tGuide").onclick=()=>{guide=!guide;upd()};
+    $$(".chipbtn[data-n]",tt).forEach(c=>c.onclick=()=>{n=+c.dataset.n;upd()});
+    upd();
+    const inf=(SITE.info&&SITE.info.tours&&SITE.info.tours.items)||[];
+    const pick=["Anticipación","Reserva","Asistencia"].map(k=>inf.find(i=>i[0]===k)).filter(Boolean);
+    $("#tInfo").innerHTML=pick.map(i=>`<div class="card icard"><h5>${esc(i[0])}</h5><p>${esc(i[1])}</p></div>`).join("");
+  }
+  // ---- paquetes
+  const P=SITE.paquetes||[];
+  const pg=document.getElementById("pkGrid");
+  const minBaja=p=>{const v=(p.matrix||[]).map(r=>r.p&&r.p[0]).filter(x=>x!=null);return v.length?Math.min(...v):null};
+  P.forEach((p,n)=>{
+    const c=document.createElement("div");c.className="card pcard";c.dataset.a="";c.style.setProperty("--i",n+2);c.dataset.go="pk-"+p.id;
+    const f=minBaja(p);
+    c.innerHTML=`<div class="band" style="background-image:url('img/portada-paquetes.webp');background-position:${n*45}% center"></div><h3>${esc(p.name)}</h3><p>${esc(p.loc)}</p><div class="from">${f!=null?`desde <b>${money(f)}</b> · pareja`:"Consultar tarifa"}</div>`;
+    pg.append(c);
+  });
+  const pa=anchorOf("PAQUETES");
+  const GRP={2:"p",3:"g3",4:"g4"};
+  P.forEach((p,pi)=>{
+    const A=document.createElement("section");A.className="slide";A.dataset.t=p.name+" · "+p.loc;A.id="pk-"+p.id;
+    A.innerHTML=`<div class="titlebox" style="top:70px" data-a><div class="pill">${esc(p.loc)}</div><br><div class="rib" style="font-size:86px">${esc(p.name)}</div></div>
+    <div class="pk-show" data-a="l" style="--i:1"><div class="pk-stack"></div><div class="pk-ph"><svg class="ico"><use href="#i-camera"/></svg><div>Fotos próximamente</div><small>paq-SLUG-1.webp a paq-SLUG-10.webp</small></div><button class="pk-arr l" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><button class="pk-arr r" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button><div class="pk-dots"></div></div>
+    <div class="pk-info">
+      <div class="card pk-c" data-a="r" style="--i:2"><div class="pk-i"><svg class="ico"><use href="#i-check"/></svg></div><h3>Incluye</h3>${p.inc.map((x,j)=>`<p data-bind="SITE.paquetes.${pi}.inc.${j}">${esc(x)}</p>`).join("")}</div>
+      <div class="card pk-c" data-a="r" style="--i:3"><div class="pk-i"><svg class="ico"><use href="#i-compass"/></svg></div><h3>Actividades</h3>${p.acts.map((x,j)=>`<p data-bind="SITE.paquetes.${pi}.acts.${j}">${esc(x)}</p>`).join("")}</div>
+    </div>`;
+    pa.parentNode.insertBefore(A,pa);
+    const slug=p.name.replace(/^Mérida\s*/,"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-");
+    $(".pk-ph small",A).textContent="paq-"+slug+"-1.webp a paq-"+slug+"-10.webp";
+    const showEl=$(".pk-show",A),stack=$(".pk-stack",A),dotsEl=$(".pk-dots",A),phEl=$(".pk-ph",A);
+    const loaded=[];let ci=0,last=Date.now();
+    const paint=()=>{[...stack.children].forEach((im,k)=>im.classList.toggle("on",k===ci));[...dotsEl.children].forEach((d,k)=>d.classList.toggle("on",k===ci))};
+    const rebuild=()=>{loaded.sort((a,b)=>a.n-b.n);stack.innerHTML=loaded.map(l=>`<img src="${l.src}" alt="">`).join("");dotsEl.innerHTML=loaded.map(()=>"<i></i>").join("");phEl.style.display=loaded.length?"none":"";showEl.classList.toggle("multi",loaded.length>1);ci=Math.min(ci,Math.max(0,loaded.length-1));paint()};
+    const go=d=>{if(!loaded.length)return;ci=(ci+d+loaded.length)%loaded.length;last=Date.now();paint()};
+    const tryLoad=(n,ext)=>{const src="img/paq-"+slug+"-"+n+"."+ext;const im=new Image();im.onload=()=>{loaded.push({n,src});rebuild()};im.onerror=()=>{if(ext==="webp")tryLoad(n,"jpg")};im.src=src};
+    for(let n=1;n<=10;n++)tryLoad(n,"webp");
+    $(".pk-arr.l",A).onclick=e=>{e.stopPropagation();go(-1)};$(".pk-arr.r",A).onclick=e=>{e.stopPropagation();go(1)};
+    showEl.onclick=()=>{if(loaded.length)openLB(loaded.map(l=>l.src),ci)};
+    let sx=null;showEl.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;e.stopPropagation()},{passive:true});
+    showEl.addEventListener("touchend",e=>{e.stopPropagation();if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>40)go(dx<0?1:-1)},{passive:true});
+    setInterval(()=>{if(A.classList.contains("on")&&!document.body.classList.contains("editing")&&!lb.classList.contains("on")&&loaded.length>1&&Date.now()-last>4500){go(1)}},1000);
+    const s=document.createElement("section");s.className="slide dark bgb";s.dataset.t=p.name+" · Tarifas";s.id="pk-"+p.id+"-t";
+    s.innerHTML=`<div class="titlebox" style="top:70px" data-a><div class="pill">Tarifas · ${esc(p.loc)}</div><br><div class="rib" style="font-size:86px">${esc(p.name)}</div></div>
+    <div data-a style="--i:1;position:absolute;left:0;right:0;top:280px;display:flex;justify-content:center;gap:24px"><div class="seg" data-se><button class="on" data-v="baja">Temporada baja</button><button data-v="alta">Temporada alta</button></div><div class="seg" data-pe><button class="on" data-v="2">Pareja</button><button data-v="3">3 personas</button><button data-v="4">4 personas</button></div></div>
+    <div style="position:absolute;left:0;right:0;top:352px;text-align:center;font-size:22px;font-weight:700;color:rgba(255,255,255,.85)">Precio total del paquete · toca un hotel para cotizar</div>
+    <div data-rows style="position:absolute;left:410px;width:1100px;top:392px"></div>
+    <div data-a style="--i:3;position:absolute;left:0;right:0;top:856px;text-align:center"><a class="btn" data-cta target="_blank" rel="noopener">${WAB}Cotizar</a></div>
+    <div style="position:absolute;left:0;right:0;top:946px;text-align:center;font-size:21px;font-weight:600;color:rgba(255,255,255,.8)">Reserva con el 40%. Plan de financiamiento: 40% inicial y dos cuotas del 30% (sujeto a aprobación).</div>`;
+    pa.parentNode.insertBefore(s,pa);
+    let season="baja",people=2,hotel=null;
+    const rows=$("[data-rows]",s),cta=$("[data-cta]",s);
+    const val=r=>r?(r[GRP[people]]||[])[season==="alta"?1:0]:null;
+    const draw=()=>{
+      rows.innerHTML=p.matrix.map((r,ri)=>{const v=val(r);return `<div class="hrow${hotel===r.hotel?" on":""}" data-h="${esc(r.hotel)}"><span data-bind="SITE.paquetes.${pi}.matrix.${ri}.hotel">${esc(r.hotel)}</span><b${v==null?' class="q"':''} data-bind="SITE.paquetes.${pi}.matrix.${ri}.${GRP[people]}.${season==='alta'?1:0}" data-num>${v==null?'Consultar':money(v)}</b></div>`}).join("");
+      $$(".hrow",rows).forEach(h=>h.onclick=()=>{hotel=h.dataset.h;draw()});
+      const v=val(p.matrix.find(x=>x.hotel===hotel));
+      cta.href=wa(`Hola, quisiera cotizar el paquete ${p.name} (${p.loc}).`+(hotel?`\nHotel: ${hotel}`:"")+`\nTemporada: ${season}\nPersonas: ${people}`+(v!=null?`\nPrecio de referencia: ${money(v)}`:""));
+    };
+    $$("[data-se] button",s).forEach(b=>b.onclick=()=>{season=b.dataset.v;$$("[data-se] button",s).forEach(x=>x.classList.toggle("on",x===b));draw()});
+    $$("[data-pe] button",s).forEach(b=>b.onclick=()=>{people=+b.dataset.v;$$("[data-pe] button",s).forEach(x=>x.classList.toggle("on",x===b));draw()});
+    draw();
+  });
+  pa.remove();
+  // ---- Mérida te abraza
+  const best=Math.min(...MTA.hoteles.map(h=>h[1]));
+  $("#mtaFrom").textContent=best;$("#mtaCom").textContent=MTA.comision;
+  $("#mtaHotels").innerHTML=MTA.hoteles.map((h,k)=>`<a class="hot${h[1]===best?" best":""}" data-a="z" style="--i:${k+1}" target="_blank" rel="noopener" href="${wa("Hola, quisiera reservar el paquete Mérida te abraza (5D/4N) en "+h[0]+". Tarifa de referencia: $"+h[1]+" por persona, hab. doble.")}">${h[1]===best?'<span class="best-t">Desde</span>':'<span class="best-t" style="visibility:hidden">·</span>'}<h4 data-bind="MTA.hoteles.${k}.0">${esc(h[0])}</h4><b data-bind="MTA.hoteles.${k}.1" data-num>$${h[1]}</b><small>por persona · hab. doble</small></a>`).join("");
+  $("#mtaInc").innerHTML=MTA.incluye.map((t,k)=>`<div class="okc" data-a style="--i:${k+1}"><i>${CHECK}</i><span data-bind="MTA.incluye.${k}">${esc(t)}</span></div>`).join("");
+  $("#mtaNo").innerHTML=MTA.noIncluye.map((t,k)=>`<span class="nok" data-bind="MTA.noIncluye.${k}">${esc(t)}</span>`).join("");
+  // ---- por qué viajar con nosotros (interactivo)
+  const wt=document.getElementById("whyTabs"),wc=document.getElementById("whyCard");
+  const showWhy=i=>{const w=WHY[i];[...wt.children].forEach((b,j)=>b.classList.toggle("on",j===i));
+    wc.innerHTML=`<div class="wbody"><div style="position:absolute;right:40px;top:-20px;font-size:300px;font-weight:900;color:rgba(0,51,127,.07);letter-spacing:-.05em;line-height:1">${w[0]}</div><svg class="ico" style="width:110px;height:110px;color:var(--blue);stroke-width:1.4"><use href="#i-${w[3]}"/></svg><div style="font-size:60px;font-weight:900;color:var(--blue);letter-spacing:-.03em;line-height:1.05;margin:20px 0 24px;position:relative" data-bind="WHY.${i}.1">${w[1]}</div><div style="font-size:36px;font-weight:500;line-height:1.45;color:#243656;position:relative" data-bind="WHY.${i}.2">${w[2]}</div></div>`};
+  WHY.forEach((w,i)=>{const b=document.createElement("button");b.className="wtab";b.dataset.dyn="1";b.setAttribute("data-dyn","");b.innerHTML=`<b>${w[0]}</b><span>${w[1]}</span>`;b.onclick=()=>showWhy(i);wt.append(b)});
+  showWhy(0);
+  $$(".logo-tab").forEach(x=>x.remove());
+  $$(".slide").forEach(sl=>{if(sl.hasAttribute("data-nofoot"))return;const f=document.createElement("div");f.className="foot";f.textContent="TRANSFERS MDA, C.A. · RIF J-41302545-0 · RTN 21403";sl.append(f)});
+  // imágenes estáticas y enlaces
+  $$("img[data-src]").forEach(loadImg);
+  $$("[data-wa]").forEach(a=>a.href=wa(a.dataset.wa));
+})();
+/* ============ NAVEGACIÓN ============ */
+const S=[...document.querySelectorAll(".slide")],stage=document.getElementById("stage");
+let cur=0;
+function fit(){const k=Math.min(innerWidth/1920,(innerHeight-64)/1080);stage.style.transform=`scale(${k})`}
+addEventListener("resize",fit);fit();
+const dots=document.getElementById("dots"),cnt=document.getElementById("cnt"),bar=document.getElementById("bar"),mList=document.getElementById("mList"),menu=document.getElementById("menu");
+S.forEach((s,i)=>{const d=document.createElement("button");d.setAttribute("aria-label",s.dataset.t);d.onclick=()=>goTo(i);dots.append(d);
+  const m=document.createElement("button");m.className="it";m.innerHTML=`<i>${String(i+1).padStart(2,"0")}</i>${s.dataset.t}`;m.onclick=()=>{goTo(i);menu.classList.remove("on")};mList.append(m)});
+function goTo(i){if(i<0||i>=S.length)return;S.forEach((s,j)=>{s.classList.toggle("on",j===i);s.classList.toggle("prev",j<i)});cur=i;
+  [...dots.children].forEach((d,j)=>d.classList.toggle("on",j===i));[...mList.children].forEach((m,j)=>m.classList.toggle("on",j===i));
+  runCounters(S[i]);cnt.textContent=(i+1)+" / "+S.length;bar.style.width=((i+1)/S.length*100)+"%";history.replaceState(null,"","#"+(i+1))}
+const next=()=>goTo(Math.min(cur+1,S.length-1)),prev=()=>goTo(Math.max(cur-1,0));
+// tarjetas que saltan a otra lámina
+document.querySelectorAll("[data-go]").forEach(c=>c.onclick=()=>goTo(S.findIndex(s=>s.id===c.dataset.go)));
+document.getElementById("bNext").onclick=next;document.getElementById("bPrev").onclick=prev;
+document.getElementById("bMenu").onclick=()=>menu.classList.toggle("on");document.getElementById("mClose").onclick=()=>menu.classList.remove("on");
+const fs=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()};
+document.getElementById("bFull").onclick=fs;
+const lb=document.getElementById("lb"),lbi=lb.querySelector("img"),EDIT=()=>document.body.classList.contains("editing");
+/* ---- contadores animados */
+function runCounters(sl){S.forEach(x=>{if(x!==sl)x.querySelectorAll("[data-count]").forEach(b=>{b.textContent=(b.dataset.prefix||"")+"0"+(b.dataset.suffix||"")})});
+  sl.querySelectorAll("[data-count]").forEach(b=>{const T=+b.dataset.count,t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/1800),v=Math.round(T*(1-Math.pow(1-k,3)));b.textContent=(b.dataset.prefix||"")+v+(b.dataset.suffix||"");if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)})}
+/* ---- visor de fotos (táctil: deslizar, pellizcar, doble toque) */
+const LB={list:[],i:0,s:1,x:0,y:0};
+function lbApply(){lbi.style.transform=`translate(${LB.x}px,${LB.y}px) scale(${LB.s})`}
+function lbShow(i){LB.i=(i+LB.list.length)%LB.list.length;LB.s=1;LB.x=LB.y=0;lbi.src=LB.list[LB.i];lbApply();document.getElementById("lbc").textContent=(LB.i+1)+" / "+LB.list.length;lb.classList.toggle("multi",LB.list.length>1)}
+function openLB(list,i){LB.list=list;lb.classList.add("on");lbShow(i||0)}
+function closeLB(){lb.classList.remove("on")}
+document.getElementById("lbX").onclick=closeLB;document.getElementById("lbP").onclick=()=>lbShow(LB.i-1);document.getElementById("lbN").onclick=()=>lbShow(LB.i+1);
+lb.addEventListener("click",e=>{if(e.target===lb)closeLB()});
+let t0=null,pd=0,ps=1,tx=0,ty=0,ox=0,oy=0,tapT=0,moved=false;
+lb.addEventListener("touchstart",e=>{if(e.target.closest(".lbb"))return;lb.classList.add("drag");moved=false;
+  if(e.touches.length===2){pd=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);ps=LB.s}
+  else{t0=Date.now();tx=e.touches[0].clientX;ty=e.touches[0].clientY;ox=LB.x;oy=LB.y}},{passive:true});
+lb.addEventListener("touchmove",e=>{if(e.target.closest(".lbb"))return;moved=true;
+  if(e.touches.length===2&&pd){const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);LB.s=Math.max(1,Math.min(6,ps*d/pd));lbApply()}
+  else if(e.touches.length===1){const dx=e.touches[0].clientX-tx,dy=e.touches[0].clientY-ty;if(LB.s>1.02){LB.x=ox+dx;LB.y=oy+dy}else{LB.x=dx;LB.y=0}lbApply()}},{passive:true});
+lb.addEventListener("touchend",e=>{lb.classList.remove("drag");if(e.target.closest(".lbb"))return;pd=0;
+  if(e.touches.length)return;
+  const dx=LB.x;
+  if(LB.s<=1.02){if(Math.abs(dx)>90&&LB.list.length>1){lbShow(LB.i+(dx<0?1:-1));return}LB.s=1;LB.x=LB.y=0;lbApply()}
+  if(!moved){const n=Date.now();if(n-tapT<320){LB.s=LB.s>1.1?1:2.5;LB.x=LB.y=0;lbApply()}tapT=n}},{passive:true});
+lb.addEventListener("wheel",e=>{e.preventDefault();LB.s=Math.max(1,Math.min(6,LB.s*(e.deltaY<0?1.15:.87)));if(LB.s===1)LB.x=LB.y=0;lbApply()},{passive:false});
+document.addEventListener("click",e=>{const g=e.target.closest(".gal .g img");if(g&&!EDIT()){const imgs=[...g.closest(".gal").querySelectorAll(".g img")].map(x=>x.src);openLB(imgs,imgs.indexOf(g.src))}});
+addEventListener("keydown",e=>{
+  if(lb.classList.contains("on")){if(e.key==="Escape")closeLB();else if(e.key==="ArrowRight")lbShow(LB.i+1);else if(e.key==="ArrowLeft")lbShow(LB.i-1);return}
+  if(EDIT()){if(e.key==="Escape")exitEdit();return}
+  if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();next()}
+  else if(e.key==="ArrowLeft"||e.key==="PageUp"){prev()}
+  else if(e.key==="Home")goTo(0);else if(e.key==="End")goTo(S.length-1);
+  else if(e.key==="f"||e.key==="F")fs();else if(e.key==="m"||e.key==="M")menu.classList.toggle("on");
+  else if(e.key==="Escape"){menu.classList.remove("on")}});
+let x0=null,y0=null;
+addEventListener("touchstart",e=>{if(EDIT()||lb.classList.contains("on")||e.target.closest("#menu"))return;x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+addEventListener("touchend",e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4)dx<0?next():prev()});
+let wl=0;addEventListener("wheel",e=>{if(EDIT()||lb.classList.contains("on")||e.target.closest("#menu"))return;const t=Date.now();if(t-wl<900||Math.abs(e.deltaY)<30)return;wl=t;e.deltaY>0?next():prev()},{passive:true});
+/* ============ EDITOR EN VIVO ============ */
+const INL=/^(BR|B|STRONG|EM|SPAN|SMALL|SUP|I|SVG|USE|PATH|CIRCLE)$/i,TAGS=/^(H1|H2|H3|H4|H5|P|LI|SPAN|B|SMALL|DIV|TD|TH|A|STRONG|LABEL)$/;
+function clean(html){const t=document.createElement("template");t.innerHTML=html;t.content.querySelectorAll("script,iframe,object,embed,style,link").forEach(n=>n.remove());t.content.querySelectorAll("*").forEach(n=>{[...n.attributes].forEach(a=>{if(/^on/i.test(a.name)||/javascript:/i.test(a.value))n.removeAttribute(a.name)})});return t.innerHTML}
+function eligible(el){if(!TAGS.test(el.tagName)||!el.textContent.trim())return false;if(el.closest("[data-dyn],[data-bind],.foot,svg"))return false;return [...el.children].every(c=>INL.test(c.tagName))}
+S.forEach((sl,si)=>{const els=[...sl.querySelectorAll("*")].filter(eligible);const outer=els.filter(e=>!els.some(o=>o!==e&&o.contains(e)));
+  outer.forEach((el,k)=>{const key=si+":"+k;el.dataset.ek=key;if(SAVED.texts[key]!=null)el.innerHTML=clean(SAVED.texts[key])})});
+const editEls=()=>[...document.querySelectorAll("[data-ek],[data-bind]")];
+function enterEdit(){document.body.classList.add("editing");menu.classList.remove("on");editEls().forEach(e=>{e.contentEditable="true";e.spellcheck=false})}
+function exitEdit(){if(document.activeElement)document.activeElement.blur();document.body.classList.remove("editing");editEls().forEach(e=>{e.removeAttribute("contenteditable")});if(DIRTY){DIRTY=false;location.reload()}}
+new MutationObserver(()=>{if(EDIT())document.querySelectorAll("[data-bind]:not([contenteditable])").forEach(e=>{e.contentEditable="true"})}).observe(stage,{childList:true,subtree:true});
+document.getElementById("bEdit").onclick=()=>EDIT()?exitEdit():enterEdit();
+document.getElementById("eDone").onclick=exitEdit;
+document.getElementById("eExp").onclick=()=>{persist(false);const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(SAVED)],{type:"application/json"}));a.download="presentacion-ediciones.json";a.click()};
+document.getElementById("eImp").onclick=()=>document.getElementById("eFile").click();
+document.getElementById("eFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);localStorage.setItem(LSK,JSON.stringify({texts:o.texts||{},data:o.data||null}));location.reload()}catch(x){alert("Archivo no válido")}};r.readAsText(f)};
+document.getElementById("eRes").onclick=()=>{if(confirm("¿Borrar todas las correcciones y volver al contenido original?")){localStorage.removeItem(LSK);location.reload()}};
+stage.addEventListener("focusout",e=>{const el=e.target;if(!EDIT()||!el.dataset)return;
+  if(el.dataset.bind){let v;if(el.hasAttribute("data-num")){const t=el.textContent.replace(/[^0-9]/g,"");v=t?parseInt(t,10):null}else v=el.textContent.trim();setPath(el.dataset.bind,v);DIRTY=true;persist(true)}
+  else if(el.dataset.ek){SAVED.texts[el.dataset.ek]=el.innerHTML;persist(false)}});
+stage.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&e.target.isContentEditable){e.preventDefault();e.target.blur()}});
+stage.addEventListener("paste",e=>{if(e.target.isContentEditable){e.preventDefault();document.execCommand("insertText",false,(e.clipboardData||window.clipboardData).getData("text/plain"))}});
+document.addEventListener("click",e=>{if(!EDIT())return;const ce=e.target.closest("[contenteditable=true]");if(ce){e.stopPropagation();if(e.target.closest("a"))e.preventDefault()}},true);
+goTo(Math.max(0,Math.min(S.length-1,(parseInt(location.hash.slice(1))||1)-1)));
+</script>
+</body>
+</html>
