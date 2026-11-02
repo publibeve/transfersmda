@@ -1,0 +1,3 @@
+Copia la carpeta brochuredeservicios dentro de transfersmda.site (junto a index.html) y haz git add . / commit / pull / push.
+No reemplaces el index.html ni data/catalogo.js del sitio.
+Quedara en transfersmda.site/brochuredeservicios
