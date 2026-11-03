@@ -1,8 +1,12 @@
-const V="tm-brochure-1793693584";
+const V="tm-brochure-1793747829";
 const CORE=["./","index.html","img/banner-paquetes.webp","img/carretera.webp","img/changan-1.webp","img/changan-2.webp","img/changan-3.webp","img/changan-4.webp","img/changan-corte.webp","img/corp-camioneta.webp","img/corp-encava.webp","img/corp-pickup.webp","img/foton-1.webp","img/foton-2.webp","img/foton-3.webp","img/foton-4.webp","img/foton-c2-techo-alto.webp","img/foton-c2.webp","img/jac-1.webp","img/jac-2.webp","img/jac-3.webp","img/jac-4.webp","img/jac-5.webp","img/jac-sunray.webp","img/logo-color.svg","img/logo-mta.svg","img/logo-white.svg","img/lug-casco-1.webp","img/lug-casco-2.webp","img/lug-casco-3.webp","img/lug-casco-4.webp","img/lug-paramo-1.webp","img/lug-paramo-10.webp","img/lug-paramo-11.webp","img/lug-paramo-2.webp","img/lug-paramo-3.webp","img/lug-paramo-4.webp","img/lug-paramo-5.webp","img/lug-paramo-6.webp","img/lug-paramo-7.webp","img/lug-paramo-8.webp","img/lug-paramo-9.webp","img/lug-valle-1.webp","img/lug-valle-2.webp","img/lug-valle-3.webp","img/mercedes-313-1.webp","img/mercedes-313-2.webp","img/mercedes-313-3.webp","img/mercedes-313-4.webp","img/mercedes-313-5.webp","img/mercedes-313.webp","img/montana.webp","img/portada-autos.webp","img/portada-paquetes.webp","img/portada-tours.webp","img/tour-paramo.webp","img/tour-valle.webp"];
 self.addEventListener("install",e=>{self.skipWaiting();e.waitUntil(caches.open(V).then(c=>Promise.all(CORE.map(u=>c.add(u).catch(()=>{})))))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V&&x.startsWith("tm-brochure-")).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener("fetch",e=>{const r=e.request;if(r.method!=="GET")return;const u=new URL(r.url);if(!/^https?:$/.test(u.protocol)||u.hostname.includes("wa.me")||u.hostname.includes("instagram.com"))return;
+  if(r.mode==="navigate"||/\/(index\.html)?$/.test(u.pathname)&&u.origin===location.origin){
+    e.respondWith(caches.open(V).then(c=>new Promise(res=>{let done=false;const fb=()=>c.match("index.html").then(h=>{if(!done){done=true;res(h||fetch(r))}});
+      const t=setTimeout(fb,3500);
+      fetch(r).then(n=>{if(n&&n.status===200){c.put("index.html",n.clone());if(!done){done=true;clearTimeout(t);res(n)}}else fb()}).catch(()=>{clearTimeout(t);fb()})})));return}
   e.respondWith(caches.open(V).then(c=>c.match(r,{ignoreSearch:true}).then(hit=>{
     const net=fetch(r).then(res=>{if(res&&(res.status===200||res.type==="opaque"))c.put(r,res.clone());return res}).catch(()=>hit||(r.mode==="navigate"?c.match("index.html"):undefined));
     return hit||net})))});
