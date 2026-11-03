@@ -134,6 +134,7 @@ table.px{border-collapse:separate;border-spacing:0 5px;width:100%}
 .pay .card span{font-size:22px;font-weight:600;color:var(--soft)}
 .pay .ic{width:110px;height:110px;border-radius:30px;margin:0 auto;display:grid;place-items:center;font-size:54px;font-weight:900;color:#fff}
 .titlebox{left:0!important;right:0;text-align:center}
+.slogo-tl{position:absolute;left:50px;top:34px;width:230px;z-index:6;pointer-events:none}.slogo-tl.plq{background:#fff;border-radius:16px;padding:8px 14px;width:230px;box-sizing:border-box;left:46px;top:28px;box-shadow:0 8px 20px rgba(0,0,0,.3)}
 .slogo{position:absolute;right:50px;top:30px;width:200px;z-index:6}
 .slide.bgb{background:linear-gradient(135deg,#00337F 0%,#001F4D 100%)}
 .slide.bgr{background:linear-gradient(135deg,#CC1B1B 0%,#8a0f0f 100%)}
@@ -322,10 +323,11 @@ body.editing #ebar{display:flex}
 .cmp .spec{margin-bottom:8px;font-size:24px}.cmp .spec i{width:46px;height:46px;border-radius:14px}.cmp .spec i svg{width:26px;height:26px}
 .u-main{display:flex;align-items:flex-end;justify-content:center}
 .u-main img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
-.pbadge{position:absolute;left:1530px;top:44px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#ffd84d,var(--gold));display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 18px 40px rgba(0,0,0,.28);border:6px solid #fff;color:var(--blue-d);z-index:5;text-align:center}
+.rstrip{position:absolute;left:0;right:0;top:262px;text-align:center;z-index:6;pointer-events:none}.rstrip span{display:inline-block;background:linear-gradient(135deg,#ffd84d,var(--gold));color:var(--blue-d);font-weight:900;font-size:38px;letter-spacing:-.01em;padding:12px 44px;border-radius:99px;border:5px solid #fff;box-shadow:0 14px 32px rgba(0,30,80,.35);pointer-events:auto}
+.pbadge{position:absolute;left:1590px;top:36px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#ffd84d,var(--gold));display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 18px 40px rgba(0,0,0,.28);border:6px solid #fff;color:var(--blue-d);z-index:5;text-align:center}
 .pbadge small{font-size:19px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
-.pbadge b{font-size:96px;font-weight:900;letter-spacing:-.05em;line-height:1;color:var(--red)}
-.pbadge span{font-size:30px;font-weight:800}
+.pbadge b{font-size:84px;font-weight:900;letter-spacing:-.05em;line-height:1;color:var(--red)}
+.pbadge span{font-size:26px;font-weight:800}
 .ntab{position:absolute;left:300px;right:300px;top:318px;border-collapse:separate;border-spacing:0;border-radius:26px;overflow:hidden;box-shadow:0 22px 50px rgba(0,30,80,.22);background:#fff;width:1320px}
 .ntab th{padding:12px 10px;font-size:26px;font-weight:900;color:var(--blue-d);line-height:1.1}
 .ntab th small{display:block;font-size:19px;font-weight:700;opacity:.75}
@@ -367,6 +369,7 @@ body.editing #ebar{display:flex}
 .clist{max-height:520px;overflow:auto;margin-top:14px;border:2px solid #dbe6f6;border-radius:18px}
 .clist div{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;padding:12px 20px;font-size:24px;font-weight:600;color:var(--blue-d);border-bottom:1px solid #e6eefa}
 .clist div:nth-child(odd){background:#f6f9ff}.clist .e{display:block;text-align:center;color:var(--soft)}
+.cf .lockb{width:80px;height:80px;padding:0!important;border-radius:50%!important;margin-left:auto;background:linear-gradient(135deg,#00337F,#001F4D)!important;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,31,77,.35);transition:transform .2s}.cf .lockb:active{transform:scale(.92)}
 .cf #cMsg{font-size:24px;font-weight:700;color:#1faa59;min-height:34px;margin-top:14px}
 /* ===== tema Mérida te abraza (CATUREM) ===== */
 .slide.cat{background:#0B2E13;color:#fff;font-family:"Baloo 2",Montserrat,system-ui,sans-serif}
@@ -386,6 +389,7 @@ body.editing #ebar{display:flex}
 .cat .hot small{display:block;font-size:22px;font-weight:600;color:#4d6b55}
 .cat .hot.best{background:#FEDC01}.cat .hot.best b{color:#0B2E13}.cat .hot.best small{color:#0B2E13}
 .cat .hot .best-t{display:inline-block;background:#0B2E13;color:#FEDC01;font-size:20px;font-weight:800;padding:2px 14px;border-radius:99px;margin-bottom:6px}
+.cat .pchip{min-width:76px;height:64px;margin:0 6px;border-radius:99px;background:rgba(255,255,255,.14);border:3px solid rgba(255,255,255,.5);color:#fff;font-weight:800;font-size:30px}.cat .pchip.on{background:#FEDC01;color:#0B2E13;border-color:#FEDC01}
 .cat .okc{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.14);border-radius:22px;padding:14px 20px;font-size:27px;font-weight:600;line-height:1.15}
 .cat .okc i{flex:none;width:40px;height:40px;border-radius:50%;background:#258E39;display:grid;place-items:center}
 .cat .okc i svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
@@ -550,9 +554,9 @@ body.editing .unit-card,body.editing .unit-card .im,body.editing .corp .card,bod
   <div class="panel" data-a="r" style="--i:3;position:absolute;left:1230px;top:260px;width:580px;padding:44px 48px;text-align:center">
     <div style="font-size:28px;font-weight:700;color:#4d6b55">Desde</div>
     <div style="font-size:150px;font-weight:800;line-height:.95;letter-spacing:-.05em;color:#258E39"><span style="font-size:80px;vertical-align:top;position:relative;top:14px">$</span><span id="mtaFrom">263</span></div>
-    <div style="font-size:28px;font-weight:700;color:#0B2E13">por persona · hab. doble</div>
+    <div id="mtaFromSub" style="font-size:28px;font-weight:700;color:#0B2E13">por persona</div>
     <div style="margin:28px auto 0;display:inline-block;background:#FEDC01;color:#0B2E13;font-weight:800;font-size:44px;padding:8px 36px;border-radius:99px">5D · 4N</div>
-    <div style="font-size:22px;font-weight:600;color:#4d6b55;margin-top:22px;line-height:1.3">Tarifas según el hotel elegido.</div>
+    <div style="font-size:22px;font-weight:600;color:#4d6b55;margin-top:22px;line-height:1.3">Según el hotel y el tamaño del grupo.</div>
   </div>
 </section>
 
@@ -560,8 +564,9 @@ body.editing .unit-card,body.editing .unit-card .im,body.editing .corp .card,bod
 <section class="slide cat" data-t="Mérida te abraza · Tarifas por hotel">
   <div class="logo-tab" style="width:260px"><img src="img/logo-color.svg" alt="" style="width:190px"></div>
   <div style="position:absolute;left:0;right:0;text-align:center;top:56px" data-a><span class="eyebrow">Mérida te abraza · 5D / 4N</span><div style="font-size:92px;font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:14px">Elige tu <em style="font-style:normal">alojamiento</em></div></div>
-  <div id="mtaHotels" style="position:absolute;left:210px;right:210px;top:360px;display:grid;grid-template-columns:repeat(3,1fr);gap:44px"></div>
-  <div data-a style="--i:9;position:absolute;left:110px;right:110px;bottom:100px;font-size:25px;font-weight:600;color:#fff;opacity:.9;text-align:center">Todas las opciones incluyen los mismos tours, traslados y guía. Tarifas por persona, habitación doble; sujetas a variación por temporada y disponibilidad. Toca un hotel para cotizar.</div>
+  <div id="mtaPers" data-a style="--i:1;position:absolute;left:110px;right:110px;top:262px;text-align:center"></div>
+  <div id="mtaHotels" style="position:absolute;left:210px;right:210px;top:390px;display:grid;grid-template-columns:repeat(3,1fr);gap:44px"></div>
+  <div data-a style="--i:9;position:absolute;left:110px;right:110px;bottom:100px;font-size:25px;font-weight:600;color:#fff;opacity:.9;text-align:center">Todas las opciones incluyen los mismos tours, traslados y guía. Precio final por persona con IVA según el tamaño del grupo; sujeto a variación por temporada y disponibilidad. Toca un hotel para cotizar.</div>
 </section>
 
 <!-- MÉRIDA TE ABRAZA 3 -->
@@ -621,8 +626,8 @@ body.editing .unit-card,body.editing .unit-card .im,body.editing .corp .card,bod
     <label for="cName">Nombre de la persona</label><input id="cName" type="text" autocomplete="off" placeholder="Nombre y apellido">
     <label for="cAg">Agencia</label><input id="cAg" type="text" autocomplete="off" placeholder="Nombre de la agencia">
     <label for="cTel">Número de teléfono</label><input id="cTel" type="tel" inputmode="tel" autocomplete="off" placeholder="+58 4xx xxx xxxx">
-    <div class="row"><button class="gbtn" id="cSave">Guardar</button><button class="sbtn" id="cAdmin" style="background:#5a73a1;margin-left:auto">Acceso administrador</button></div>
-    <div id="cMsg" data-dyn></div>
+    <div class="row"><button class="gbtn" id="cSave">Guardar</button><button class="sbtn lockb" id="cAdmin" aria-label="Acceso administrador" title="Acceso administrador"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-6a9 9 0 0 1 18 0v6" stroke="#fff" stroke-width="4"/><rect x="9" y="21" width="30" height="22" rx="6" fill="#fff"/><circle cx="24" cy="31" r="3.6" fill="#00337F"/><path d="M24 33v5" stroke="#00337F" stroke-width="3.4"/></svg></button></div>
+    <div id="cMsg" data-dyn></div><div id="cNet" data-dyn style="font-size:20px;font-weight:700;margin-top:6px"></div>
   </div>
   <div class="adm" id="admOv" hidden>
     <div class="admbox" id="pinBox"><h3>Acceso administrador</h3><p>Ingresa el PIN de 6 dígitos</p>
@@ -657,7 +662,7 @@ const wa=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
 // Tours y paquetes de tu sitio (data/catalogo.js)
 const SITE={"tours":[{"id":"d1","name":"Tour Páramo Mágico","loc":"Mérida · 9:00 a.m. – 7:00 p.m.","cover":"img/portada-tours.webp","acts":["Casa de Juan el Molinero","Monumento al Perro Nevado","Capilla de Piedra","Laguna de Mucubají","Monumento Loca Luz Caraballo","Refugio Mifafí","El Collado del Cóndor"],"inc":["Traslado de ida y retorno","Fresas con crema","Entrada a la Casa Encantada","Snack premium en bolsita","Hidratación (agua)","Estacionamiento Laguna de Mucubají","Wi-Fi y aire acondicionado"],"tiers":{"1":139,"2":153,"3":167,"4":209,"5":223,"6":237,"7":250,"8":278,"9":292,"10":306,"11":319,"12":333},"fotos":["img/lug-paramo-1.webp","img/lug-paramo-2.webp","img/lug-paramo-3.webp","img/lug-paramo-4.webp","img/lug-paramo-5.webp","img/lug-paramo-6.webp","img/lug-paramo-7.webp","img/lug-paramo-8.webp","img/lug-paramo-9.webp","img/lug-paramo-10.webp","img/lug-paramo-11.webp"]},{"id":"d2","name":"Tour El Valle","loc":"Mérida · Tour de un día","cover":"img/montana.webp","acts":["Casa Ángel del Sol (contacto con colibríes)","Caminata por el Bosque Sagrado","Merienda en el Bosque Sagrado"],"inc":["Traslado de ida y retorno","Entrada al Bosque Sagrado + merienda","Entrada a la Casa del Colibrí","Hidratación y snack sencillo","Wi-Fi y aire acondicionado"],"tiers":{"1":132,"2":157,"3":182,"4":221,"5":246,"6":271,"7":296,"8":336,"9":361,"10":386,"11":411,"12":436},"fotos":["img/lug-valle-1.webp","img/lug-valle-2.webp","img/lug-valle-3.webp"]}],"paquetes":[{"id":"p4","slug":"4dias","name":"Experiencia Merideña","loc":"4 días · 3 noches","inc":["Hospedaje 3 noches con desayuno en Hotel Convención, Venetur, La Pedregosa o Park","Tour Valle o Páramo Mágico (a elegir)","City tour por Mérida","Asistencia de Transfers Mérida"],"acts":["Día 1: Check in, hospedaje y desayuno","Día 2: Tour Valle o Páramo Mágico","Día 3: City tour: Mercado Principal, Plaza Bolívar, Catedral, Plaza Las Heroínas, El Mirador, Casa del Juguete y Heladería Coromoto","Día 4: Desayuno y check out"],"opt":"Actividades opcionales (sujetas a cambios): Tour El Valle, parque temático, full day aguas termales, Mundo Safari y zoológico.","precio":{"sin":{"2":536,"3":616,"4":753},"con":{"2":1267,"3":1677,"4":2172}},"hoteles":["Hotel Convención","Hotel Venetur","Hotel La Pedregosa","Hotel Park"],"fotos":["img/lug-casco-1.webp","img/lug-valle-1.webp","img/lug-paramo-1.webp","img/lug-casco-2.webp","img/lug-paramo-2.webp","img/lug-valle-2.webp","img/lug-casco-3.webp","img/lug-paramo-3.webp","img/lug-valle-3.webp","img/lug-paramo-4.webp","img/lug-casco-4.webp"]},{"id":"p3","slug":"3dias","name":"Experiencia Merideña","loc":"3 días · 2 noches","inc":["Hospedaje 2 noches con desayuno en Hotel Convención, Venetur, La Pedregosa o Park","Tour Valle o Páramo Mágico (a elegir)","Mercado Principal + zoológico o city tour","Asistencia de Transfers Mérida"],"acts":["Día 1: Check in, hospedaje y desayuno","Día 2: Tour Valle o Páramo Mágico","Día 3: Mercado Principal + zoológico o city tour"],"opt":"Actividades opcionales (sujetas a cambios): Tour El Valle, parque temático, full day aguas termales, Mundo Safari y zoológico.","precio":{"sin":{"2":447,"3":509,"4":619},"con":{"2":1178,"3":1570,"4":2038}},"hoteles":["Hotel Convención","Hotel Venetur","Hotel La Pedregosa","Hotel Park"],"fotos":["img/lug-valle-1.webp","img/lug-paramo-5.webp","img/lug-casco-2.webp","img/lug-paramo-1.webp","img/lug-valle-3.webp","img/lug-casco-1.webp","img/lug-paramo-8.webp","img/lug-casco-3.webp","img/lug-paramo-2.webp","img/lug-valle-2.webp"]}],"info":{"tours":{"items":[["Anticipación","Reserva con mínimo 5 días de anticipación para organizar tu itinerario."],["Reserva","Se reserva con el 50% del pago."],["Tarifa por grupo","La tarifa corresponde al total del grupo según el número de personas (de 2 a 12)."],["Asistencia","El recorrido incluye asistencia general en el traslado."],["Guía exclusivo","Si deseas un guía turístico exclusivo para profundizar en la historia de cada sitio, se puede agregar por un costo adicional de $50."]]}}};
 // Mérida te abraza (tomado de la página de la campaña)
-const MTA={comision:"5%",incluye:["Traslados aeropuerto – hotel – aeropuerto","Alojamiento 4 noches en habitación doble","Desayuno diario en el hotel","City tour por Mérida","Tour al Páramo","Tour al Valle y La Culata","Almuerzo durante los tours","Guía de turismo en todos los tours"],noIncluye:["No incluye cenas","No incluye entrada a museos"],hoteles:[["Hotel El Cid",263],["Hotel Venetur",345],["Convención Hotel Boutique",406]]};
+const MTA={comision:"5%",incluye:["Traslados aeropuerto – hotel – aeropuerto","Alojamiento 4 noches en habitación doble","Desayuno diario en el hotel","City tour por Mérida","Tour al Páramo","Tour al Valle y La Culata","Almuerzo durante los tours","Guía de turismo en todos los tours"],noIncluye:["No incluye cenas","No incluye entrada a museos"],personas:[2,3,4,5,6,7,8,9,10],hoteles:[["Hotel El Cid",[468.29,391.73,394.92,373.87,347.07,331.58,316.77,318.01,307.52]],["Hotel Venetur",[523.93,408.75,400.03,406.33,369.02,341.79,321.87,338.31,322.73]],["Convención Hotel Boutique",[583.13,454.68,522.52,457.57,470.42,431.47,444.37,421.22,432.56]]]};
 // Tarifas traslado aeropuerto: [descripción, pública, agencia/corp]
 const TARIFAS=[["1 pasajero one-way",20,17],["1 pasajero round-trip o 2 one-way",38,34],["3 pasajeros one-way",45,38],["4 pasajeros one-way",58,52],["5 pasajeros one-way",70,65],["6 pasajeros one-way",85,78],["7 pasajeros one-way",105,90],["8 pasajeros one-way",120,105],["9 pasajeros one-way",135,120],["10 pasajeros one-way",150,130]];
 const CHANGAN=["img/changan-1.webp","img/changan-2.webp","img/changan-3.webp","img/changan-4.webp"];
@@ -671,8 +676,8 @@ const UNITS=[
 const RENT={id:"rent",len:4.4,name:"Changan Alsvin 2026",pill:"Rent a Car",rib:"Alquiler de vehículo corporativo",img:"img/changan-corte.webp",specs:[["users","3 a 4 pasajeros"],["snow","Aire acondicionado"],["gear","Automática DCT"],["bolt","Android Auto"],["infinity","Kilometraje ilimitado en el Estado Mérida"]],gal:CHG};
 const CORPLEN={A:4.8,B:8.5,C:5.3};
 const WHY=[["01","Conocimientos turísticos","La mejor manera de complementar un viaje es conocer la historia y la cultura, basado en el talento de la gente y en la riqueza del patrimonio cultural de la ciudad.","map"],["02","Años de servicio","Tiempo que demuestra nuestra capacidad laboral. Nos dedicamos al 100% a ofrecer la mejor experiencia a todos nuestros clientes.","medal"],["03","Unidades de lujo","Medios de transporte exclusivos para cada traslado. Contamos con vehículos sedán, SUV (camioneta), pick-up (rústicos), vans y Encava.","van"],["04","Somos pet friendly","Amamos las mascotas y tenemos tratos especiales para ellas. Sabemos lo importante que puede ser viajar con ellas.","paw"]];
-const LSK="tm_deck_v3";
-let SAVED={texts:{},data:null,veh:{}},DIRTY=false;
+const LSK="tm_deck_v5";
+let S_ALL;let SAVED={texts:{},data:null,veh:{}},DIRTY=false;
 try{const r=JSON.parse(localStorage.getItem(LSK)||"null");if(r){SAVED.texts=r.texts||{};SAVED.data=r.data||null;SAVED.veh=r.veh||{}}}catch(e){}
 if(SAVED.data){try{const d=SAVED.data;if(d.TARIFAS)TARIFAS.splice(0,TARIFAS.length,...d.TARIFAS);if(d.MTA)Object.assign(MTA,d.MTA);if(d.SITE)Object.assign(SITE,d.SITE);if(d.WHY)WHY.splice(0,WHY.length,...d.WHY)}catch(e){}}
 const ROOTS={TARIFAS,MTA,SITE,WHY};
@@ -747,7 +752,7 @@ function mkShow(host,srcs,o){o=o||{};
   };
   UNITS.forEach((u,k)=>unitSec(u,k,ua,{}));
   ua.remove();
-  unitSec(RENT,0,ra,{id:"s-rent",title:"Rent a Car · Alquiler corporativo",pill:RENT.pill,rib:"Alquiler de vehículo",wa:"el alquiler de vehículo corporativo (Changan Alsvin 2026)",special:`<div class="special"><span style="padding-right:18px">Alquiler ejecutivo y corporativo</span></div>`,badge:`<div class="pbadge" data-a="z" style="--i:2"><small>Precio especial</small><b>$95</b><span>por día</span></div>`});
+  unitSec(RENT,0,ra,{id:"s-rent",title:"Rent a Car · Alquiler corporativo",pill:RENT.pill,rib:"Alquiler de vehículo",wa:"el alquiler de vehículo corporativo (Changan Alsvin 2026)",special:"",badge:`<div class="rstrip" data-a style="--i:2"><span>Alquiler ejecutivo y corporativo</span></div><div class="pbadge" data-a="z" style="--i:2"><small>Tarifa</small><b>$95</b><span>por día</span></div>`});
   ra.remove();
   // ---- corporativos
   [["cpA",CORP.A,"Camioneta grande",CORPLEN.A],["cpB",CORP.B,"Encava",CORPLEN.B],["cpC",CORP.C,"Pick-up",CORPLEN.C]].forEach(([id,src,alt,len])=>document.getElementById(id).append(mkImg(src,alt)));
@@ -775,7 +780,7 @@ function mkShow(host,srcs,o){o=o||{};
     TA.parentNode.insertBefore(A,TA);
     mkShow($(".pk-show",A),T.fotos||[]);
     const B=document.createElement("section");B.className="slide dark bgb";B.dataset.t=T.name+" · Tarifas";B.id="tour-"+T.id+"-t";
-    const keys=Object.keys(T.tiers).map(Number).sort((a,b)=>a-b);let sel=2;
+    const keys=Object.keys(T.tiers).map(Number).filter(k=>k>=2).sort((a,b)=>a-b);let sel=2;
     B.innerHTML=`<div class="titlebox" style="top:70px" data-a><div class="pill">Tarifas por persona</div><br><div class="rib" style="font-size:86px">${esc(T.name)}</div></div>
     <div class="tt-grid" data-a="z" style="--i:1"></div>
     <div style="position:absolute;left:110px;right:110px;top:910px;text-align:center;font-size:22px;font-weight:600;color:rgba(255,255,255,.85)">Valor por persona según el tamaño del grupo (el total del grupo va debajo). Reserva con el 50%, con mínimo 5 días de anticipación. Incluye asistencia en el traslado.</div>`;
@@ -855,13 +860,20 @@ function mkShow(host,srcs,o){o=o||{};
     document.getElementById("cd"+ni).setAttribute("class","cd-g on");chips[ni].classList.add("on");
     city.textContent=NAT[ni][0];city.classList.remove("pop");void city.offsetWidth;city.classList.add("pop")},300);
   // ---- tarifas nacionales (tabla; euros originales + 5 USD)
-  const NACT=[["Aeropuerto El Vigía – Mérida",70,150,200],["La Fría",150,250,280],["Santa Bárbara",100,220,270],["Caracas",490,1200,1300],["Maracay",440,1120,1200],["Barinas",170,450,550],["Valencia",390,1050,1150],["Barquisimeto",310,700,800],["Trujillo",185,550,500],["Maracaibo",320,700,800],["Ureña",200,500,550]];
-  const fm=v=>"$"+(v+5).toLocaleString("en-US");
+  const NACT=[["Aeropuerto El Vigía – Mérida",80,170,225],["La Fría",170,280,315],["Santa Bárbara",115,245,300],["Caracas",550,1340,1450],["Maracay",490,1250,1340],["Barinas",190,500,615],["Valencia",435,1170,1280],["Barquisimeto",345,780,890],["Trujillo",205,615,560],["Maracaibo",350,780,890],["Ureña",225,560,615]];
+  const fm=v=>"$"+v.toLocaleString("en-US");
   document.getElementById("natTab").innerHTML='<tr><th>Rutas privadas</th><th>Alsvin<small>3 pax</small></th><th>Van C2<small>8 pax</small></th><th>Van JAC<small>13 pax</small></th></tr>'+NACT.map(r=>`<tr><td>${r[0]}</td><td>${fm(r[1])}</td><td>${fm(r[2])}</td><td>${fm(r[3])}</td></tr>`).join("");
   // ---- Mérida te abraza
-  const best=Math.min(...MTA.hoteles.map(h=>h[1]));
-  $("#mtaFrom").textContent=best;$("#mtaCom").textContent=MTA.comision;
-  $("#mtaHotels").innerHTML=MTA.hoteles.map((h,k)=>`<a class="hot${h[1]===best?" best":""}" data-a="z" style="--i:${k+1}" target="_blank" rel="noopener" href="${wa("Hola, quisiera reservar el paquete Mérida te abraza (5D/4N) en "+h[0]+". Tarifa de referencia: $"+h[1]+" por persona, hab. doble.")}">${h[1]===best?'<span class="best-t">Desde</span>':'<span class="best-t" style="visibility:hidden">·</span>'}<h4 data-bind="MTA.hoteles.${k}.0">${esc(h[0])}</h4><b data-bind="MTA.hoteles.${k}.1" data-num>$${h[1]}</b><small>por persona · hab. doble</small></a>`).join("");
+  const mpr=v=>"$"+Math.round(v).toLocaleString("en-US");
+  let allMin=1e9,allN=0;MTA.hoteles.forEach(h=>h[1].forEach((v,j)=>{if(v<allMin){allMin=v;allN=MTA.personas[j]}}));
+  $("#mtaFrom").textContent=Math.round(allMin);$("#mtaFromSub").textContent="por persona · grupo de "+allN;$("#mtaCom").textContent=MTA.comision;
+  let mSel=0;
+  const mdraw=()=>{
+    $("#mtaPers").innerHTML='<span style="font-size:26px;font-weight:800;color:#fff;margin-right:14px;vertical-align:middle">Personas:</span>'+MTA.personas.map((n,j)=>`<button class="pchip${j===mSel?" on":""}" data-j="${j}">${n}</button>`).join("");
+    $$("#mtaPers .pchip").forEach(b=>b.onclick=()=>{mSel=+b.dataset.j;mdraw()});
+    const vals=MTA.hoteles.map(h=>h[1][mSel]),best=Math.min(...vals),n=MTA.personas[mSel];
+    $("#mtaHotels").innerHTML=MTA.hoteles.map((h,k)=>`<a class="hot${vals[k]===best?" best":""}" style="--i:${k+1}" target="_blank" rel="noopener" href="${wa("Hola, quisiera reservar el paquete Mérida te abraza (5D/4N) en "+h[0]+" para "+n+" personas. Tarifa de referencia: "+mpr(vals[k])+" por persona (precio final con IVA).")}">${vals[k]===best?'<span class="best-t">Mejor precio</span>':'<span class="best-t" style="visibility:hidden">·</span>'}<h4 data-bind="MTA.hoteles.${k}.0">${esc(h[0])}</h4><b data-bind="MTA.hoteles.${k}.1.${mSel}" data-num>${mpr(vals[k])}</b><small>por persona · grupo de ${n}</small></a>`).join("")};
+  mdraw();
   $("#mtaInc").innerHTML=MTA.incluye.map((t,k)=>`<div class="okc" data-a style="--i:${k+1}"><i>${CHECK}</i><span data-bind="MTA.incluye.${k}">${esc(t)}</span></div>`).join("");
   $("#mtaNo").innerHTML=MTA.noIncluye.map((t,k)=>`<span class="nok" data-bind="MTA.noIncluye.${k}">${esc(t)}</span>`).join("");
   // ---- por qué viajar con nosotros (interactivo)
@@ -871,6 +883,10 @@ function mkShow(host,srcs,o){o=o||{};
   WHY.forEach((w,i)=>{const b=document.createElement("button");b.className="wtab";b.dataset.dyn="1";b.setAttribute("data-dyn","");b.innerHTML=`<b>${w[0]}</b><span>${w[1]}</span>`;b.onclick=()=>showWhy(i);wt.append(b)});
   showWhy(0);
   $$(".logo-tab").forEach(x=>x.remove());
+  S_ALL=[...document.querySelectorAll(".slide")];
+  S_ALL.forEach(sl=>{if(sl.hasAttribute("data-nologo")||sl.classList.contains("cat"))return;
+    const red=sl.classList.contains("bgr"),dark=sl.classList.contains("dark");
+    const im=document.createElement("img");im.className="slogo-tl"+(red?" plq":"");im.alt="Transfers Mérida";im.src=(dark&&!red)?"img/logo-white.svg":"img/logo-color.svg";sl.prepend(im)});
   const MTABG={"s-mta":["img/lug-paramo-1.webp","img/lug-valle-1.webp","img/lug-casco-2.webp"]};
   const MTAALL=[["img/lug-paramo-3.webp","img/lug-casco-1.webp","img/lug-valle-1.webp"],["img/lug-paramo-2.webp","img/lug-casco-3.webp","img/lug-valle-2.webp"]];
   $$(".slide.cat").forEach((sl,i)=>{const list=MTABG[sl.id]||MTAALL[(i-1)%2];const d=document.createElement("div");d.className="mta-bg";d.innerHTML=list.map(x=>`<img src="${x}" alt="">`).join("");sl.prepend(d)});
@@ -940,13 +956,16 @@ let wl=0;addEventListener("wheel",e=>{if(EDIT()||lb.classList.contains("on")||e.
 /* ============ FORMULARIO DE CONTACTO ============ */
 (function(){const KEY="tm_contactos_v1";const g=id=>document.getElementById(id);
   const PIN=String.fromCharCode(50,48,49,49,48,48);
-  const all=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}};
+  const all=()=>{try{return JSON.parse(localStorage.getItem(KEY)||localStorage.getItem(KEY+"_bak")||"[]")}catch(e){return[]}};
   const esc2=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
   const msg=(t,ok)=>{g("cMsg").style.color=ok?"#1faa59":"#CC1B1B";g("cMsg").textContent=t};
   g("cSave").onclick=()=>{const n=g("cName").value.trim(),a=g("cAg").value.trim(),t=g("cTel").value.trim();
     if(!n||!t){msg("Escribe al menos el nombre y el teléfono.");return}
-    const l=all();l.push({n,a,t,f:new Date().toISOString()});try{localStorage.setItem(KEY,JSON.stringify(l))}catch(e){}
-    g("cName").value=g("cAg").value=g("cTel").value="";msg("¡Gracias! Tus datos fueron guardados.",1)};
+    const l=all();l.push({n,a,t,f:new Date().toISOString()});try{const j=JSON.stringify(l);localStorage.setItem(KEY,j);localStorage.setItem(KEY+"_bak",j)}catch(e){}
+    g("cName").value=g("cAg").value=g("cTel").value="";msg((typeof navigator==="undefined"||navigator.onLine)?"¡Gracias! Tus datos fueron guardados.":"¡Gracias! Datos guardados en este dispositivo (sin conexión).",1)};
+  try{navigator.storage.persist()}catch(e){}
+  const net=()=>{const b=g("cNet");if(!b||typeof navigator==="undefined")return;b.textContent=navigator.onLine?"En línea · contactos guardados: "+all().length:"Sin conexión · tus datos se guardan en este dispositivo y siguen aquí al volver el internet";b.style.color=navigator.onLine?"#1faa59":"#CC1B1B"};
+  addEventListener("online",net);addEventListener("offline",net);setTimeout(net,0);
   const ov=g("admOv"),pinBox=g("pinBox"),listBox=g("listBox");
   const draw=()=>{const l=all();g("cCount").textContent="("+l.length+")";
     g("cList").innerHTML=l.length?l.map(c=>`<div><span>${esc2(c.n)}</span><span>${esc2(c.a||"-")}</span><span>${esc2(c.t)}</span></div>`).join(""):'<div class="e">Aún no hay contactos guardados.</div>'};
@@ -987,9 +1006,10 @@ document.addEventListener("click",e=>{if(!EDIT())return;const ce=e.target.closes
 /* ---- vehículos: mover y escalar en modo edición ---- */
 const VSEL=".u-main img,.unit-card .im img,.corp .cim img";
 const vehs=[];S.forEach(sl=>{sl.querySelectorAll(VSEL).forEach((im,n)=>{const key=(sl.id||("s"+S.indexOf(sl)))+":"+n;im.dataset.vk=key;im.classList.add("vh");vehs.push(im)})});
-const vget=k=>SAVED.veh[k]||{x:0,y:0,s:1};
+const VEH_DEF={"s-rent:0":{"x":217,"y":22,"s":1.08},"s-unidades:0":{"x":-44,"y":1,"s":1.166},"s-unidades:1":{"x":-27,"y":24,"s":1.08},"s-unidades:2":{"x":-41,"y":36,"s":1.166},"s-unidades:3":{"x":-18,"y":33,"s":1.166},"unit-chan:0":{"x":239,"y":14,"s":1.259},"unit-foton:0":{"x":154,"y":-9,"s":1.587},"unit-merc:0":{"x":126,"y":23,"s":1.714},"unit-jac:0":{"x":179,"y":28,"s":1.714},"s12:1":{"x":9,"y":0,"s":1.36},"s12:0":{"x":1,"y":0,"s":1.08},"s12:2":{"x":-6,"y":13,"s":1.36}};
+const vget=k=>SAVED.veh[k]||VEH_DEF[k]||{x:0,y:0,s:1};
 const vapply=im=>{const v=vget(im.dataset.vk);im.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.s})`;};
-vehs.forEach(im=>{if(SAVED.veh[im.dataset.vk])vapply(im)});
+vehs.forEach(im=>{if(SAVED.veh[im.dataset.vk]||VEH_DEF[im.dataset.vk])vapply(im)});
 let vsel=null;const vbar=document.getElementById("vbar");
 const vselect=im=>{if(vsel)vsel.classList.remove("sel");vsel=im;if(im)im.classList.add("sel");vbar.hidden=!im||!EDIT()};
 const vset=(im,v)=>{SAVED.veh[im.dataset.vk]=v;vapply(im);persist(false)};
@@ -1004,11 +1024,12 @@ const vzoom=(im,f)=>{const v=vget(im.dataset.vk);vset(im,{x:v.x,y:v.y,s:Math.max
 stage.addEventListener("wheel",e=>{if(!EDIT())return;const im=e.target.closest&&e.target.closest(".vh");if(!im)return;e.preventDefault();vzoom(im,e.deltaY<0?1.06:1/1.06)},{passive:false});
 document.getElementById("vPlus").onclick=()=>vsel&&vzoom(vsel,1.08);
 document.getElementById("vMinus").onclick=()=>vsel&&vzoom(vsel,1/1.08);
-document.getElementById("vRes").onclick=()=>{if(!vsel)return;delete SAVED.veh[vsel.dataset.vk];vsel.style.transform="";persist(false)};
+document.getElementById("vRes").onclick=()=>{if(!vsel)return;delete SAVED.veh[vsel.dataset.vk];vapply(vsel);persist(false)};
 new MutationObserver(()=>{if(!EDIT())vselect(null)}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 (function(){const add=(id,list,cls)=>{const sl=document.getElementById(id);if(!sl)return;const d=document.createElement("div");d.className="mta-bg"+(cls?" "+cls:"");d.innerHTML=list.map(x=>`<img src="${x}" alt="">`).join("");sl.prepend(d)};
   add("s-nacional",["img/carretera.webp","img/montana.webp","img/portada-autos.webp"]);
   add("s-tarifas-nac",["img/carretera.webp","img/lug-paramo-2.webp","img/montana.webp"],"lt")})();
+if(typeof navigator!=="undefined"&&"serviceWorker" in navigator&&/^https?:$/.test(location.protocol))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 goTo(Math.max(0,Math.min(S.length-1,(parseInt(location.hash.slice(1))||1)-1)));
 </script>
 </body>
