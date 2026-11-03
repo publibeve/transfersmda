@@ -635,12 +635,13 @@ body.editing .unit-card,body.editing .unit-card .im,body.editing .corp .card,bod
       <div class="row"><button class="gbtn" id="pinOk">Entrar</button><button class="sbtn" id="pinCancel">Cancelar</button></div><div id="pinMsg" data-dyn></div></div>
     <div class="admbox wide" id="listBox" hidden><h3>Contactos guardados <span id="cCount" data-dyn></span></h3>
       <div class="clist" id="cList" data-dyn></div>
-      <div class="row"><button class="sbtn" id="cCsv">Descargar CSV</button><button class="gbtn" id="cWa" style="height:70px;font-size:26px">Enviar lista por WhatsApp</button><button class="sbtn" id="cClose" style="background:#5a73a1">Cerrar sesión</button></div><div id="aMsg" data-dyn style="color:#1faa59;font-weight:700;font-size:22px;margin-top:10px;min-height:30px"></div></div>
+      <div class="row"><button class="sbtn" id="cSync" style="background:#1a7f43">Sincronizar ahora</button><button class="sbtn" id="cCsv">Descargar CSV</button><button class="gbtn" id="cWa" style="height:70px;font-size:26px">Enviar lista por WhatsApp</button><button class="sbtn" id="cClose" style="background:#5a73a1">Cerrar sesión</button></div><div id="aMsg" data-dyn style="color:#1faa59;font-weight:700;font-size:22px;margin-top:10px;min-height:30px"></div></div>
   </div>
 </section>
 
 </div></div>
 
+<form name="contactos" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden><input type="hidden" name="form-name" value="contactos"><input name="bot-field"><input name="nombre"><input name="agencia"><input name="telefono"><input name="fecha"><input name="id"></form>
 <svg width="0" height="0" style="position:absolute"><defs><symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.500V19l-2 1.500V22l3.500-1 3.500 1v-1.500L13 19v-5.500z"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17h14M3 17v-4l2-5h14l2 5v4M7 17v2M17 17v2M3 13h18"/><circle cx="7.500" cy="14.500" r=".6"/><circle cx="16.500" cy="14.500" r=".6"/></symbol><symbol id="i-van" viewBox="0 0 24 24"><path d="M2 7h12l5 5v5h-2M2 7v10h2M8 17h7M14 7v5h5"/><circle cx="6" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.500 8.500-2 5-5 2 2-5z"/></symbol><symbol id="i-hotel" viewBox="0 0 24 24"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16M15 10h4a1 1 0 0 1 1 1v10M2 21h20M8 8h3M8 12h3M8 16h3"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.300-8-11a4.500 4.500 0 0 1 8-2.800A4.500 4.500 0 0 1 20 10c0 5.700-8 11-8 11z"/></symbol><symbol id="i-paw" viewBox="0 0 24 24"><circle cx="6" cy="11" r="1.800"/><circle cx="10" cy="6.500" r="1.800"/><circle cx="14" cy="6.500" r="1.800"/><circle cx="18" cy="11" r="1.800"/><path d="M12 12c-3 0-5 3-5 5.500 0 1.500 1.500 2.500 3 2 1-.3 1.500-.5 2-.5s1 .2 2 .5c1.500.5 3-.5 3-2 0-2.500-2-5.500-5-5.500z"/></symbol><symbol id="i-bag" viewBox="0 0 24 24"><path d="M7 8h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2zM9 8V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3M9 12v5M15 12v5"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.500"/><path d="M5 21c0-4 3.100-7 7-7s7 3 7 7"/></symbol><symbol id="i-medkit" viewBox="0 0 24 24"><path d="M4 7h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1zM9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M12 11v6M9 14h6"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol><symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 2v20M4 6l16 12M20 6 4 18"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.700 6.300a4 4 0 0 0-5 5L3 18l3 3 6.700-6.700a4 4 0 0 0 5-5l-2.500 2.500-2.500-.5-.5-2.500z"/></symbol><symbol id="i-infinity" viewBox="0 0 24 24"><path d="M18 7.800c-3 0-4.500 2.200-6 4.200-1.500 2-3 4.200-6 4.200a4.200 4.200 0 1 1 0-8.400c3 0 4.500 2.200 6 4.200 1.500 2 3 4.200 6 4.200a4.200 4.200 0 1 0 0-8.400z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11.500a7 7 0 0 1 14 0C19 15 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M8.500 13.500 7 21l5-3 5 3-1.500-7.500"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.500" r="3.500"/></symbol><symbol id="waI" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm4.8 13.7c-.2.6-1.2 1.1-1.7 1.2-.5.1-1.1.1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.8-4.5-4-.1-.2-1-1.4-1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.8c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.7.8c.3.1.5.2.5.3.1.1.1.7-.1 1.2Z"/></symbol></defs></svg>
 <div id="ui">
   <button class="cbtn" id="bPrev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
@@ -953,26 +954,37 @@ let x0=null,y0=null;
 addEventListener("touchstart",e=>{if(EDIT()||lb.classList.contains("on")||e.target.closest("#menu,input,textarea"))return;x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
 addEventListener("touchend",e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4)dx<0?next():prev()});
 let wl=0;addEventListener("wheel",e=>{if(EDIT()||lb.classList.contains("on")||e.target.closest("#menu"))return;const t=Date.now();if(t-wl<900||Math.abs(e.deltaY)<30)return;wl=t;e.deltaY>0?next():prev()},{passive:true});
-/* ============ FORMULARIO DE CONTACTO ============ */
+/* ============ FORMULARIO DE CONTACTO (con cola y sincronización a Netlify Forms) ============ */
 (function(){const KEY="tm_contactos_v1";const g=id=>document.getElementById(id);
   const PIN=String.fromCharCode(50,48,49,49,48,48);
   const all=()=>{try{return JSON.parse(localStorage.getItem(KEY)||localStorage.getItem(KEY+"_bak")||"[]")}catch(e){return[]}};
+  const save=l=>{try{const j=JSON.stringify(l);localStorage.setItem(KEY,j);localStorage.setItem(KEY+"_bak",j)}catch(e){}};
   const esc2=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const online=()=>typeof navigator==="undefined"||navigator.onLine!==false;
+  const pend=()=>all().filter(c=>c.sent!==true).length;
   const msg=(t,ok)=>{g("cMsg").style.color=ok?"#1faa59":"#CC1B1B";g("cMsg").textContent=t};
+  const net=()=>{const b=g("cNet");if(!b)return;const p=pend();b.textContent=online()?(p?"En línea · sincronizando "+p+" contacto(s)…":"En línea · todo sincronizado"):"Sin conexión · tus datos están a salvo en este dispositivo y se enviarán solos al volver el internet"+(p?" ("+p+" pendiente(s))":"");b.style.color=online()?"#1faa59":"#CC1B1B"};
+  let syncing=false;
+  async function sync(){if(syncing||!online()||typeof fetch==="undefined")return;syncing=true;
+    try{let l=all();for(let i=0;i<l.length;i++){const c=l[i];if(c.sent===true)continue;
+      if(!c.id){c.id=Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+      const body=new URLSearchParams({"form-name":"contactos","bot-field":"",nombre:c.n,agencia:c.a||"",telefono:c.t,fecha:c.f||"",id:c.id}).toString();
+      const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body});
+      if(r&&r.ok){c.sent=true;const cur=all();const m=cur.find(x=>(x.id&&x.id===c.id)||(x.f===c.f&&x.t===c.t));if(m){m.sent=true;m.id=c.id}else cur.push(c);save(cur)}else break}
+      save(all().map(x=>x))}catch(e){}
+    syncing=false;net();if(!listBox.hidden)draw()}
   g("cSave").onclick=()=>{const n=g("cName").value.trim(),a=g("cAg").value.trim(),t=g("cTel").value.trim();
     if(!n||!t){msg("Escribe al menos el nombre y el teléfono.");return}
-    const l=all();l.push({n,a,t,f:new Date().toISOString()});try{const j=JSON.stringify(l);localStorage.setItem(KEY,j);localStorage.setItem(KEY+"_bak",j)}catch(e){}
-    g("cName").value=g("cAg").value=g("cTel").value="";msg((typeof navigator==="undefined"||navigator.onLine)?"¡Gracias! Tus datos fueron guardados.":"¡Gracias! Datos guardados en este dispositivo (sin conexión).",1)};
+    const l=all();l.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),n,a,t,f:new Date().toISOString(),sent:false});save(l);
+    g("cName").value=g("cAg").value=g("cTel").value="";msg(online()?"¡Gracias! Tus datos fueron guardados.":"¡Gracias! Datos guardados en este dispositivo (sin conexión).",1);net();sync()};
   try{navigator.storage.persist()}catch(e){}
-  const net=()=>{const b=g("cNet");if(!b||typeof navigator==="undefined")return;b.textContent=navigator.onLine?"En línea · contactos guardados: "+all().length:"Sin conexión · tus datos se guardan en este dispositivo y siguen aquí al volver el internet";b.style.color=navigator.onLine?"#1faa59":"#CC1B1B"};
-  addEventListener("online",net);addEventListener("offline",net);setTimeout(net,0);
   const ov=g("admOv"),pinBox=g("pinBox"),listBox=g("listBox");
-  const draw=()=>{const l=all();g("cCount").textContent="("+l.length+")";
-    g("cList").innerHTML=l.length?l.map(c=>`<div><span>${esc2(c.n)}</span><span>${esc2(c.a||"-")}</span><span>${esc2(c.t)}</span></div>`).join(""):'<div class="e">Aún no hay contactos guardados.</div>'};
+  const draw=()=>{const l=all(),p=l.filter(c=>c.sent!==true).length;g("cCount").textContent="("+l.length+" en este dispositivo · "+p+" pendientes de enviar)";
+    g("cList").innerHTML=l.length?l.map(c=>`<div><span>${esc2(c.n)}</span><span>${esc2(c.a||"-")}</span><span>${esc2(c.t)} ${c.sent===true?"✓":"⏳"}</span></div>`).join(""):'<div class="e">Aún no hay contactos guardados.</div>'};
   const close=()=>{ov.hidden=true;listBox.hidden=true;pinBox.hidden=false;g("pinIn").value="";g("pinMsg").textContent="";g("aMsg").textContent=""};
   g("cAdmin").onclick=()=>{ov.hidden=false;pinBox.hidden=false;listBox.hidden=true;g("pinIn").value="";setTimeout(()=>g("pinIn").focus(),50)};
   g("pinCancel").onclick=close;g("cClose").onclick=close;
-  const enter=()=>{if(g("pinIn").value===PIN){pinBox.hidden=true;listBox.hidden=false;draw()}else{g("pinMsg").textContent="PIN incorrecto.";g("pinIn").value=""}};
+  const enter=()=>{if(g("pinIn").value===PIN){pinBox.hidden=true;listBox.hidden=false;draw();sync()}else{g("pinMsg").textContent="PIN incorrecto.";g("pinIn").value=""}};
   g("pinOk").onclick=enter;g("pinIn").addEventListener("keydown",e=>{if(e.key==="Enter")enter()});
   g("cCsv").onclick=()=>{const l=all();if(!l.length){g("aMsg").style.color="#CC1B1B";g("aMsg").textContent="No hay contactos.";return}
     const q=v=>'"'+String(v).replace(/"/g,'""')+'"';const csv="﻿Nombre,Agencia,Teléfono,Fecha\n"+l.map(c=>[c.n,c.a,c.t,c.f].map(q).join(",")).join("\n");
@@ -980,6 +992,9 @@ let wl=0;addEventListener("wheel",e=>{if(EDIT()||lb.classList.contains("on")||e.
   g("cWa").onclick=()=>{const l=all();if(!l.length){g("aMsg").style.color="#CC1B1B";g("aMsg").textContent="No hay contactos.";return}
     const txt="Contactos TransfersMérida ("+l.length+"):\n\n"+l.map((c,i)=>`${i+1}. ${c.n} | ${c.a||"-"} | ${c.t}`).join("\n");
     window.open("https://wa.me/?text="+encodeURIComponent(txt),"_blank")};
+  g("cSync").onclick=()=>{g("aMsg").style.color="#1faa59";g("aMsg").textContent=online()?"Sincronizando…":"Sin conexión: se enviará al volver el internet.";sync().then(()=>{g("aMsg").textContent=pend()?"Quedan "+pend()+" pendiente(s).":"Todo sincronizado."})};
+  addEventListener("online",()=>{net();sync()});addEventListener("offline",net);
+  setInterval(sync,60000);setTimeout(()=>{net();sync()},1500);
 })();
 /* ============ EDITOR EN VIVO ============ */
 const INL=/^(BR|B|STRONG|EM|SPAN|SMALL|SUP|I|SVG|USE|PATH|CIRCLE)$/i,TAGS=/^(H1|H2|H3|H4|H5|P|LI|SPAN|B|SMALL|DIV|TD|TH|A|STRONG|LABEL)$/;
